@@ -69,8 +69,8 @@ struct Provider: IntentTimelineProvider {
             if let data {
                 print("Altitude: \(data.altitude)")
                 altitudeManager.stopAbsoluteAltitudeUpdates()
-                let entry = AltitudeEntry(date: Date(), altitude: Int(data.altitude * FEET_PER_METER), configuration: configuration)
-                let timeline = Timeline(entries: [entry], policy: .atEnd)
+                let entry = AltitudeEntry(date: currentDate, altitude: Int(data.altitude * FEET_PER_METER), configuration: configuration)
+                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
                 completion(timeline)
             }
         }
