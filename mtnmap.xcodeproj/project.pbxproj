@@ -1,0 +1,770 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F02398F829BD727800A0CC25 /* mtnmapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02398F729BD727800A0CC25 /* mtnmapApp.swift */; };
+		F02398FA29BD727800A0CC25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02398F929BD727800A0CC25 /* ContentView.swift */; };
+		F02398FC29BD727900A0CC25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02398FB29BD727900A0CC25 /* Assets.xcassets */; };
+		F02398FF29BD727900A0CC25 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02398FE29BD727900A0CC25 /* Preview Assets.xcassets */; };
+		F023990929BD727900A0CC25 /* mtnmapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F023990829BD727900A0CC25 /* mtnmapTests.swift */; };
+		F023991329BD727900A0CC25 /* mtnmapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F023991229BD727900A0CC25 /* mtnmapUITests.swift */; };
+		F023991529BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */; };
+		F0E2257B29D1F4710068D00E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E2257A29D1F4710068D00E /* WidgetKit.framework */; };
+		F0E2257D29D1F4710068D00E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E2257C29D1F4710068D00E /* SwiftUI.framework */; };
+		F0E2258029D1F4710068D00E /* altitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2257F29D1F4710068D00E /* altitude.swift */; };
+		F0E2258329D1F4730068D00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0E2258229D1F4730068D00E /* Assets.xcassets */; };
+		F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
+		F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
+		F0E2258929D1F4730068D00E /* altitudeExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F0E2257829D1F4710068D00E /* altitudeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F023990529BD727900A0CC25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F02398EC29BD727800A0CC25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F02398F329BD727800A0CC25;
+			remoteInfo = mtnmap;
+		};
+		F023990F29BD727900A0CC25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F02398EC29BD727800A0CC25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F02398F329BD727800A0CC25;
+			remoteInfo = mtnmap;
+		};
+		F0E2258729D1F4730068D00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F02398EC29BD727800A0CC25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F0E2257729D1F4710068D00E;
+			remoteInfo = altitudeExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F0E2258A29D1F4730068D00E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F0E2258929D1F4730068D00E /* altitudeExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F02398F429BD727800A0CC25 /* mtnmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtnmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F02398F729BD727800A0CC25 /* mtnmapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapApp.swift; sourceTree = "<group>"; };
+		F02398F929BD727800A0CC25 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F02398FB29BD727900A0CC25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F02398FE29BD727900A0CC25 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F023990429BD727900A0CC25 /* mtnmapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mtnmapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F023990829BD727900A0CC25 /* mtnmapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapTests.swift; sourceTree = "<group>"; };
+		F023990E29BD727900A0CC25 /* mtnmapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mtnmapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F023991229BD727900A0CC25 /* mtnmapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapUITests.swift; sourceTree = "<group>"; };
+		F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F0E2257829D1F4710068D00E /* altitudeExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = altitudeExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0E2257A29D1F4710068D00E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F0E2257C29D1F4710068D00E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F0E2257F29D1F4710068D00E /* altitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = altitude.swift; sourceTree = "<group>"; };
+		F0E2258129D1F4710068D00E /* altitude.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = altitude.intentdefinition; sourceTree = "<group>"; };
+		F0E2258229D1F4730068D00E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F0E2258429D1F4730068D00E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F02398F129BD727800A0CC25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F023990129BD727900A0CC25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F023990B29BD727900A0CC25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0E2257529D1F4710068D00E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0E2257D29D1F4710068D00E /* SwiftUI.framework in Frameworks */,
+				F0E2257B29D1F4710068D00E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F02398EB29BD727800A0CC25 = {
+			isa = PBXGroup;
+			children = (
+				F02398F629BD727800A0CC25 /* mtnmap */,
+				F023990729BD727900A0CC25 /* mtnmapTests */,
+				F023991129BD727900A0CC25 /* mtnmapUITests */,
+				F0E2257E29D1F4710068D00E /* altitude */,
+				F0E2257929D1F4710068D00E /* Frameworks */,
+				F02398F529BD727800A0CC25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F02398F529BD727800A0CC25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F02398F429BD727800A0CC25 /* mtnmap.app */,
+				F023990429BD727900A0CC25 /* mtnmapTests.xctest */,
+				F023990E29BD727900A0CC25 /* mtnmapUITests.xctest */,
+				F0E2257829D1F4710068D00E /* altitudeExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F02398F629BD727800A0CC25 /* mtnmap */ = {
+			isa = PBXGroup;
+			children = (
+				F02398F729BD727800A0CC25 /* mtnmapApp.swift */,
+				F02398F929BD727800A0CC25 /* ContentView.swift */,
+				F02398FB29BD727900A0CC25 /* Assets.xcassets */,
+				F02398FD29BD727900A0CC25 /* Preview Content */,
+			);
+			path = mtnmap;
+			sourceTree = "<group>";
+		};
+		F02398FD29BD727900A0CC25 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F02398FE29BD727900A0CC25 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F023990729BD727900A0CC25 /* mtnmapTests */ = {
+			isa = PBXGroup;
+			children = (
+				F023990829BD727900A0CC25 /* mtnmapTests.swift */,
+			);
+			path = mtnmapTests;
+			sourceTree = "<group>";
+		};
+		F023991129BD727900A0CC25 /* mtnmapUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F023991229BD727900A0CC25 /* mtnmapUITests.swift */,
+				F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */,
+			);
+			path = mtnmapUITests;
+			sourceTree = "<group>";
+		};
+		F0E2257929D1F4710068D00E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0E2257A29D1F4710068D00E /* WidgetKit.framework */,
+				F0E2257C29D1F4710068D00E /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0E2257E29D1F4710068D00E /* altitude */ = {
+			isa = PBXGroup;
+			children = (
+				F0E2257F29D1F4710068D00E /* altitude.swift */,
+				F0E2258129D1F4710068D00E /* altitude.intentdefinition */,
+				F0E2258229D1F4730068D00E /* Assets.xcassets */,
+				F0E2258429D1F4730068D00E /* Info.plist */,
+			);
+			path = altitude;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F02398F329BD727800A0CC25 /* mtnmap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F023991829BD727900A0CC25 /* Build configuration list for PBXNativeTarget "mtnmap" */;
+			buildPhases = (
+				F02398F029BD727800A0CC25 /* Sources */,
+				F02398F129BD727800A0CC25 /* Frameworks */,
+				F02398F229BD727800A0CC25 /* Resources */,
+				F0E2258A29D1F4730068D00E /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F0E2258829D1F4730068D00E /* PBXTargetDependency */,
+			);
+			name = mtnmap;
+			productName = mtnmap;
+			productReference = F02398F429BD727800A0CC25 /* mtnmap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F023990329BD727900A0CC25 /* mtnmapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F023991B29BD727900A0CC25 /* Build configuration list for PBXNativeTarget "mtnmapTests" */;
+			buildPhases = (
+				F023990029BD727900A0CC25 /* Sources */,
+				F023990129BD727900A0CC25 /* Frameworks */,
+				F023990229BD727900A0CC25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F023990629BD727900A0CC25 /* PBXTargetDependency */,
+			);
+			name = mtnmapTests;
+			productName = mtnmapTests;
+			productReference = F023990429BD727900A0CC25 /* mtnmapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F023990D29BD727900A0CC25 /* mtnmapUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F023991E29BD727900A0CC25 /* Build configuration list for PBXNativeTarget "mtnmapUITests" */;
+			buildPhases = (
+				F023990A29BD727900A0CC25 /* Sources */,
+				F023990B29BD727900A0CC25 /* Frameworks */,
+				F023990C29BD727900A0CC25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F023991029BD727900A0CC25 /* PBXTargetDependency */,
+			);
+			name = mtnmapUITests;
+			productName = mtnmapUITests;
+			productReference = F023990E29BD727900A0CC25 /* mtnmapUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		F0E2257729D1F4710068D00E /* altitudeExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0E2258D29D1F4730068D00E /* Build configuration list for PBXNativeTarget "altitudeExtension" */;
+			buildPhases = (
+				F0E2257429D1F4710068D00E /* Sources */,
+				F0E2257529D1F4710068D00E /* Frameworks */,
+				F0E2257629D1F4710068D00E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = altitudeExtension;
+			productName = altitudeExtension;
+			productReference = F0E2257829D1F4710068D00E /* altitudeExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F02398EC29BD727800A0CC25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					F02398F329BD727800A0CC25 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					F023990329BD727900A0CC25 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = F02398F329BD727800A0CC25;
+					};
+					F023990D29BD727900A0CC25 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = F02398F329BD727800A0CC25;
+					};
+					F0E2257729D1F4710068D00E = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+				};
+			};
+			buildConfigurationList = F02398EF29BD727800A0CC25 /* Build configuration list for PBXProject "mtnmap" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F02398EB29BD727800A0CC25;
+			productRefGroup = F02398F529BD727800A0CC25 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F02398F329BD727800A0CC25 /* mtnmap */,
+				F023990329BD727900A0CC25 /* mtnmapTests */,
+				F023990D29BD727900A0CC25 /* mtnmapUITests */,
+				F0E2257729D1F4710068D00E /* altitudeExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F02398F229BD727800A0CC25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F02398FF29BD727900A0CC25 /* Preview Assets.xcassets in Resources */,
+				F02398FC29BD727900A0CC25 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F023990229BD727900A0CC25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F023990C29BD727900A0CC25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0E2257629D1F4710068D00E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0E2258329D1F4730068D00E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F02398F029BD727800A0CC25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F02398FA29BD727800A0CC25 /* ContentView.swift in Sources */,
+				F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */,
+				F02398F829BD727800A0CC25 /* mtnmapApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F023990029BD727900A0CC25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F023990929BD727900A0CC25 /* mtnmapTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F023990A29BD727900A0CC25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F023991329BD727900A0CC25 /* mtnmapUITests.swift in Sources */,
+				F023991529BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0E2257429D1F4710068D00E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */,
+				F0E2258029D1F4710068D00E /* altitude.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F023990629BD727900A0CC25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F02398F329BD727800A0CC25 /* mtnmap */;
+			targetProxy = F023990529BD727900A0CC25 /* PBXContainerItemProxy */;
+		};
+		F023991029BD727900A0CC25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F02398F329BD727800A0CC25 /* mtnmap */;
+			targetProxy = F023990F29BD727900A0CC25 /* PBXContainerItemProxy */;
+		};
+		F0E2258829D1F4730068D00E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F0E2257729D1F4710068D00E /* altitudeExtension */;
+			targetProxy = F0E2258729D1F4730068D00E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F023991629BD727900A0CC25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F023991729BD727900A0CC25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F023991929BD727900A0CC25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"mtnmap/Preview Content\"";
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMotionUsageDescription = "Uses barometer sensor to determine device altitude.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F023991A29BD727900A0CC25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"mtnmap/Preview Content\"";
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMotionUsageDescription = "Uses barometer sensor to determine device altitude.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F023991C29BD727900A0CC25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mtnmap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mtnmap";
+			};
+			name = Debug;
+		};
+		F023991D29BD727900A0CC25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mtnmap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mtnmap";
+			};
+			name = Release;
+		};
+		F023991F29BD727900A0CC25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmapUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = mtnmap;
+			};
+			name = Debug;
+		};
+		F023992029BD727900A0CC25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmapUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = mtnmap;
+			};
+			name = Release;
+		};
+		F0E2258B29D1F4730068D00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = altitude/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = altitude;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmap.altitude;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F0E2258C29D1F4730068D00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q49KLF9VPG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = altitude/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = altitude;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goatfish.mtnmap.altitude;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F02398EF29BD727800A0CC25 /* Build configuration list for PBXProject "mtnmap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F023991629BD727900A0CC25 /* Debug */,
+				F023991729BD727900A0CC25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F023991829BD727900A0CC25 /* Build configuration list for PBXNativeTarget "mtnmap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F023991929BD727900A0CC25 /* Debug */,
+				F023991A29BD727900A0CC25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F023991B29BD727900A0CC25 /* Build configuration list for PBXNativeTarget "mtnmapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F023991C29BD727900A0CC25 /* Debug */,
+				F023991D29BD727900A0CC25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F023991E29BD727900A0CC25 /* Build configuration list for PBXNativeTarget "mtnmapUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F023991F29BD727900A0CC25 /* Debug */,
+				F023992029BD727900A0CC25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0E2258D29D1F4730068D00E /* Build configuration list for PBXNativeTarget "altitudeExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0E2258B29D1F4730068D00E /* Debug */,
+				F0E2258C29D1F4730068D00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F02398EC29BD727800A0CC25 /* Project object */;
+}
