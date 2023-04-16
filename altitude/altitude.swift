@@ -26,9 +26,19 @@ extension CMAltimeter {
             return 0
         }
     }
+    
+    func readAltitude(queue: OperationQueue) async -> Double? {
+        await withCheckedContinuation { (continuation: CheckedContinuation<Double?, Never>) in
+            self.startAbsoluteAltitudeUpdates(to: queue) { data, error in
+                self.stopAbsoluteAltitudeUpdates()
+                continuation.resume(returning: data?.altitude)
+            }
+        }
+    }
 }
 
 private let FEET_PER_METER = 3.281
+
 
 struct Provider: IntentTimelineProvider {
     
