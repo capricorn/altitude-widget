@@ -8,47 +8,20 @@
 import WidgetKit
 import SwiftUI
 import Intents
-
-// WIP: How to provide callbacks to display / simulate the altitude?
-// How to view the widget on the home screen? (Accessory?)
-// Need to make async altimeter call I think.. can't have a running background task
-// Maybe the app itself should collect data and inform the widget to update..
-// (Where can the widget itself access this info? Core Data?)
-// WIP: Update XCode to 14.2 for iOS 16.3 support.. also, make a 'one-shot' API for the altimeter.
-// TODO: Test syncing refresh
-
 import CoreMotion
-
-extension CMAltimeter {
-    var absoluteAltitude: Int {
-        // TODO: Need to find the wrapper to convert continuations to async
-        get async {
-            return 0
-        }
-    }
-    
-    func readAltitude(queue: OperationQueue) async -> Double? {
-        await withCheckedContinuation { (continuation: CheckedContinuation<Double?, Never>) in
-            self.startAbsoluteAltitudeUpdates(to: queue) { data, error in
-                self.stopAbsoluteAltitudeUpdates()
-                continuation.resume(returning: data?.altitude)
-            }
-        }
-    }
-}
 
 class Altimeter {
     private let queue = OperationQueue()
     private let altimeter = CMAltimeter()
     static let shared = Altimeter()
     
-    var absoluteAltitude: Double? {
+    var absoluteAltitude: Measurement<UnitLength>? {
         get async {
-            await withCheckedContinuation { (continuation: CheckedContinuation<Double?, Never>) in
+            await withCheckedContinuation { (continuation: CheckedContinuation<Measurement<UnitLength>?, Never>) in
                 altimeter.startAbsoluteAltitudeUpdates(to: queue) { data, error in
                     self.altimeter.stopAbsoluteAltitudeUpdates()
                     if let data {
-                        continuation.resume(returning: Double(data.altitude))
+                        continuation.resume(returning: Measurement(value: Double(data.altitude), unit: .meters))
                     } else {
                         continuation.resume(returning: nil)
                     }
@@ -58,77 +31,29 @@ class Altimeter {
     }
 }
 
-private let FEET_PER_METER = 3.281
-
-
 struct Provider: IntentTimelineProvider {
-    
-    //let altitudeManager = CMAltimeter()
-    let opQueue = OperationQueue()
-
     func placeholder(in context: Context) -> AltitudeEntry {
         AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent())
     }
 
-    // Provides a fixed snapshot of the widget as an example
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (AltitudeEntry) -> ()) {
         let entry = AltitudeEntry(date: Date(), altitude: 800, configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        print("Fetching timeline: \(Date())")
-        
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        /*
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-        */
-//        let altitudeManager = CMAltimeter()
-//        altitudeManager.startAbsoluteAltitudeUpdates(to: opQueue) { data, error in
-//            if let error {
-//                print("Error: \(error)")
-//                return
-//            }
-//
-//            if let data {
-//                print("Altitude: \(data.altitude)")
-//                altitudeManager.stopAbsoluteAltitudeUpdates()
-//                let entry = AltitudeEntry(date: currentDate, altitude: Int(data.altitude * FEET_PER_METER), configuration: configuration)
-//                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
-//                completion(timeline)
-//            }
-//        }
         Task {
             if let altitude = await Altimeter.shared.absoluteAltitude {
-                let entry = AltitudeEntry(date: currentDate, altitude: Int(altitude * FEET_PER_METER), configuration: configuration)
+                let currentDate = Date()
+                let altitudeFeet = Int(altitude.converted(to: .feet).value)
+                let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: configuration)
                 let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
                 completion(timeline)
             } else {
-                // TODO: Populate if reading altitude fails
+                // TODO: Populate '--' if reading altitude fails
             }
         }
-
-        /*
-        // One option: perform the background processing but still pass completion with the timeline data.
-        let entryDate = Calendar.current.date(byAdding: .second, value: 5, to: currentDate)!
-        entries.append(SimpleEntry(date: entryDate, configuration: configuration))
-
-        let timeline = Timeline(entries: entries, policy: .after(entryDate))
-        completion(timeline)
-        */
     }
-}
-
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationIntent
 }
 
 struct AltitudeEntry: TimelineEntry {
@@ -149,7 +74,6 @@ struct altitudeEntryView : View {
             Image(systemName: "mountain.2.circle")
             Text("\(altitude.altitude) ft")
         }
-        //Text(entry.date, style: .time)
     }
 }
 
