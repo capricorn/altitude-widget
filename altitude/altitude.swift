@@ -37,6 +37,27 @@ extension CMAltimeter {
     }
 }
 
+class Altimeter {
+    private let queue = OperationQueue()
+    private let altimeter = CMAltimeter()
+    static let shared = Altimeter()
+    
+    var absoluteAltitude: Double? {
+        get async {
+            await withCheckedContinuation { (continuation: CheckedContinuation<Double?, Never>) in
+                altimeter.startAbsoluteAltitudeUpdates(to: queue) { data, error in
+                    self.altimeter.stopAbsoluteAltitudeUpdates()
+                    if let data {
+                        continuation.resume(returning: Double(data.altitude))
+                    } else {
+                        continuation.resume(returning: nil)
+                    }
+                }
+            }
+        }
+    }
+}
+
 private let FEET_PER_METER = 3.281
 
 
@@ -69,19 +90,28 @@ struct Provider: IntentTimelineProvider {
             entries.append(entry)
         }
         */
-        let altitudeManager = CMAltimeter()
-        altitudeManager.startAbsoluteAltitudeUpdates(to: opQueue) { data, error in
-            if let error {
-                print("Error: \(error)")
-                return
-            }
-
-            if let data {
-                print("Altitude: \(data.altitude)")
-                altitudeManager.stopAbsoluteAltitudeUpdates()
-                let entry = AltitudeEntry(date: currentDate, altitude: Int(data.altitude * FEET_PER_METER), configuration: configuration)
+//        let altitudeManager = CMAltimeter()
+//        altitudeManager.startAbsoluteAltitudeUpdates(to: opQueue) { data, error in
+//            if let error {
+//                print("Error: \(error)")
+//                return
+//            }
+//
+//            if let data {
+//                print("Altitude: \(data.altitude)")
+//                altitudeManager.stopAbsoluteAltitudeUpdates()
+//                let entry = AltitudeEntry(date: currentDate, altitude: Int(data.altitude * FEET_PER_METER), configuration: configuration)
+//                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
+//                completion(timeline)
+//            }
+//        }
+        Task {
+            if let altitude = await Altimeter.shared.absoluteAltitude {
+                let entry = AltitudeEntry(date: currentDate, altitude: Int(altitude * FEET_PER_METER), configuration: configuration)
                 let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
                 completion(timeline)
+            } else {
+                // TODO: Populate if reading altitude fails
             }
         }
 
