@@ -10,15 +10,20 @@ import UIKit
 import SwiftUI
 
 class AltitudeView: UIView {
+    var values: [Int] = []
+    
     override func draw(_ rect: CGRect) {
-        super.draw(rect)
+        //super.draw(rect)
         // TODO
         let context = UIGraphicsGetCurrentContext()!
-        let quadrantWidth = frame.width/4
+        let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
         //let startPoint = CGPoint(x: frame.minX, y: frame.minY)
         
+        context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
+        context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: CGSize(width: frame.width, height: frame.height))])
+        
         // Quadrant divider
-        for i in 1..<4 {
+        for i in 1..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
             context.setStrokeColor(gray: 0.8, alpha: 0.5)
             context.beginPath()
             context.move(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
@@ -29,16 +34,18 @@ class AltitudeView: UIView {
         
         // Should scale according to this; need to handle negatives
         // Can take min as zero, max as..? Round up to nearest multiple..? (given places)
-        let values = [50, 234, 100, 75]
+        //let values = [50, 234, 100, 75]
         // Normalize [0,1] and multiply against frame height (use maxY for now)
         // TODO: Handle negatives -- abs ok?
         var maxY = (values.max()!)
         let minY = values.min()!
         
+        /*
         if (maxY % 100) > 0 {
             maxY = 100*(Int(maxY)/100 + 1)
             print(maxY)
         }
+         */
         
         // Start at bottom-left corner?
         context.beginPath()
@@ -83,24 +90,56 @@ class AltitudeView: UIView {
     }
 }
 
+class AltitudeRepresentableViewModel: ObservableObject {
+    static let MAX_VALUES_SIZE = 10
+    @Published var values: [Int] = []
+    
+    func pushValue(_ value: Int) {
+        if values.count > AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
+            values.remove(at: 0)
+        }
+        
+        values.append(value)
+    }
+}
+
 struct AltitudeRepresentableView: UIViewRepresentable {
     typealias UIViewType = AltitudeView
+    
+    @ObservedObject var model: AltitudeRepresentableViewModel
     
     func makeUIView(context: Context) -> UIViewType {
         return AltitudeView()
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        // TODO: Necessary?
-        //uiView.setNeedsDisplay()
-        //uiView.draw(CGRect(origin: .zero, size: CGSize(width: 500, height: 500)))
+        uiView.values = model.values
+        uiView.setNeedsDisplay()
     }
 }
 
 
+struct AltitudePreviewView: View {
+    @StateObject var model: AltitudeRepresentableViewModel = AltitudeRepresentableViewModel()
+    
+    var body: some View {
+        VStack {
+            AltitudeRepresentableView(model: model)
+                .frame(width: 250, height: 250)
+                .onAppear {
+                    (0..<5).forEach { _ in
+                        model.pushValue(Int.random(in: 20...100))
+                    }
+                }
+            Button("Push data") {
+                model.pushValue(Int.random(in: 20...100))
+            }
+        }
+    }
+}
+
 struct AltitudeView_Previews: PreviewProvider {
     static var previews: some View {
-        AltitudeRepresentableView()
-            .frame(width: 250, height: 250)
+        AltitudePreviewView()
     }
 }

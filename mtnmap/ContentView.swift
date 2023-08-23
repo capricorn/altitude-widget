@@ -107,8 +107,12 @@ struct ContentView: View {
     }
     
     var body: some View {
+        
+        AltitudePreviewView()
+        /*
         AltitudeRepresentableView()
             .frame(width: 500, height: 500)
+         */
         /*
         VStack {
             Image(systemName: "globe")
