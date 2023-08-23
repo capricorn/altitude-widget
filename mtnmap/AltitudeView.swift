@@ -12,11 +12,14 @@ import SwiftUI
 extension NSAttributedString {
     enum Attribute {
         case foregroundColor(UIColor)
+        case font(UIFont)
         
         var tuple: (key: NSAttributedString.Key, value: Any) {
             switch self {
             case .foregroundColor(let color):
                 return (key: NSAttributedString.Key.foregroundColor, value: color)
+            case .font(let font):
+                return (key: NSAttributedString.Key.font, value: font)
             }
         }
     }
@@ -73,7 +76,10 @@ class AltitudeView: UIView {
             // TODO: Date formatting time only?
             let components = Calendar.current.dateComponents([.hour, .minute], from: time)
             "\(components.hour!):\(components.minute!)"
-                .attributed([.foregroundColor(UIColor.cyan)])
+                .attributed([
+                    .foregroundColor(UIColor.cyan),
+                    .font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))
+                ])
                 .draw(at: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
             //context.closePath()
         }
