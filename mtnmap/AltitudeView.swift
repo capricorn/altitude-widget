@@ -70,10 +70,10 @@ class AltitudeView: UIView {
             context.move(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
             context.addLine(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY))
             context.strokePath()
-            
+        }
+        
+        for i in 0..<values.count {
             let time = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double.random(in: (0...(60*60*3))))
-            //let string = time.formatted(date: .omitted, time: .shortened)//time.formatted(.time(pattern: .hourMinute))
-            // TODO: Date formatting time only?
             let components = Calendar.current.dateComponents([.hour, .minute], from: time)
             "\(components.hour!):\(components.minute!)"
                 .attributed([
@@ -81,7 +81,6 @@ class AltitudeView: UIView {
                     .font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))
                 ])
                 .draw(at: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
-            //context.closePath()
         }
         
         // Should scale according to this; need to handle negatives
