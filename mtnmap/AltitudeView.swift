@@ -60,8 +60,6 @@ class AltitudeView: UIView {
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
         context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: CGSize(width: frame.width, height: frame.height))])
         
-        "test string".attributed([.foregroundColor(.red)]).draw(at: CGPoint(x: frame.minX, y: frame.minY))
-        
         // Quadrant divider
         for i in 1..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
             context.setStrokeColor(gray: 0.8, alpha: 0.5)
@@ -69,6 +67,8 @@ class AltitudeView: UIView {
             context.move(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
             context.addLine(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY))
             context.strokePath()
+            
+            "\(i)".attributed([.foregroundColor(UIColor.cyan)]).draw(at: CGPoint(x: Double(i)*quadrantWidth+quadrantWidth/2, y: frame.minY))
             //context.closePath()
         }
         
