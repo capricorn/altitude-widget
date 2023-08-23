@@ -9,6 +9,44 @@ import Foundation
 import UIKit
 import SwiftUI
 
+extension NSAttributedString {
+    enum Attribute {
+        case foregroundColor(UIColor)
+        
+        var tuple: (key: NSAttributedString.Key, value: Any) {
+            switch self {
+            case .foregroundColor(let color):
+                return (key: NSAttributedString.Key.foregroundColor, value: color)
+            }
+        }
+    }
+}
+
+extension Array where Element == NSAttributedString.Attribute {
+    var attributes: [NSAttributedString.Key: Any]? {
+        guard self.count > 0 else {
+            return nil
+        }
+        
+        var tmp: [NSAttributedString.Key: Any] = [:]
+        for (key, val) in self.map({$0.tuple}) {
+            tmp[key] = val
+        }
+        
+        return tmp
+    }
+}
+
+extension String {
+    var attributed: NSAttributedString {
+        NSAttributedString(string: self)
+    }
+    
+    func attributed(_ attributes: [NSAttributedString.Attribute]) -> NSAttributedString {
+        return NSAttributedString(string: self, attributes: attributes.attributes)
+    }
+}
+
 class AltitudeView: UIView {
     var values: [Int] = []
     
@@ -21,6 +59,8 @@ class AltitudeView: UIView {
         
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
         context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: CGSize(width: frame.width, height: frame.height))])
+        
+        "test string".attributed([.foregroundColor(.red)]).draw(at: CGPoint(x: frame.minX, y: frame.minY))
         
         // Quadrant divider
         for i in 1..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
