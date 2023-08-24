@@ -83,7 +83,7 @@ class AltitudeView: UIView {
         //context.strokePath()
         //context.restoreGState()
         context.setFillColor(CGColor(red: 0, green: 1, blue: 0, alpha: 1))
-        context.clip(using: .winding)
+        //context.clip(using: .winding)
         /*
         context.closePath()
         context.saveGState()
@@ -104,9 +104,11 @@ class AltitudeView: UIView {
         let gradientStart = CGPoint(x: frame.minX, y: frame.minY)
         let gradientEnd = CGPoint(x: frame.minX, y: frame.maxY)
         
+        /*
         context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
         
         return
+         */
         //return
         
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
@@ -152,7 +154,6 @@ class AltitudeView: UIView {
         
         // Start at bottom-left corner?
         context.beginPath()
-        context.move(to: CGPoint(x: frame.minX, y: frame.maxY))
         context.setStrokeColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
         context.setFillColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
         context.setLineWidth(2)
@@ -163,18 +164,32 @@ class AltitudeView: UIView {
             // x in local coords
             let x = frame.minX + (Double(i)*quadrantWidth + quadrantWidth/2)
             
+            // Draw the downward connector line
+            if i > 0 {
+                let prevY = frame.minY + frame.height*(1.0 - Double(values[i-1])/Double(maxY))
+                //context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
+                context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
+            } else {
+                context.move(to: CGPoint(x: frame.minX, y: y))
+            }
+            
             // Draw top, left to right
-            context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
+            //context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
             context.addLine(to: CGPoint(x: frame.minX + (Double(i+1)*quadrantWidth), y: y))
             
             
             
             // Draw connector
-            if i > 0 {
-                let prevY = frame.minY + frame.height*(1.0 - Double(values[i-1])/Double(maxY))
-                context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
-                context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: prevY))
+            if i == (values.count-1) {
+                // Obtain first y
+                let firstY = frame.minY + frame.height*(1.0 - Double(values[0])/Double(maxY))
+                //context.move(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: y))
+                context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frame.maxY))
+                // Move back to origin
+                context.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
+                context.addLine(to: CGPoint(x: frame.minX, y: firstY))
             }
+            
             
             // Draw value text above
             "\(values[i])"
@@ -190,12 +205,31 @@ class AltitudeView: UIView {
         //context.drawPath(using: .fill)
         //context.closePath()
         //context.replacePathWithStrokedPath()
+        /*
         context.clip(using: .winding)
         context.setFillColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
         context.fillPath()
+         */
+        // Draw down from last value
+        
         //context.strokePath()
-        //context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        //context.replacePathWithStrokedPath()
+        
+        //context.saveGState()
+        //context.strokePath()
+        //context.closePath()
+        //context.restoreGState()
+        
+        context.clip(using: .evenOdd)
+        context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        //context.restoreGState()
+        
+        context.setFillColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
+        context.setStrokeColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
         //context.fillPath()
+        //context.strokePath()
+        
+        
         //context.closePath()
         
         /*
