@@ -61,12 +61,26 @@ class AltitudeView: UIView {
         return formatter
     }()
     
+    // TODO: Create gradient here?
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    
     override func draw(_ rect: CGRect) {
         //super.draw(rect)
         // TODO
         let context = UIGraphicsGetCurrentContext()!
         let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
         //let startPoint = CGPoint(x: frame.minX, y: frame.minY)
+        
+        
+        // Draw gradient from top of graph to bottom of frame
+        let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1), CGColor(red: 0, green: 0, blue: 0.5, alpha: 0.4) ] as CFArray
+        let gradient = CGGradient(colorsSpace: self.colorSpace, colors: colors, locations: [0,1])!
+        
+        // Want to draw vertically..
+        let gradientStart = CGPoint(x: frame.minX, y: frame.minY)
+        let gradientEnd = CGPoint(x: frame.minX, y: frame.maxY)
+        
+        //return
         
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
         context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: CGSize(width: frame.width, height: frame.height))])
@@ -113,6 +127,7 @@ class AltitudeView: UIView {
         context.beginPath()
         context.move(to: CGPoint(x: frame.minX, y: frame.maxY))
         context.setStrokeColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
+        context.setFillColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
         context.setLineWidth(2)
         context.setLineJoin(CGLineJoin.bevel)
         for i in 0..<values.count {
@@ -124,6 +139,8 @@ class AltitudeView: UIView {
             // Draw top, left to right
             context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
             context.addLine(to: CGPoint(x: frame.minX + (Double(i+1)*quadrantWidth), y: y))
+            
+            
             
             // Draw connector
             if i > 0 {
@@ -141,7 +158,15 @@ class AltitudeView: UIView {
                 // TODO: Compute proper font height
                 .draw(at: CGPoint(x: frame.minX + (Double(i)*quadrantWidth+quadrantWidth/2), y: y-10))
         }
-        context.strokePath()
+        //context.clip(using: .evenOdd)
+        //context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
+        //context.drawPath(using: .fill)
+        context.closePath()
+        context.replacePathWithStrokedPath()
+        context.clip(using: .evenOdd)
+        //context.strokePath()
+        context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        //context.fillPath()
         //context.closePath()
         
         /*
