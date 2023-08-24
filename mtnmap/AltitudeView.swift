@@ -81,9 +81,10 @@ class AltitudeView: UIView {
             "\(components.hour!):\(components.minute!)"
                 .attributed([
                     .foregroundColor(UIColor.cyan),
-                    .font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))
+                    .font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))
                 ])
-                .draw(at: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
+                // TODO: Use font metrics for this
+                .draw(at: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY-10.0))
         }
         
         // Should scale according to this; need to handle negatives
