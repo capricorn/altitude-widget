@@ -71,6 +71,30 @@ class AltitudeView: UIView {
         let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
         //let startPoint = CGPoint(x: frame.minX, y: frame.minY)
         
+        context.setStrokeColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
+        context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
+        context.beginPath()
+        context.move(to: CGPoint(x: frame.minX, y: frame.minY + frame.height/2))
+        context.addLine(to: CGPoint(x: frame.maxX, y: frame.minY + frame.height/2))
+        context.addLine(to: CGPoint(x: frame.minX, y: frame.minY))
+        
+        //context.saveGState()
+        //context.clip()
+        //context.strokePath()
+        //context.restoreGState()
+        context.setFillColor(CGColor(red: 0, green: 1, blue: 0, alpha: 1))
+        context.clip(using: .winding)
+        /*
+        context.closePath()
+        context.saveGState()
+        context.clip(using: .winding)
+        context.restoreGState()
+         */
+        //context.drawPath(using: .fill)
+        //context.fillPath()
+        //context.strokePath()
+        
+        
         
         // Draw gradient from top of graph to bottom of frame
         let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1), CGColor(red: 0, green: 0, blue: 0.5, alpha: 0.4) ] as CFArray
@@ -80,6 +104,9 @@ class AltitudeView: UIView {
         let gradientStart = CGPoint(x: frame.minX, y: frame.minY)
         let gradientEnd = CGPoint(x: frame.minX, y: frame.maxY)
         
+        context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        
+        return
         //return
         
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
@@ -161,11 +188,13 @@ class AltitudeView: UIView {
         //context.clip(using: .evenOdd)
         //context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
         //context.drawPath(using: .fill)
-        context.closePath()
-        context.replacePathWithStrokedPath()
-        context.clip(using: .evenOdd)
+        //context.closePath()
+        //context.replacePathWithStrokedPath()
+        context.clip(using: .winding)
+        context.setFillColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
+        context.fillPath()
         //context.strokePath()
-        context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        //context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
         //context.fillPath()
         //context.closePath()
         
