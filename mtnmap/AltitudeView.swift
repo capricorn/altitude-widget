@@ -53,6 +53,14 @@ extension String {
 class AltitudeView: UIView {
     var values: [Int] = []
     
+    // TODO: Any way to use with `Date.formatted()` api?
+    static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm"
+        
+        return formatter
+    }()
+    
     override func draw(_ rect: CGRect) {
         //super.draw(rect)
         // TODO
@@ -77,8 +85,7 @@ class AltitudeView: UIView {
         
         for i in 0..<values.count {
             let time = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double.random(in: (0...(60*60*3))))
-            let components = Calendar.current.dateComponents([.hour, .minute], from: time)
-            "\(components.hour!):\(components.minute!)"
+            AltitudeView.timeFormatter.string(from: time)
                 .attributed([
                     .foregroundColor(UIColor.cyan),
                     .font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))
