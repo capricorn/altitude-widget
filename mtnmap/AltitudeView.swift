@@ -65,12 +65,15 @@ class AltitudeView: UIView {
         
         // Quadrant divider
         for i in 1..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
-            context.setStrokeColor(gray: 0.8, alpha: 0.5)
+            context.setStrokeColor(gray: 0.80, alpha: 0.30)
+            context.setLineDash(phase: 0, lengths: [4,2])
             context.beginPath()
             context.move(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
             context.addLine(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY))
             context.strokePath()
         }
+        
+        context.setLineDash(phase: 0, lengths: [])
         
         for i in 0..<values.count {
             let time = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double.random(in: (0...(60*60*3))))
