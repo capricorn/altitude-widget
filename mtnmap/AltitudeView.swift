@@ -105,9 +105,11 @@ class AltitudeView: UIView {
         context.beginPath()
         context.move(to: CGPoint(x: frame.minX, y: frame.maxY))
         context.setStrokeColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
+        context.setLineWidth(2)
+        context.setLineJoin(CGLineJoin.bevel)
         for i in 0..<values.count {
             // y in local coords
-            let y = frame.minY + frame.height*(Double(values[i])/Double(maxY))
+            let y = frame.minY + frame.height*(1.0 - Double(values[i])/Double(maxY))
             // x in local coords
             let x = frame.minX + (Double(i)*quadrantWidth + quadrantWidth/2)
             
@@ -117,7 +119,7 @@ class AltitudeView: UIView {
             
             // Draw connector
             if i > 0 {
-                let prevY = frame.minY + frame.height*(Double(values[i-1])/Double(maxY))
+                let prevY = frame.minY + frame.height*(1.0 - Double(values[i-1])/Double(maxY))
                 context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
                 context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: prevY))
             }
