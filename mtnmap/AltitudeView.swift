@@ -118,6 +118,15 @@ class AltitudeView: UIView {
                 context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
                 context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: prevY))
             }
+            
+            // Draw value text above
+            "\(values[i])"
+                .attributed([
+                    .foregroundColor(UIColor.cyan),
+                    .font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))
+                ])
+                // TODO: Compute proper font height
+                .draw(at: CGPoint(x: frame.minX + (Double(i)*quadrantWidth+quadrantWidth/2), y: y-10))
         }
         context.strokePath()
         //context.closePath()
