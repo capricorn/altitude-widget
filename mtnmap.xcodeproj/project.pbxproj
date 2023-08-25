@@ -15,6 +15,7 @@
 		F023991329BD727900A0CC25 /* mtnmapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F023991229BD727900A0CC25 /* mtnmapUITests.swift */; };
 		F023991529BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */; };
 		F04C5AF12A9521090010F3AE /* AltitudeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF02A9521090010F3AE /* AltitudeView.swift */; };
+		F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 		F0E2257B29D1F4710068D00E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E2257A29D1F4710068D00E /* WidgetKit.framework */; };
 		F0E2257D29D1F4710068D00E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E2257C29D1F4710068D00E /* SwiftUI.framework */; };
 		F0E2258029D1F4710068D00E /* altitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2257F29D1F4710068D00E /* altitude.swift */; };
@@ -74,6 +75,7 @@
 		F023991229BD727900A0CC25 /* mtnmapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapUITests.swift; sourceTree = "<group>"; };
 		F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F04C5AF02A9521090010F3AE /* AltitudeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeView.swift; sourceTree = "<group>"; };
+		F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		F0E2257829D1F4710068D00E /* altitudeExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = altitudeExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E2257A29D1F4710068D00E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F0E2257C29D1F4710068D00E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -148,6 +150,7 @@
 				F02398FB29BD727900A0CC25 /* Assets.xcassets */,
 				F02398FD29BD727900A0CC25 /* Preview Content */,
 				F04C5AF02A9521090010F3AE /* AltitudeView.swift */,
+				F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */,
 			);
 			path = mtnmap;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				F02398FA29BD727800A0CC25 /* ContentView.swift in Sources */,
 				F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */,
 				F02398F829BD727800A0CC25 /* mtnmapApp.swift in Sources */,
+				F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
