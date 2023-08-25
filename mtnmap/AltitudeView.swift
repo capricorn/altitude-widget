@@ -157,13 +157,17 @@ class AltitudeView: UIView {
             }
             
             // Draw value text above
-            "\(values[i])"
+            let valueString = "\(values[i])"
                 .attributed([
                     .foregroundColor(UIColor.cyan),
                     .font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))
                 ])
-                // TODO: Compute proper font height
-                .draw(at: CGPoint(x: frame.minX + (Double(i)*quadrantWidth+quadrantWidth/2), y: y-10))
+            
+            let valuePadding = (quadrantWidth - valueString.size().width)/2
+            let valueStartX = frame.minX + (Double(i)*quadrantWidth) + valuePadding
+            let valueStartY = y-valueString.size().height
+            
+            valueString.draw(at: CGPoint(x: valueStartX, y: valueStartY))
         }
         
         let existingPath = context.path!.copy()!
