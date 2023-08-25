@@ -103,13 +103,17 @@ class AltitudeView: UIView {
         
         for i in 0..<values.count {
             let time = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double.random(in: (0...(60*60*3))))
-            AltitudeView.timeFormatter.string(from: time)
+            let timestampString = AltitudeView.timeFormatter.string(from: time)
                 .attributed([
                     .foregroundColor(UIColor.cyan),
                     .font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))
                 ])
-                // TODO: Use font metrics for this
-                .draw(at: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY-10.0))
+            
+            let timestampPadding = (quadrantWidth - timestampString.size().width)/2
+            let timestampStartX = Double(i)*quadrantWidth + timestampPadding
+            let timestampStartY = frame.maxY - timestampString.size().height
+            
+            timestampString.draw(at: CGPoint(x: timestampStartX, y: timestampStartY))
         }
         
         // Should scale according to this; need to handle negatives
