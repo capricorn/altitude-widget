@@ -105,7 +105,7 @@ class AltitudeView: UIView {
             let time = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double.random(in: (0...(60*60*3))))
             let timestampString = AltitudeView.timeFormatter.string(from: time)
                 .attributed([
-                    .foregroundColor(UIColor.cyan),
+                    .foregroundColor(UIColor.lightGray),
                     .font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))
                 ])
             
