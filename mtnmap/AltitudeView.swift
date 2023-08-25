@@ -142,7 +142,7 @@ class AltitudeView: UIView {
         //let values = [50, 234, 100, 75]
         // Normalize [0,1] and multiply against frame height (use maxY for now)
         // TODO: Handle negatives -- abs ok?
-        var maxY = (values.max()!)
+        let maxY = (values.max()!.padRound())
         let minY = values.min()!
         
         /*
@@ -200,6 +200,7 @@ class AltitudeView: UIView {
                 // TODO: Compute proper font height
                 .draw(at: CGPoint(x: frame.minX + (Double(i)*quadrantWidth+quadrantWidth/2), y: y-10))
         }
+        
         //context.clip(using: .evenOdd)
         //context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
         //context.drawPath(using: .fill)
@@ -248,6 +249,13 @@ class AltitudeView: UIView {
         // start x/y = top-left corner
         context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: .init(width: frame.width/4, height: frame.height/4))])
          */
+    }
+}
+
+extension Int {
+    func padRound() -> Int {
+        let places: Double = Double(Swift.max("\(self)".count-2, 1))
+        return Int(ceil((Double(self) / pow(10, places))) * pow(10, places))
     }
 }
 
