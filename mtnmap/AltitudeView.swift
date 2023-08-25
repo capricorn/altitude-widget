@@ -61,8 +61,13 @@ class AltitudeView: UIView {
         return formatter
     }()
     
+    static let graphGradient: CGGradient = {
+        let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1), CGColor(red: 0, green: 0, blue: 0.5, alpha: 0.4) ] as CFArray
+        return CGGradient(colorsSpace: colorSpace, colors: colors, locations: [0,1])!
+    }()
+    
     // TODO: Create gradient here?
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    static let colorSpace = CGColorSpaceCreateDeviceRGB()
     
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
@@ -76,10 +81,6 @@ class AltitudeView: UIView {
         context.addLine(to: CGPoint(x: frame.minX, y: frame.minY))
         
         context.setFillColor(CGColor(red: 0, green: 1, blue: 0, alpha: 1))
-        
-        // Draw gradient from top of graph to bottom of frame
-        let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1), CGColor(red: 0, green: 0, blue: 0.5, alpha: 0.4) ] as CFArray
-        let gradient = CGGradient(colorsSpace: self.colorSpace, colors: colors, locations: [0,1])!
         
         // Want to draw vertically..
         let gradientStart = CGPoint(x: frame.minX, y: frame.minY)
@@ -170,7 +171,7 @@ class AltitudeView: UIView {
         context.drawPath(using: .stroke)
         context.addPath(existingPath)
         context.clip()
-        context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        context.drawLinearGradient(AltitudeView.graphGradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
     }
 }
 
