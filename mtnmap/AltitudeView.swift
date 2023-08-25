@@ -159,7 +159,7 @@ class AltitudeView: UIView {
             // Draw value text above
             let valueString = "\(values[i])"
                 .attributed([
-                    .foregroundColor(UIColor.cyan),
+                    .foregroundColor(UIColor.white),
                     .font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))
                 ])
             
