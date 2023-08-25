@@ -76,6 +76,7 @@
 		F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F04C5AF02A9521090010F3AE /* AltitudeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeView.swift; sourceTree = "<group>"; };
 		F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		F04C5AF62A996C8A0010F3AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F0E2257829D1F4710068D00E /* altitudeExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = altitudeExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E2257A29D1F4710068D00E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F0E2257C29D1F4710068D00E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -145,6 +146,7 @@
 		F02398F629BD727800A0CC25 /* mtnmap */ = {
 			isa = PBXGroup;
 			children = (
+				F04C5AF62A996C8A0010F3AE /* Info.plist */,
 				F02398F729BD727800A0CC25 /* mtnmapApp.swift */,
 				F02398F929BD727800A0CC25 /* ContentView.swift */,
 				F02398FB29BD727900A0CC25 /* Assets.xcassets */,
@@ -542,6 +544,9 @@
 				DEVELOPMENT_TEAM = Q49KLF9VPG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mtnmap/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "GPS access is required for determining the altitude.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "GPS access is required for determining the altitude.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Uses barometer sensor to determine device altitude.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -574,6 +579,9 @@
 				DEVELOPMENT_TEAM = Q49KLF9VPG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mtnmap/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "GPS access is required for determining the altitude.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "GPS access is required for determining the altitude.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Uses barometer sensor to determine device altitude.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -121,8 +121,8 @@ class AltitudeView: UIView {
         //let values = [50, 234, 100, 75]
         // Normalize [0,1] and multiply against frame height (use maxY for now)
         // TODO: Handle negatives -- abs ok?
-        let maxY = (values.max()!.padRound())
-        let minY = values.min()!
+        let maxY = ((values.max() ?? 1).padRound())
+        //let minY = values.min()!
         
         // Start at bottom-left corner?
         context.beginPath()
@@ -174,12 +174,13 @@ class AltitudeView: UIView {
             valueString.draw(at: CGPoint(x: valueStartX, y: valueStartY))
         }
         
-        let existingPath = context.path!.copy()!
-        context.setStrokeColor(CGColor(red: 0, green: 0, blue: 1, alpha: 1))
-        context.drawPath(using: .stroke)
-        context.addPath(existingPath)
-        context.clip()
-        context.drawLinearGradient(AltitudeView.graphGradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        if let existingPath = context.path?.copy() {
+            context.setStrokeColor(CGColor(red: 0, green: 0, blue: 1, alpha: 1))
+            context.drawPath(using: .stroke)
+            context.addPath(existingPath)
+            context.clip()
+            context.drawLinearGradient(AltitudeView.graphGradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
+        }
     }
 }
 

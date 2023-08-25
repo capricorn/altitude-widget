@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreMotion
+import CoreLocation
 import Combine
 
 // TODO: Upgrade phone to iOS 16
@@ -106,13 +107,40 @@ struct ContentView: View {
         
     }
     
+    @StateObject var model: AltitudeRepresentableViewModel = AltitudeRepresentableViewModel()
+    
+    let locationManager = CLLocationManager()
+    let locationDelegate = LocationDelegate()
+    
     var body: some View {
         
-        AltitudePreviewView()
-        /*
-        AltitudeRepresentableView()
+        //AltitudePreviewView()
+        AltitudeRepresentableView(model: model)
             .frame(width: 500, height: 500)
-         */
+            // TODO -- could pass `locationDelegate.publisher` here
+            .onReceive(locationDelegate.locationPublisher) { location in
+                model.pushValue(Int(location.altitude))
+                print(model.values)
+            }
+            .onAppear {
+                // Start location updates (according to authorization status)
+                locationManager.delegate = locationDelegate
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                
+                if locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse {
+                    locationManager.startUpdatingLocation()
+                } else {
+                    print("Not authorized for location")
+                    locationManager.requestAlwaysAuthorization()
+                }
+            }
+            // TODO: Must be published to register?
+            .onChange(of: locationManager.authorizationStatus) { newStatus in
+                if newStatus == .authorizedWhenInUse || newStatus == .authorizedAlways {
+                    print("App authorized, start location updates.")
+                    locationManager.startUpdatingLocation()
+                }
+            }
         /*
         VStack {
             Image(systemName: "globe")
