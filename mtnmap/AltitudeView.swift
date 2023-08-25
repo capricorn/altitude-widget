@@ -122,7 +122,18 @@ class AltitudeView: UIView {
         // Normalize [0,1] and multiply against frame height (use maxY for now)
         // TODO: Handle negatives -- abs ok?
         let maxY = ((values.max() ?? 1).padRound())
-        //let minY = values.min()!
+        // TODO: Round down
+        let minY = (values.min() ?? 1)
+        
+        // Scales from 0 to 1
+        let scaler: (Int) -> Double = { val in
+            let slope = 1.0/Double(maxY - minY)
+            
+            // Apply 1-res at the front to deal with coordinate system (yes, it would cancel)
+            return 1.0 - (Double((val-maxY))*slope + 1.0)
+        }
+        
+        print("Scaled: \(values.map({scaler($0)}))")
         
         // Start at bottom-left corner?
         context.beginPath()
@@ -132,13 +143,13 @@ class AltitudeView: UIView {
         context.setLineJoin(CGLineJoin.bevel)
         for i in 0..<values.count {
             // y in local coords
-            let y = frame.minY + frame.height*(1.0 - Double(values[i])/Double(maxY))
+            let y = frame.minY + frame.height*(scaler(values[i]))
             // x in local coords
             let x = frame.minX + (Double(i)*quadrantWidth + quadrantWidth/2)
             
             // Draw the downward connector line
             if i > 0 {
-                let prevY = frame.minY + frame.height*(1.0 - Double(values[i-1])/Double(maxY))
+                let prevY = frame.minY + frame.height*(scaler(values[i-1]))
                 //context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
                 context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
             } else {
@@ -152,7 +163,7 @@ class AltitudeView: UIView {
             // Draw connector
             if i == (values.count-1) {
                 // Obtain first y
-                let firstY = frame.minY + frame.height*(1.0 - Double(values[0])/Double(maxY))
+                let firstY = frame.minY + frame.height*(scaler(values[0]))
                 //context.move(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: y))
                 context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frame.maxY))
                 // Move back to origin
