@@ -221,7 +221,13 @@ class AltitudeView: UIView {
         //context.closePath()
         //context.restoreGState()
         
-        context.clip(using: .evenOdd)
+        //context.setFillColor(CGColor(red: 1.0, green: 0, blue: 0, alpha: 1.0))
+        //context.clip(using: .evenOdd)
+        let existingPath = context.path!.copy()!
+        context.setStrokeColor(CGColor(red: 0, green: 0, blue: 1, alpha: 1))
+        context.drawPath(using: .stroke)
+        context.addPath(existingPath)
+        context.clip()
         context.drawLinearGradient(gradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
         //context.restoreGState()
         
