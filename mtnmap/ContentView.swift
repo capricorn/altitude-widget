@@ -116,7 +116,7 @@ struct ContentView: View {
         
         //AltitudePreviewView()
         AltitudeRepresentableView(model: model)
-            .frame(width: 500, height: 500)
+            .frame(height: 500)
             // TODO -- could pass `locationDelegate.publisher` here
             .onReceive(locationDelegate.locationPublisher) { location in
                 model.pushValue(Int(location.altitude))
