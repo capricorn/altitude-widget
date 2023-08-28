@@ -128,9 +128,15 @@ class AltitudeView: UIView {
         //let values = [50, 234, 100, 75]
         // Normalize [0,1] and multiply against frame height (use maxY for now)
         // TODO: Handle negatives -- abs ok?
-        let maxY = ((values.max() ?? 1).padRound())
+        var maxY = ((values.max() ?? 1).padRound())
         // TODO: Round down
-        let minY = (values.min() ?? 1)
+        var minY = (values.min() ?? 1)
+        
+        // Adjust max/min from +-1 median? Improve view with insufficient range.
+        if (values.max()! - values.min()!) < 3 {
+            maxY = values.max()! + 1
+            minY = values.min()! - 1
+        }
         
         // Scales from 0 to 1
         let scaler: (Int) -> Double = { val in
