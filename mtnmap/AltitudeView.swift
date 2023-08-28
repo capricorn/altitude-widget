@@ -213,7 +213,7 @@ class AltitudeRepresentableViewModel: ObservableObject {
     @Published var values: [Int] = []
     
     func pushValue(_ value: Int) {
-        if values.count > AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
+        if values.count == AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
             values.remove(at: 0)
         }
         
@@ -251,7 +251,7 @@ struct AltitudePreviewView: View {
             AltitudeRepresentableView(model: model)
                 .frame(width: 300, aspectRatio: 3/2)
                 .onAppear {
-                    (0..<5).forEach { _ in
+                    (0..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE).forEach { _ in
                         model.pushValue(Int.random(in: 20...100))
                     }
                 }
