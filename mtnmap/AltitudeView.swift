@@ -203,7 +203,7 @@ extension Int {
 }
 
 class AltitudeRepresentableViewModel: ObservableObject {
-    static let MAX_VALUES_SIZE = 10
+    static let MAX_VALUES_SIZE = 5
     @Published var values: [Int] = []
     
     func pushValue(_ value: Int) {
