@@ -172,9 +172,10 @@ class AltitudeView: UIView {
                 context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frameMaxY))
                 // Move back to origin
                 // Bottom connecting line -- make opaque
+                /*
                 context.addLine(to: CGPoint(x: frame.minX, y: frameMaxY))
-                //context.move(to: CGPoint(x: frame.minX, y: frameMaxY))
                 context.addLine(to: CGPoint(x: frame.minX, y: firstY))
+                 */
             }
             
             // Draw value text above
@@ -192,9 +193,19 @@ class AltitudeView: UIView {
         }
         
         if let existingPath = context.path?.copy() {
+            // Draw the incomplete path
             context.setStrokeColor(CGColor(red: 0.4, green: 0.0, blue: 1.0, alpha: 1.0))
             context.drawPath(using: .stroke)
             context.addPath(existingPath)
+            
+            if values.count == AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
+                let firstY = frameMinY + graphHeight*(scaler(values[0]))
+                context.setStrokeColor(CGColor(red: 0.4, green: 0.0, blue: 1.0, alpha: 0.0))
+                context.move(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frameMaxY))
+                context.addLine(to: CGPoint(x: frame.minX, y: frameMaxY))
+                context.addLine(to: CGPoint(x: frame.minX, y: firstY))
+            }
+            
             context.clip()
             context.drawLinearGradient(AltitudeView.graphGradient, start: gradientStart, end: gradientEnd, options: CGGradientDrawingOptions.drawsAfterEndLocation)
         }
