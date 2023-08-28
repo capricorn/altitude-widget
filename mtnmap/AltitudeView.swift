@@ -69,6 +69,20 @@ class AltitudeView: UIView {
     // TODO: Create gradient here?
     static let colorSpace = CGColorSpaceCreateDeviceRGB()
     
+    func drawColumnDividers() {
+        let context = UIGraphicsGetCurrentContext()!
+        let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
+        
+        for i in 1..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
+            context.setStrokeColor(gray: 0.80, alpha: 0.30)
+            context.setLineDash(phase: 0, lengths: [4,2])
+            context.beginPath()
+            context.move(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
+            context.addLine(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY))
+            context.strokePath()
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
@@ -96,15 +110,7 @@ class AltitudeView: UIView {
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
         context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: CGSize(width: frame.width, height: frame.height))])
         
-        // Quadrant divider
-        for i in 1..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
-            context.setStrokeColor(gray: 0.80, alpha: 0.30)
-            context.setLineDash(phase: 0, lengths: [4,2])
-            context.beginPath()
-            context.move(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.minY))
-            context.addLine(to: CGPoint(x: Double(i)*quadrantWidth, y: frame.maxY))
-            context.strokePath()
-        }
+        self.drawColumnDividers()
         
         context.setLineDash(phase: 0, lengths: [])
         
