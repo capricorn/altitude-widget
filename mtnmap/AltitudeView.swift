@@ -187,7 +187,7 @@ class AltitudeView: UIView {
             
             let valuePadding = (quadrantWidth - valueString.size().width)/2
             let valueStartX = frame.minX + (Double(i)*quadrantWidth) + valuePadding
-            let valueStartY = y-valueString.size().height
+            let valueStartY = y-valueString.size().height-2
             
             valueString.draw(at: CGPoint(x: valueStartX, y: valueStartY))
         }
