@@ -236,6 +236,12 @@ struct AltitudeRepresentableView: UIViewRepresentable {
     }
 }
 
+extension View {
+    func frame(width: CGFloat, aspectRatio: CGFloat) -> some View {
+        self.frame(width: width, height: width/aspectRatio)
+    }
+}
+
 
 struct AltitudePreviewView: View {
     @StateObject var model: AltitudeRepresentableViewModel = AltitudeRepresentableViewModel()
@@ -243,7 +249,7 @@ struct AltitudePreviewView: View {
     var body: some View {
         VStack {
             AltitudeRepresentableView(model: model)
-                .frame(width: 250, height: 250)
+                .frame(width: 300, aspectRatio: 3/2)
                 .onAppear {
                     (0..<5).forEach { _ in
                         model.pushValue(Int.random(in: 20...100))
