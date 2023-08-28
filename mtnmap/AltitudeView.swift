@@ -62,7 +62,7 @@ class AltitudeView: UIView {
     }()
     
     static let graphGradient: CGGradient = {
-        let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1.0), CGColor(red: 0, green: 0, blue: 0.2, alpha: 0.1) ] as CFArray
+        let colors: CFArray = [ CGColor(red: 1.0, green: 0.5, blue: 1, alpha: 1.0), CGColor(red: 0, green: 0, blue: 0.2, alpha: 0.1) ] as CFArray
         return CGGradient(colorsSpace: colorSpace, colors: colors, locations: [0,1])!
     }()
     
@@ -73,8 +73,9 @@ class AltitudeView: UIView {
         let context = UIGraphicsGetCurrentContext()!
         let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
         let frameMaxY = frame.maxY - "00:00".attributed([.font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))]).size().height - 4
-        let graphHeight = frameMaxY - frame.minY
-
+        let frameMinY = frame.minY + "9999".attributed([.font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))]).size().height
+        let graphHeight = frameMaxY - frameMinY
+        //let graphHeight = frameMaxY -
         
         context.setStrokeColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
         context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
@@ -146,13 +147,13 @@ class AltitudeView: UIView {
         context.setLineJoin(CGLineJoin.bevel)
         for i in 0..<values.count {
             // y in local coords
-            let y = frame.minY + graphHeight*(scaler(values[i]))
+            let y = frameMinY + graphHeight*(scaler(values[i]))
             // x in local coords
             let x = frame.minX + (Double(i)*quadrantWidth + quadrantWidth/2)
             
             // Draw the downward connector line
             if i > 0 {
-                let prevY = frame.minY + graphHeight*(scaler(values[i-1]))
+                let prevY = frameMinY + graphHeight*(scaler(values[i-1]))
                 //context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
                 context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
             } else {
@@ -166,7 +167,7 @@ class AltitudeView: UIView {
             // Draw connector
             if i == (values.count-1) {
                 // Obtain first y
-                let firstY = frame.minY + graphHeight*(scaler(values[0]))
+                let firstY = frameMinY + graphHeight*(scaler(values[0]))
                 //context.move(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: y))
                 context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frameMaxY))
                 // Move back to origin
@@ -191,7 +192,7 @@ class AltitudeView: UIView {
         }
         
         if let existingPath = context.path?.copy() {
-            context.setStrokeColor(CGColor(red: 0, green: 0, blue: 1.0, alpha: 1.0))
+            context.setStrokeColor(CGColor(red: 0.4, green: 0.0, blue: 1.0, alpha: 1.0))
             context.drawPath(using: .stroke)
             context.addPath(existingPath)
             context.clip()
