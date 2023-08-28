@@ -62,7 +62,7 @@ class AltitudeView: UIView {
     }()
     
     static let graphGradient: CGGradient = {
-        let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1), CGColor(red: 0, green: 0, blue: 0.5, alpha: 0.4) ] as CFArray
+        let colors: CFArray = [ CGColor(red: 0, green: 0, blue: 1, alpha: 1.0), CGColor(red: 0, green: 0, blue: 0.2, alpha: 0.1) ] as CFArray
         return CGGradient(colorsSpace: colorSpace, colors: colors, locations: [0,1])!
     }()
     
@@ -170,7 +170,9 @@ class AltitudeView: UIView {
                 //context.move(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: y))
                 context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frameMaxY))
                 // Move back to origin
+                // Bottom connecting line -- make opaque
                 context.addLine(to: CGPoint(x: frame.minX, y: frameMaxY))
+                //context.move(to: CGPoint(x: frame.minX, y: frameMaxY))
                 context.addLine(to: CGPoint(x: frame.minX, y: firstY))
             }
             
@@ -189,7 +191,7 @@ class AltitudeView: UIView {
         }
         
         if let existingPath = context.path?.copy() {
-            context.setStrokeColor(CGColor(red: 0, green: 0, blue: 1, alpha: 1))
+            context.setStrokeColor(CGColor(red: 0, green: 0, blue: 1.0, alpha: 1.0))
             context.drawPath(using: .stroke)
             context.addPath(existingPath)
             context.clip()
