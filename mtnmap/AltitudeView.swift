@@ -73,7 +73,7 @@ class AltitudeView: UIView {
         let context = UIGraphicsGetCurrentContext()!
         let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
         let frameMaxY = frame.maxY - "00:00".attributed([.font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))]).size().height - 4
-        let frameMinY = frame.minY + "9999".attributed([.font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))]).size().height
+        let frameMinY = frame.minY + "9999".attributed([.font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))]).size().height + 4
         let graphHeight = frameMaxY - frameMinY
         //let graphHeight = frameMaxY -
         
