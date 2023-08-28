@@ -72,6 +72,9 @@ class AltitudeView: UIView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         let quadrantWidth = frame.width/Double(AltitudeRepresentableViewModel.MAX_VALUES_SIZE)
+        let frameMaxY = frame.maxY - "00:00".attributed([.font(UIFont.monospacedSystemFont(ofSize: 6, weight: .light))]).size().height - 4
+        let graphHeight = frameMaxY - frame.minY
+
         
         context.setStrokeColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
         context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
@@ -84,7 +87,7 @@ class AltitudeView: UIView {
         
         // Want to draw vertically..
         let gradientStart = CGPoint(x: frame.minX, y: frame.minY)
-        let gradientEnd = CGPoint(x: frame.minX, y: frame.maxY)
+        let gradientEnd = CGPoint(x: frame.minX, y: frameMaxY)
         
         context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 1))
         context.fill([CGRect(origin: CGPoint(x: frame.minX, y: frame.minY), size: CGSize(width: frame.width, height: frame.height))])
@@ -143,13 +146,13 @@ class AltitudeView: UIView {
         context.setLineJoin(CGLineJoin.bevel)
         for i in 0..<values.count {
             // y in local coords
-            let y = frame.minY + frame.height*(scaler(values[i]))
+            let y = frame.minY + graphHeight*(scaler(values[i]))
             // x in local coords
             let x = frame.minX + (Double(i)*quadrantWidth + quadrantWidth/2)
             
             // Draw the downward connector line
             if i > 0 {
-                let prevY = frame.minY + frame.height*(scaler(values[i-1]))
+                let prevY = frame.minY + graphHeight*(scaler(values[i-1]))
                 //context.move(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
                 context.addLine(to: CGPoint(x: frame.minX + (Double(i)*quadrantWidth), y: y))
             } else {
@@ -163,11 +166,11 @@ class AltitudeView: UIView {
             // Draw connector
             if i == (values.count-1) {
                 // Obtain first y
-                let firstY = frame.minY + frame.height*(scaler(values[0]))
+                let firstY = frame.minY + graphHeight*(scaler(values[0]))
                 //context.move(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: y))
-                context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frame.maxY))
+                context.addLine(to: CGPoint(x: frame.minX + Double(values.count)*quadrantWidth, y: frameMaxY))
                 // Move back to origin
-                context.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
+                context.addLine(to: CGPoint(x: frame.minX, y: frameMaxY))
                 context.addLine(to: CGPoint(x: frame.minX, y: firstY))
             }
             
