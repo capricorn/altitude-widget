@@ -51,7 +51,7 @@ extension String {
 }
 
 class AltitudeView: UIView {
-    var values: [Int] = []
+    var values: [Altitude] = []
     
     // TODO: Any way to use with `Date.formatted()` api?
     static let timeFormatter: DateFormatter = {
@@ -76,6 +76,9 @@ class AltitudeView: UIView {
         let frameMinY = frame.minY + "9999".attributed([.font(UIFont.monospacedSystemFont(ofSize: 8, weight: .light))]).size().height + 4
         let graphHeight = frameMaxY - frameMinY
         //let graphHeight = frameMaxY -
+        
+        let timestamps = values.map { $0.timestamp }
+        let values = values.map { $0.location }
         
         context.setStrokeColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
         context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
@@ -106,7 +109,7 @@ class AltitudeView: UIView {
         context.setLineDash(phase: 0, lengths: [])
         
         for i in 0..<values.count {
-            let time = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double.random(in: (0...(60*60*3))))
+            let time = Date(timeIntervalSince1970: Double(timestamps[i]))
             let timestampString = AltitudeView.timeFormatter.string(from: time)
                 .attributed([
                     .foregroundColor(UIColor.lightGray),
@@ -221,9 +224,9 @@ extension Int {
 
 class AltitudeRepresentableViewModel: ObservableObject {
     static let MAX_VALUES_SIZE = 5
-    @Published var values: [Int] = []
+    @Published var values: [Altitude] = []
     
-    func pushValue(_ value: Int) {
+    func pushValue(_ value: Altitude) {
         if values.count == AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
             values.remove(at: 0)
         }
@@ -253,6 +256,10 @@ extension View {
     }
 }
 
+struct Altitude {
+    let location: Int
+    let timestamp: Int
+}
 
 struct AltitudePreviewView: View {
     @StateObject var model: AltitudeRepresentableViewModel = AltitudeRepresentableViewModel()
@@ -263,11 +270,13 @@ struct AltitudePreviewView: View {
                 .frame(width: 300, aspectRatio: 3/2)
                 .onAppear {
                     (0..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE).forEach { _ in
-                        model.pushValue(Int.random(in: 20...100))
+                        let altitude = Int.random(in: 20...100)
+                        model.pushValue(Altitude(location: altitude, timestamp: Int(Date().timeIntervalSince1970)))
                     }
                 }
             Button("Push data") {
-                model.pushValue(Int.random(in: 20...100))
+                let altitude = Int.random(in: 20...100)
+                model.pushValue(Altitude(location: altitude, timestamp: Int(Date().timeIntervalSince1970)))
             }
         }
     }

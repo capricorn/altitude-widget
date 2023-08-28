@@ -119,7 +119,8 @@ struct ContentView: View {
             .frame(height: 500)
             // TODO -- could pass `locationDelegate.publisher` here
             .onReceive(locationDelegate.locationPublisher) { location in
-                model.pushValue(Int(location.altitude))
+                //model.pushValue(Int(location.altitude))
+                model.pushValue(Altitude(location: Int(location.altitude), timestamp: Int(location.timestamp.timeIntervalSince1970)))
                 print(model.values)
             }
             .onAppear {
