@@ -77,7 +77,13 @@ struct altitudeEntryView : View {
     }
 }
 
-@main
+struct AltitudeWidgets: WidgetBundle {
+    var body: some Widget {
+        altitude()
+    }
+}
+
+//@main
 struct altitude: Widget {
     let kind: String = "altitude"
 
