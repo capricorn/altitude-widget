@@ -23,6 +23,7 @@
 		F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
 		F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
 		F0E2258929D1F4730068D00E /* altitudeExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F0E2257829D1F4710068D00E /* altitudeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF02A9521090010F3AE /* AltitudeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -392,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */,
 				F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */,
 				F0E2258029D1F4710068D00E /* altitude.swift in Sources */,
 			);

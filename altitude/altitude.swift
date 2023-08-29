@@ -77,15 +77,34 @@ struct altitudeEntryView : View {
     }
 }
 
+@main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
         altitude()
+        AltitudeGraph()
+    }
+}
+
+struct AltitudeGraph: Widget {
+    let kind: String = "com.goatfish.AltitudeGraph"
+    
+    var body: some WidgetConfiguration {
+        // TODO: Is a custom ConfigurationIntent necessary?
+        // TODO: Implement separate Provider
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { timelineEntry in
+            // TODO: Provide entry to actual view
+            AltitudePreviewView()
+        }
+        .configurationDisplayName("My Widget 2")
+        .description("This is an example widget.")
+        .supportedFamilies([
+            .accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
     }
 }
 
 //@main
 struct altitude: Widget {
-    let kind: String = "altitude"
+    let kind: String = "com.goatfish.altitude"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
