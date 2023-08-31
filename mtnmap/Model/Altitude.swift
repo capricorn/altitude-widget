@@ -8,13 +8,14 @@
 import Foundation
 import WidgetKit
 
-struct Altitude {
+struct Altitude: TimelineEntry {
     let location: Int
     let timestamp: Int
-}
-
-extension Altitude: TimelineEntry {
-    var date: Date {
-        Date(timeIntervalSince1970: TimeInterval(self.timestamp))
+    let date: Date
+    
+    init(location: Int, timestamp: Int, date: Date=Date()) {
+        self.location = location
+        self.timestamp = timestamp
+        self.date = date
     }
 }

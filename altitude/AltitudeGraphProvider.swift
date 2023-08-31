@@ -9,19 +9,47 @@ import Foundation
 import WidgetKit
 
 struct AltitudeGraphProvider: TimelineProvider {
+    private class EntryStack {
+        let stackSize: Int
+        var entries: [Altitude] = []
+        
+        init(stackSize: Int) {
+            self.stackSize = stackSize
+        }
+        
+        func push(_ altitude: Altitude) {
+            if entries.count == stackSize {
+                entries.remove(at: 0)
+            }
+            
+            self.entries.append(altitude)
+        }
+    }
+    
     typealias Entry = Altitude
+    
+    // TODO: Does this work in practice?
+    private let entryStack = EntryStack(stackSize: 5)
     
     func placeholder(in context: Context) -> Altitude {
         return Altitude(location: 10, timestamp: 10)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (Altitude) -> Void) {
-        // TODO: Pass in current state..?
         let altitude = Altitude(location: 50, timestamp: Int(Date().timeIntervalSince1970))
         completion(altitude)
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Altitude>) -> Void) {
-        // TODO: Generate / assign random value for now
+        let endDate = Date().addingTimeInterval(15*60)
+        
+        // Perform gps reading, use completion callback here
+        Task {
+            // TODO: Separate date from timestamp -- two different things
+            // TODO: Async gps reading
+            let entry = Altitude(location: 10, timestamp: 10)
+            entryStack.push(entry)
+            completion(Timeline(entries: [entry], policy: .atEnd))
+        }
     }
 }
