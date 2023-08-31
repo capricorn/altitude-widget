@@ -16,23 +16,31 @@ struct StepGraphView: View {
             AccessoryWidgetBackground()
                 .cornerRadius(5)
             Canvas { context, size in
-                // test1 -- draw columns
                 context.stroke(
                     Path { path in
+                        let values = (0..<columns).map { _ in CGFloat(Int.random(in: 100...1000)) }
                         let columnWidth = size.width/CGFloat(columns)
-                        var columnValue = CGFloat(Int.random(in: 10...40))
+                        
+                        let scaler = { (x: CGFloat) -> CGFloat in
+                            let maxValue = values.max()!
+                            let minValue = values.min()!
+                            let slope = 1/(maxValue-minValue)
+                            
+                            return slope*(x-maxValue) + 1.0
+                        }
                         
                         path.move(to: .zero)
                         
                         for col in 0..<columns {
-                            path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnValue))
+                            // +- 4 padding
+                            let columnY = (size.height-8)*scaler(values[col]) + 4
+                            path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnY))
                             
                             let point = CGPoint(
                                 x: CGFloat(col+1)*(columnWidth),
-                                y: columnValue
+                                y: columnY
                             )
                             path.addLine(to: point)
-                            columnValue = CGFloat(Int.random(in: 10...40))
                         }
                     }, with: .foreground
                 )
