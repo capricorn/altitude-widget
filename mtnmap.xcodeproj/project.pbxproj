@@ -24,6 +24,10 @@
 		F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
 		F0E2258929D1F4730068D00E /* altitudeExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F0E2257829D1F4710068D00E /* altitudeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF02A9521090010F3AE /* AltitudeView.swift */; };
+		F0E740E92A9FE63800AD2A72 /* AltitudeGraphProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740E82A9FE63800AD2A72 /* AltitudeGraphProvider.swift */; };
+		F0E740EC2A9FE72B00AD2A72 /* Altitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EB2A9FE72B00AD2A72 /* Altitude.swift */; };
+		F0E740ED2A9FE72B00AD2A72 /* Altitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EB2A9FE72B00AD2A72 /* Altitude.swift */; };
+		F0E740F02AA0FAEC00AD2A72 /* StepGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +89,9 @@
 		F0E2258129D1F4710068D00E /* altitude.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = altitude.intentdefinition; sourceTree = "<group>"; };
 		F0E2258229D1F4730068D00E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0E2258429D1F4730068D00E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0E740E82A9FE63800AD2A72 /* AltitudeGraphProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeGraphProvider.swift; sourceTree = "<group>"; };
+		F0E740EB2A9FE72B00AD2A72 /* Altitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Altitude.swift; sourceTree = "<group>"; };
+		F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepGraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +154,7 @@
 		F02398F629BD727800A0CC25 /* mtnmap */ = {
 			isa = PBXGroup;
 			children = (
+				F0E740EA2A9FE71200AD2A72 /* Model */,
 				F04C5AF62A996C8A0010F3AE /* Info.plist */,
 				F02398F729BD727800A0CC25 /* mtnmapApp.swift */,
 				F02398F929BD727800A0CC25 /* ContentView.swift */,
@@ -199,8 +207,18 @@
 				F0E2258129D1F4710068D00E /* altitude.intentdefinition */,
 				F0E2258229D1F4730068D00E /* Assets.xcassets */,
 				F0E2258429D1F4730068D00E /* Info.plist */,
+				F0E740E82A9FE63800AD2A72 /* AltitudeGraphProvider.swift */,
+				F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */,
 			);
 			path = altitude;
+			sourceTree = "<group>";
+		};
+		F0E740EA2A9FE71200AD2A72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F0E740EB2A9FE72B00AD2A72 /* Altitude.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F04C5AF12A9521090010F3AE /* AltitudeView.swift in Sources */,
+				F0E740EC2A9FE72B00AD2A72 /* Altitude.swift in Sources */,
 				F02398FA29BD727800A0CC25 /* ContentView.swift in Sources */,
 				F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */,
 				F02398F829BD727800A0CC25 /* mtnmapApp.swift in Sources */,
@@ -393,9 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0E740ED2A9FE72B00AD2A72 /* Altitude.swift in Sources */,
 				F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */,
 				F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */,
 				F0E2258029D1F4710068D00E /* altitude.swift in Sources */,
+				F0E740E92A9FE63800AD2A72 /* AltitudeGraphProvider.swift in Sources */,
+				F0E740F02AA0FAEC00AD2A72 /* StepGraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

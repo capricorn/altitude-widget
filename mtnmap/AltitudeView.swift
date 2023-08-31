@@ -268,10 +268,7 @@ extension View {
     }
 }
 
-struct Altitude {
-    let location: Int
-    let timestamp: Int
-}
+
 
 struct AltitudePreviewView: View {
     @StateObject var model: AltitudeRepresentableViewModel = AltitudeRepresentableViewModel()

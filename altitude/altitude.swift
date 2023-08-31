@@ -119,7 +119,13 @@ struct altitude: Widget {
 
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
+        VStack {
+            AltitudePreviewView()
+        }
+        .previewContext(WidgetPreviewContext(family: .systemLarge))
+        /*
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+         */
     }
 }
