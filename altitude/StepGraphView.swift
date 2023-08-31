@@ -42,12 +42,15 @@ struct StepGraphView: View {
                             )
                             // Top line of square
                             path.addLine(to: point)
-                            // TODO: Center
                             // TODO: Select top/bottom if bounds exceeded
+                            let columnText = Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced))
+                            let columnTextSize = context.resolve(columnText).measure(in: size)
+                            let columnTextPadding = (columnWidth - columnTextSize.width)/2
+                            
                             context.draw(
                                 // TODO: Value formatting
                                 Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced)),
-                                at: CGPoint(x: CGFloat(col)*(columnWidth), y: columnY),
+                                at: CGPoint(x: CGFloat(col)*(columnWidth) + columnTextPadding, y: columnY),
                                 anchor: .topLeading
                             )
                         }
