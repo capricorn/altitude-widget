@@ -33,7 +33,7 @@ struct StepGraphView: View {
                         
                         for col in 0..<columns {
                             // +- 4 padding
-                            let columnY = (size.height-8)*scaler(values[col]) + 4
+                            var columnY = (size.height-8)*scaler(values[col]) + 4
                             path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnY))
                             
                             let point = CGPoint(
@@ -46,6 +46,11 @@ struct StepGraphView: View {
                             let columnText = Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced))
                             let columnTextSize = context.resolve(columnText).measure(in: size)
                             let columnTextPadding = (columnWidth - columnTextSize.width)/2
+                            
+                            // If the text will clip below the graph, render it above.
+                            if (columnY + columnTextSize.height) > (size.height-4) {
+                                columnY -= columnTextSize.height
+                            }
                             
                             context.draw(
                                 // TODO: Value formatting
