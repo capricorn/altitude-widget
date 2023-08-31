@@ -40,7 +40,16 @@ struct StepGraphView: View {
                                 x: CGFloat(col+1)*(columnWidth),
                                 y: columnY
                             )
+                            // Top line of square
                             path.addLine(to: point)
+                            // TODO: Center
+                            // TODO: Select top/bottom if bounds exceeded
+                            context.draw(
+                                // TODO: Value formatting
+                                Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced)),
+                                at: CGPoint(x: CGFloat(col)*(columnWidth), y: columnY),
+                                anchor: .topLeading
+                            )
                         }
                     }, with: .foreground
                 )
