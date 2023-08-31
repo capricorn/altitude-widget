@@ -91,14 +91,12 @@ struct AltitudeGraph: Widget {
     var body: some WidgetConfiguration {
         // TODO: Is a custom ConfigurationIntent necessary?
         // TODO: Implement separate Provider
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { timelineEntry in
+        StaticConfiguration(kind: kind, provider: AltitudeGraphProvider()) { timelineEntry in
             // TODO: Provide entry to actual view
-            AltitudePreviewView()
+            StepGraphView()
         }
-        .configurationDisplayName("My Widget 2")
         .description("This is an example widget.")
-        .supportedFamilies([
-            .accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
+        .supportedFamilies([.accessoryRectangular])
     }
 }
 
@@ -119,10 +117,8 @@ struct altitude: Widget {
 
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            AltitudePreviewView()
-        }
-        .previewContext(WidgetPreviewContext(family: .systemLarge))
+        StepGraphView()
+            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         /*
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
