@@ -20,11 +20,19 @@ struct StepGraphView: View {
                 context.stroke(
                     Path { path in
                         let columnWidth = size.width/CGFloat(columns)
-                        // Should be (0,0) in the view
+                        var columnValue = CGFloat(Int.random(in: 10...40))
+                        
                         path.move(to: .zero)
-                        // TODO: Stroke color?
-                        for col in 1...columns {
-                            path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: CGFloat(Int.random(in: 10...40))))
+                        
+                        for col in 0..<columns {
+                            path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnValue))
+                            
+                            let point = CGPoint(
+                                x: CGFloat(col+1)*(columnWidth),
+                                y: columnValue
+                            )
+                            path.addLine(to: point)
+                            columnValue = CGFloat(Int.random(in: 10...40))
                         }
                     }, with: .foreground
                 )
