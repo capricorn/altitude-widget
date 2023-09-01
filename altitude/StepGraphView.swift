@@ -10,6 +10,11 @@ import WidgetKit
 
 struct StepGraphView: View {
     let columns = 5
+    let entry: AltitudeStepEntry
+    
+    init(entry: AltitudeStepEntry) {
+        self.entry = entry
+    }
     
     private func graphHeight(context: GraphicsContext, size: CGSize) -> CGFloat {
         let timestampText = Text("00:00").font(.system(size: 8, design: .monospaced))
@@ -22,9 +27,9 @@ struct StepGraphView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm"
         
-        for i in 0..<columns {
-            let timestamp = Int(startDate.timeIntervalSince1970) + i*Int.random(in: 60...3600)
-            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+        for i in 0..<min(columns, entry.altitudes.count) {
+            //let timestamp = Int(startDate.timeIntervalSince1970) + i*Int.random(in: 60...3600)
+            let date = entry.altitudes[i].time
             let text = Text(formatter.string(from: date)).font(.system(size: 6, design: .monospaced))
             
             let columnWidth = size.width/CGFloat(columns)
@@ -43,7 +48,7 @@ struct StepGraphView: View {
             Canvas { context, size in
                 context.stroke(
                     Path { path in
-                        let values = (0..<columns).map { _ in CGFloat(Int.random(in: 100...1000)) }
+                        let values = entry.altitudes.map { CGFloat($0.value) }
                         let columnWidth = size.width/CGFloat(columns)
                         let graphHeight = graphHeight(context: context, size: size)
                         
@@ -57,7 +62,7 @@ struct StepGraphView: View {
                         
                         path.move(to: .zero)
                         
-                        for col in 0..<columns {
+                        for col in 0..<min(columns, values.count) {
                             // +- 4 padding
                             var columnY = (graphHeight-8)*scaler(values[col]) + 4
                             path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnY))
@@ -92,12 +97,15 @@ struct StepGraphView: View {
             }
             .border(Color.black)
         }
+        .onAppear {
+            print("Running altitude graph")
+        }
     }
 }
 
 struct StepGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        StepGraphView()
+        StepGraphView(entry: AltitudeStepEntry(altitudes: []))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
 }

@@ -80,7 +80,7 @@ struct altitudeEntryView : View {
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
-        altitude()
+        //altitude()
         AltitudeGraph()
     }
 }
@@ -93,10 +93,11 @@ struct AltitudeGraph: Widget {
         // TODO: Implement separate Provider
         StaticConfiguration(kind: kind, provider: AltitudeGraphProvider()) { timelineEntry in
             // TODO: Provide entry to actual view
-            StepGraphView()
+            StepGraphView(entry: timelineEntry)
         }
+        .configurationDisplayName("Altitude Graph")
         .description("This is an example widget.")
-        .supportedFamilies([.accessoryRectangular])
+        .supportedFamilies([.accessoryRectangular, .systemMedium])
     }
 }
 
@@ -117,7 +118,7 @@ struct altitude: Widget {
 
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
-        StepGraphView()
+        StepGraphView(entry: AltitudeStepEntry(altitudes: []))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         /*
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))

@@ -51,7 +51,7 @@ extension String {
 }
 
 class AltitudeView: UIView {
-    var values: [Altitude] = []
+    var values: [AltitudeStepEntry.Altitude] = []
     
     // TODO: Any way to use with `Date.formatted()` api?
     static let timeFormatter: DateFormatter = {
@@ -91,8 +91,8 @@ class AltitudeView: UIView {
         let graphHeight = frameMaxY - frameMinY
         //let graphHeight = frameMaxY -
         
-        let timestamps = values.map { $0.timestamp }
-        let values = values.map { $0.location }
+        let timestamps = values.map { Int($0.time.timeIntervalSince1970) }
+        let values = values.map { $0.value }
         
         context.setStrokeColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
         context.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
@@ -236,9 +236,9 @@ extension Int {
 
 class AltitudeRepresentableViewModel: ObservableObject {
     static let MAX_VALUES_SIZE = 5
-    @Published var values: [Altitude] = []
+    @Published var values: [AltitudeStepEntry.Altitude] = []
     
-    func pushValue(_ value: Altitude) {
+    func pushValue(_ value: AltitudeStepEntry.Altitude) {
         if values.count == AltitudeRepresentableViewModel.MAX_VALUES_SIZE {
             values.remove(at: 0)
         }
@@ -280,12 +280,12 @@ struct AltitudePreviewView: View {
                 .onAppear {
                     (0..<AltitudeRepresentableViewModel.MAX_VALUES_SIZE).forEach { _ in
                         let altitude = Int.random(in: 20...100)
-                        model.pushValue(Altitude(location: altitude, timestamp: Int(Date().timeIntervalSince1970)))
+                        model.pushValue(AltitudeStepEntry.Altitude(value: altitude, time: Date()))
                     }
                 }
             Button("Push data") {
                 let altitude = Int.random(in: 20...100)
-                model.pushValue(Altitude(location: altitude, timestamp: Int(Date().timeIntervalSince1970)))
+                model.pushValue(AltitudeStepEntry.Altitude(value: altitude, time: Date()))
             }
         }
     }
