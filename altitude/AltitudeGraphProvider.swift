@@ -50,7 +50,7 @@ struct AltitudeGraphProvider: TimelineProvider {
         Task {
             let locationDelegate = LocationContinuationDelegate()
             let location = await locationManager.getLocation(delegate: locationDelegate)
-            let entry = Altitude(location: Int(location.altitude), timestamp: Int(Date().timeIntervalSince1970))
+            let entry = Altitude(location: Int(location.altitude), timestamp: Int(Date().timeIntervalSince1970), date: endDate)
             entryStack.push(entry)
             completion(Timeline(entries: [entry], policy: .atEnd))
         }
