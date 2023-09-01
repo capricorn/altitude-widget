@@ -14,7 +14,7 @@ struct AltitudeStepEntry: TimelineEntry {
         let time: Date
     }
     
-    let altitudes: [Altitude]
+    var altitudes: [Altitude]
     let date: Date
     
     init(altitudes: [Altitude], date: Date=Date()) {

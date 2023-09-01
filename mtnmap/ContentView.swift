@@ -9,6 +9,7 @@ import SwiftUI
 import CoreMotion
 import CoreLocation
 import Combine
+import WidgetKit
 
 // TODO: Upgrade phone to iOS 16
 // If recording is relative, that should work reasonably well.
@@ -112,10 +113,18 @@ struct ContentView: View {
     let locationManager = CLLocationManager()
     let locationDelegate = LocationDelegate()
     
+    @State var entry: AltitudeStepEntry = AltitudeStepEntry(altitudes: [])
+    
+    let debugPublisher = Timer.publish(every: 5, on: RunLoop.main, in: .default).autoconnect()
+    
     var body: some View {
         
         //AltitudePreviewView()
-        AltitudeRepresentableView(model: model)
+        //AltitudeRepresentableView(model: model)
+        // Use a variable timer, push a fake entry each time
+        StepGraphView(entry: entry)
+            .frame(width: 300, height: 300*(2/3))
+            /*
             .frame(height: 500)
             // TODO -- could pass `locationDelegate.publisher` here
             .onReceive(locationDelegate.locationPublisher) { location in
@@ -123,6 +132,7 @@ struct ContentView: View {
                 model.pushValue(AltitudeStepEntry.Altitude(value: Int(location.altitude), time: Date()))
                 print(model.values)
             }
+             */
             .onAppear {
                 // Start location updates (according to authorization status)
                 locationManager.delegate = locationDelegate
@@ -141,6 +151,14 @@ struct ContentView: View {
                     print("App authorized, start location updates.")
                     locationManager.startUpdatingLocation()
                 }
+            }
+            .onReceive(debugPublisher) { _ in
+                if entry.altitudes.count == 5 {
+                    entry.altitudes.remove(at: 0)
+                }
+                
+                entry.altitudes.append(AltitudeStepEntry.Altitude(value: Int.random(in: 10...100), time: Date()))
+                print("Received new altitude")
             }
         /*
         VStack {
