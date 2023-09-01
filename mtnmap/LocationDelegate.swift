@@ -46,6 +46,11 @@ class LocationContinuationDelegate: NSObject, CLLocationManagerDelegate {
         if let lastLocation = locations.last {
             continuation.resume(returning: lastLocation)
         }
+        
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            print("Location continuation manager failed: \(error.localizedDescription)")
+        }
+        
     }
 }
 

@@ -9,6 +9,32 @@ import Foundation
 import WidgetKit
 import CoreLocation
 
+class GPS {
+    static let shared = GPS()
+    
+    private let locationManager = CLLocationManager()
+    private var delegate: LocationContinuationDelegate!
+    
+    private init() {}
+    
+    var location: CLLocation {
+        get async {
+            print("Location authorization status: \(locationManager.authorizationStatus)")
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            delegate = LocationContinuationDelegate()
+            let location = await withCheckedContinuation { continuation in
+                // TODO: Figure out reference
+                delegate.continuation = continuation
+                locationManager.delegate = delegate
+                locationManager.startUpdatingLocation()
+            }
+            
+            locationManager.stopUpdatingLocation()
+            return location
+        }
+    }
+}
+
 struct AltitudeGraphProvider: TimelineProvider {
     private class EntryStack {
         let stackSize: Int
@@ -45,14 +71,16 @@ struct AltitudeGraphProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<AltitudeStepEntry>) -> Void) {
-        let endDate = Date().addingTimeInterval(15*60)
         
         // Perform gps reading, use completion callback here
-        Task {
-            let locationDelegate = LocationContinuationDelegate()
-            let location = await locationManager.getLocation(delegate: locationDelegate)
-            
+        Task { @MainActor in
+            let endDate = Date().addingTimeInterval(15*60)
+            //let locationDelegate = LocationContinuationDelegate()
+            let location = await GPS.shared.location //await locationManager.getLocation(delegate: locationDelegate)
             let altitude = AltitudeStepEntry.Altitude(value: Int(location.altitude), time: Date())
+            
+            //let altitude = AltitudeStepEntry.Altitude(value: Int.random(in: 10...100), time: Date())
+            
             entryStack.push(altitude)
             
             let entry = AltitudeStepEntry(altitudes: entryStack.entries, date: endDate)

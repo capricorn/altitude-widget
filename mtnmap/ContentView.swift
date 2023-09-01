@@ -144,6 +144,9 @@ struct ContentView: View {
                     print("Not authorized for location")
                     locationManager.requestAlwaysAuthorization()
                 }
+                
+                print("Reloading widget timeline")
+                WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.AltitudeGraph")
             }
             // TODO: Must be published to register?
             .onChange(of: locationManager.authorizationStatus) { newStatus in
@@ -153,12 +156,18 @@ struct ContentView: View {
                 }
             }
             .onReceive(debugPublisher) { _ in
-                if entry.altitudes.count == 5 {
-                    entry.altitudes.remove(at: 0)
-                }
                 
-                entry.altitudes.append(AltitudeStepEntry.Altitude(value: Int.random(in: 10...100), time: Date()))
-                print("Received new altitude")
+                Task {
+                    let locationDelegate = LocationContinuationDelegate()
+                    let location = await locationManager.getLocation(delegate: locationDelegate)
+                    
+                    if entry.altitudes.count == 5 {
+                        entry.altitudes.remove(at: 0)
+                    }
+                    
+                    entry.altitudes.append(AltitudeStepEntry.Altitude(value: Int(location.altitude), time: Date()))
+                    print("Received new altitude")
+                }
             }
         /*
         VStack {

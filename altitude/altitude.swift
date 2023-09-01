@@ -77,6 +77,7 @@ struct altitudeEntryView : View {
     }
 }
 
+/*
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
@@ -84,7 +85,9 @@ struct AltitudeWidgets: WidgetBundle {
         AltitudeGraph()
     }
 }
+*/
 
+@main
 struct AltitudeGraph: Widget {
     let kind: String = "com.goatfish.AltitudeGraph"
     
@@ -94,6 +97,7 @@ struct AltitudeGraph: Widget {
         StaticConfiguration(kind: kind, provider: AltitudeGraphProvider()) { timelineEntry in
             // TODO: Provide entry to actual view
             StepGraphView(entry: timelineEntry)
+            //StepGraphView(entry: AltitudeStepEntry(altitudes: [.init(value: 30, time: Date()), .init(value: 50, time: Date())]))
         }
         .configurationDisplayName("Altitude Graph")
         .description("This is an example widget.")
@@ -118,7 +122,7 @@ struct altitude: Widget {
 
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
-        StepGraphView(entry: AltitudeStepEntry(altitudes: []))
+        StepGraphView(entry: AltitudeStepEntry(altitudes: [.init(value: 30, time: Date()), .init(value: 50, time: Date())]))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         /*
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))
