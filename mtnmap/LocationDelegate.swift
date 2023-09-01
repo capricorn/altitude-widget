@@ -30,3 +30,39 @@ class LocationDelegate: NSObject, CLLocationManagerDelegate {
         print("Location manager failed: \(error.localizedDescription)")
     }
 }
+
+// One-time delegate -- pass each time when location updates start -- stop immediately after.
+class LocationContinuationDelegate: NSObject, CLLocationManagerDelegate {
+    /*
+    let continuation: CheckedContinuation<CLLocation, Never>
+    
+    init(_ continuation: CheckedContinuation<CLLocation, Never>) {
+        self.continuation = continuation
+    }
+    */
+    var continuation: CheckedContinuation<CLLocation, Never>!
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lastLocation = locations.last {
+            continuation.resume(returning: lastLocation)
+        }
+    }
+}
+
+extension CLLocationManager {
+    // TODO: Attempt, async unit test..? (Need to mock..)
+    func getLocation(delegate: LocationContinuationDelegate) async -> CLLocation {
+        let location = await withCheckedContinuation { continuation in
+            // TODO: Figure out reference
+            delegate.continuation = continuation
+            self.delegate = delegate
+            //self.delegate = LocationContinuationDelegate(continuation)
+            self.startUpdatingLocation()
+        }
+        
+        self.stopUpdatingLocation()
+        self.delegate = nil
+        
+        return location
+    }
+}

@@ -28,6 +28,7 @@
 		F0E740EC2A9FE72B00AD2A72 /* Altitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EB2A9FE72B00AD2A72 /* Altitude.swift */; };
 		F0E740ED2A9FE72B00AD2A72 /* Altitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EB2A9FE72B00AD2A72 /* Altitude.swift */; };
 		F0E740F02AA0FAEC00AD2A72 /* StepGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */; };
+		F0E740F12AA249C400AD2A72 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0E740F12AA249C400AD2A72 /* LocationDelegate.swift in Sources */,
 				F0E740ED2A9FE72B00AD2A72 /* Altitude.swift in Sources */,
 				F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */,
 				F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */,

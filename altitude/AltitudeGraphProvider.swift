@@ -7,6 +7,7 @@
 
 import Foundation
 import WidgetKit
+import CoreLocation
 
 struct AltitudeGraphProvider: TimelineProvider {
     private class EntryStack {
@@ -30,6 +31,8 @@ struct AltitudeGraphProvider: TimelineProvider {
     
     // TODO: Does this work in practice?
     private let entryStack = EntryStack(stackSize: 5)
+    private let locationManager = CLLocationManager()
+    //private var locationDelegate = LocationContinuationDelegate()
     
     func placeholder(in context: Context) -> Altitude {
         return Altitude(location: 10, timestamp: 10)
@@ -45,9 +48,9 @@ struct AltitudeGraphProvider: TimelineProvider {
         
         // Perform gps reading, use completion callback here
         Task {
-            // TODO: Separate date from timestamp -- two different things
-            // TODO: Async gps reading
-            let entry = Altitude(location: 10, timestamp: 10)
+            let locationDelegate = LocationContinuationDelegate()
+            let location = await locationManager.getLocation(delegate: locationDelegate)
+            let entry = Altitude(location: Int(location.altitude), timestamp: Int(Date().timeIntervalSince1970))
             entryStack.push(entry)
             completion(Timeline(entries: [entry], policy: .atEnd))
         }
