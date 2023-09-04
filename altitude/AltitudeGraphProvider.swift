@@ -110,6 +110,10 @@ struct AltitudeGraphProvider: TimelineProvider {
     private let locationDelegate = LocationDelegate()
     //private var locationDelegate = LocationContinuationDelegate()
     
+    private var timelineEntries: Timeline<AltitudeStepEntry> {
+        Timeline(entries: [ AltitudeStepEntry(altitudes: entryStack.entries) ], policy: .atEnd)
+    }
+    
     init() {
         locationManager.delegate = locationDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -128,6 +132,13 @@ struct AltitudeGraphProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<AltitudeStepEntry>) -> Void) {
+        // TODO: Is this the correct way to avoid dupes across widgets..?
+        // (Seems they share the same provider across all families..?)
+        guard context.family == .accessoryRectangular else {
+            completion(timelineEntries)
+            return
+        }
+        
         Task { @MainActor in
             let manager = CLLocationManager()
             let delegate = LocationContinuationDelegate()

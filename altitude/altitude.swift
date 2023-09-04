@@ -101,7 +101,7 @@ struct AltitudeGraph: Widget {
         }
         .configurationDisplayName("Altitude Graph")
         .description("This is an example widget.")
-        .supportedFamilies([.accessoryRectangular, .systemMedium])
+        .supportedFamilies([.accessoryRectangular])
     }
 }
 
