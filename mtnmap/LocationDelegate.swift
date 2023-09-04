@@ -43,14 +43,17 @@ class LocationContinuationDelegate: NSObject, CLLocationManagerDelegate {
     var continuation: CheckedContinuation<CLLocation, Never>!
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let lastLocation = locations.last {
-            continuation.resume(returning: lastLocation)
+        DispatchQueue.main.async {
+            if let lastLocation = locations.last {
+                self.continuation.resume(returning: lastLocation)
+            }
         }
-        
-        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            print("Location continuation manager failed: \(error.localizedDescription)")
-        }
-        
+    }
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager failed: \(error.localizedDescription)")
     }
 }
 
