@@ -44,7 +44,6 @@ struct StepGraphView: View {
     var body: some View {
         ZStack {
             AccessoryWidgetBackground()
-                .cornerRadius(5)
             Canvas { context, size in
                 context.stroke(
                     Path { path in
@@ -97,6 +96,7 @@ struct StepGraphView: View {
             }
             .border(Color.black)
         }
+        .cornerRadius(5)
         .onAppear {
             print("Running altitude graph")
         }
