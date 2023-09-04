@@ -131,7 +131,7 @@ struct AltitudeGraphProvider: TimelineProvider {
         Task { @MainActor in
             let manager = CLLocationManager()
             let delegate = LocationContinuationDelegate()
-            let endDate = Date().addingTimeInterval(60)
+            let endDate = Date().addingTimeInterval(15*60)
             
             manager.delegate = delegate
             
