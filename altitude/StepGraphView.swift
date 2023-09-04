@@ -54,7 +54,8 @@ struct StepGraphView: View {
                         let scaler = { (x: CGFloat) -> CGFloat in
                             let maxValue = values.max()!
                             let minValue = values.min()!
-                            let slope = 1/(maxValue-minValue)
+                            // TODO: Negative support?
+                            let slope = 1/(max(maxValue-minValue, 1))
                             
                             return slope*(x-maxValue) + 1.0
                         }
