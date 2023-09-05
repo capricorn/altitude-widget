@@ -77,17 +77,14 @@ struct altitudeEntryView : View {
     }
 }
 
-/*
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
-        //altitude()
+        altitude()
         AltitudeGraph()
     }
 }
-*/
 
-@main
 struct AltitudeGraph: Widget {
     let kind: String = "com.goatfish.AltitudeGraph"
     
@@ -105,7 +102,6 @@ struct AltitudeGraph: Widget {
     }
 }
 
-//@main
 struct altitude: Widget {
     let kind: String = "com.goatfish.altitude"
 
