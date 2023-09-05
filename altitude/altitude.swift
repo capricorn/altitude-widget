@@ -101,7 +101,7 @@ struct AltitudeGraph: Widget {
             //StepGraphView(entry: AltitudeStepEntry(altitudes: [.init(value: 30, time: Date()), .init(value: 50, time: Date())]))
         }
         .configurationDisplayName("Altitude Graph")
-        .description("This is an example widget.")
+        .description("A timeline of recent altitude readings.")
         .supportedFamilies([.accessoryRectangular])
     }
 }
