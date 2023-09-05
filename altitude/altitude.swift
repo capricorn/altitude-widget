@@ -113,8 +113,8 @@ struct altitude: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             altitudeEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Recent Altitude")
+        .description("A recent altitude reading indicator.")
         .supportedFamilies([
             .accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
     }
