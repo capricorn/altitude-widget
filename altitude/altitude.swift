@@ -42,16 +42,13 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        Task {
-            if let altitude = await Altimeter.shared.absoluteAltitude {
-                let currentDate = Date()
-                let altitudeFeet = Int(altitude.converted(to: .feet).value)
-                let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: configuration)
-                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
-                completion(timeline)
-            } else {
-                // TODO: Populate '--' if reading altitude fails
-            }
+        Task { @MainActor in
+            let location = await GPS().location
+            let currentDate = Date()
+            let altitudeFeet = Int(location.altitude) // TODO Unit conversion
+            let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: configuration)
+            let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
+            completion(timeline)
         }
     }
 }

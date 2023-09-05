@@ -18,6 +18,26 @@ class GPS {
     
     init() {}
     
+    var location: CLLocation {
+        get async {
+            let manager = CLLocationManager()
+            let continuationDelegate = LocationContinuationDelegate()
+            
+            manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            
+            manager.delegate = continuationDelegate
+            
+            let location = await withCheckedContinuation { continuation in
+                continuationDelegate.continuation = continuation
+                manager.startUpdatingLocation()
+            }
+            
+            manager.stopUpdatingLocation()
+            return location
+        }
+    }
+    
+    /*
     @MainActor
     var location: CLLocation {
         get async {
@@ -82,6 +102,7 @@ class GPS {
             */
         }
     }
+    */
 }
 
 struct AltitudeGraphProvider: TimelineProvider {
