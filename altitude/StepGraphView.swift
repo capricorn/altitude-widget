@@ -64,7 +64,7 @@ struct StepGraphView: View {
                         
                         for col in 0..<min(columns, values.count) {
                             // +- 4 padding
-                            var columnY = (graphHeight-8)*scaler(values[col]) + 4
+                            var columnY = (graphHeight-8)*(1.0-scaler(values[col])) + 4
                             path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnY))
                             
                             let point = CGPoint(
