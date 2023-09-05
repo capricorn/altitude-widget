@@ -10,6 +10,12 @@ import SwiftUI
 import Intents
 import CoreMotion
 
+extension Double {
+    func measurement<UnitType: Unit>(_ type: UnitType) -> Measurement<UnitType> {
+        Measurement(value: self, unit: type.self)
+    }
+}
+
 class Altimeter {
     private let queue = OperationQueue()
     private let altimeter = CMAltimeter()
@@ -45,7 +51,8 @@ struct Provider: IntentTimelineProvider {
         Task { @MainActor in
             let location = await GPS().location
             let currentDate = Date()
-            let altitudeFeet = Int(location.altitude) // TODO Unit conversion
+            let altitudeFeet = Int(location.altitude.measurement(UnitLength.feet).value)
+            let measurement = Measurement(value: location.altitude, unit: UnitLength.feet)
             let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: configuration)
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
             completion(timeline)
