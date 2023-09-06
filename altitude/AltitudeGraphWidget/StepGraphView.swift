@@ -19,7 +19,15 @@ struct StepGraphView: View {
     private func graphHeight(context: GraphicsContext, size: CGSize) -> CGFloat {
         let timestampText = Text("00:00").font(.system(size: 8, design: .monospaced))
         
+        // The graph height stretches from the top of the frame to the top padding of the bottom row timestamp text.
         return size.height - (context.resolve(timestampText).measure(in: size).height + 4)
+    }
+    
+    private func graphRect(context: GraphicsContext, size: CGSize) -> CGRect {
+        let graphMinY = 4.0
+        let graphHeight = graphHeight(context: context, size: size)
+        
+        return CGRect(x: 0.0, y: graphMinY, width: size.width, height: graphHeight - graphMinY)
     }
     
     private func drawTimeline(context: GraphicsContext, size: CGSize) {
@@ -47,9 +55,9 @@ struct StepGraphView: View {
             Canvas { context, size in
                 context.stroke(
                     Path { path in
+                        let graphRect = graphRect(context: context, size: size)
                         let values = entry.altitudes.map { CGFloat($0.value) }
-                        let columnWidth = size.width/CGFloat(columns)
-                        let graphHeight = graphHeight(context: context, size: size)
+                        let columnWidth = graphRect.width/CGFloat(columns)
                         
                         let scaler = { (x: CGFloat) -> CGFloat in
                             let maxValue = values.max()!
@@ -64,25 +72,19 @@ struct StepGraphView: View {
                         
                         for col in 0..<min(columns, values.count) {
                             // +- 4 padding
-                            var columnY = (graphHeight-8)*(1.0-scaler(values[col])) + 4
-                            path.move(to: CGPoint(x: (CGFloat(col)*columnWidth + columnWidth/2), y: graphHeight-8))
-                            path.addLine(to: CGPoint(x: (CGFloat(col)*columnWidth + columnWidth/2), y: columnY))
+                            // The actual height of the scaled value
+                            var columnY = (graphRect.height)*(scaler(values[col]))
+                            let columnX = (CGFloat(col)*columnWidth + columnWidth/2)
+                            path.move(to: CGPoint(x: columnX, y: graphRect.maxY))
+                            path.addLine(to: CGPoint(x: columnX, y: graphRect.maxY - columnY))
                             
-                            /*
-                            let point = CGPoint(
-                                x: CGFloat(col+1)*(columnWidth),
-                                y: columnY
-                            )
-                            // Top line of square
-                            path.addLine(to: point)
-                             */
                             // TODO: Select top/bottom if bounds exceeded
                             let columnText = Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced))
                             let columnTextSize = context.resolve(columnText).measure(in: size)
                             let columnTextPadding = (columnWidth - columnTextSize.width)/2
                             
                             // If the text will clip below the graph, render it above.
-                            if (columnY + columnTextSize.height) > (graphHeight-4) {
+                            if (columnY + columnTextSize.height) > (graphRect.height-4) {
                                 columnY -= columnTextSize.height
                             }
                             
