@@ -16,18 +16,31 @@ struct StepGraphView: View {
         self.entry = entry
     }
     
-    private func graphHeight(context: GraphicsContext, size: CGSize) -> CGFloat {
+    private func altitudeTextSize(context: GraphicsContext, size: CGSize) -> CGSize {
+        let exampleText = Text("12,345").font(.system(size: 8, design: .monospaced))
+        return context.resolve(exampleText).measure(in: size)
+    }
+    
+    private func timestampTextSize(context: GraphicsContext, size: CGSize) -> CGSize {
         let timestampText = Text("00:00").font(.system(size: 8, design: .monospaced))
+        return context.resolve(timestampText).measure(in: size)
+    }
+    
+    private func graphHeight(context: GraphicsContext, size: CGSize) -> CGFloat {
+        let timestampTextSize = timestampTextSize(context: context, size: size)
+        let altitudeTextSize = altitudeTextSize(context: context, size: size)
         
-        // The graph height stretches from the top of the frame to the top padding of the bottom row timestamp text.
-        return size.height - (context.resolve(timestampText).measure(in: size).height + 4)
+        let timestampRowHeight = timestampTextSize.height + 4
+        let altitudeTextHeight = altitudeTextSize.height + 4
+        
+        return size.height - (timestampRowHeight + altitudeTextHeight)
     }
     
     private func graphRect(context: GraphicsContext, size: CGSize) -> CGRect {
-        let graphMinY = 4.0
+        let graphMinY = altitudeTextSize(context: context, size: size).height + 4
         let graphHeight = graphHeight(context: context, size: size)
         
-        return CGRect(x: 0.0, y: graphMinY, width: size.width, height: graphHeight - graphMinY)
+        return CGRect(x: 0.0, y: graphMinY, width: size.width, height: graphHeight)
     }
     
     private func drawTimeline(context: GraphicsContext, size: CGSize) {
@@ -80,26 +93,16 @@ struct StepGraphView: View {
                             path.move(to: columnOriginPoint)
                             path.addLine(to: columnTopPoint)
                             
-                            // TODO: Select top/bottom if bounds exceeded
                             let columnText = Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced))
                             let columnTextSize = context.resolve(columnText).measure(in: size)
-                            let columnTextPadding = (columnWidth - columnTextSize.width)/2
+                            let columnTextPadding = columnTextSize.width/2//(columnWidth - columnTextSize.width)/2
                             
-                            // If the text will clip below the graph, render it above.
-                            /*
-                            if (columnY + columnTextSize.height) > (graphRect.height-4) {
-                                columnY -= columnTextSize.height
-                            }
-                             */
-                            
-                            /*
                             context.draw(
                                 // TODO: Value formatting
-                                Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced)),
-                                at: CGPoint(x: CGFloat(col)*(columnWidth) + columnTextPadding, y: columnY),
+                                columnText,
+                                at: CGPoint(x: columnX - columnTextPadding, y: columnTopPoint.y - columnTextSize.height - 4),
                                 anchor: .topLeading
                             )
-                             */
                         }
                     }, with: .foreground, style: StrokeStyle(lineWidth: 4, lineCap: .round)
                 )
