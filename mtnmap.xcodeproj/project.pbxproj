@@ -31,6 +31,9 @@
 		F0E740F12AA249C400AD2A72 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 		F0E740F82AA285A500AD2A72 /* StepGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */; };
 		F0E740FB2AA7CBB300AD2A72 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FA2AA7CBB300AD2A72 /* Util.swift */; };
+		F0E741002AA8E2FE00AD2A72 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */; };
+		F0E741012AA8E3B000AD2A72 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */; };
+		F0E741022AA8E3C900AD2A72 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FA2AA7CBB300AD2A72 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,7 @@
 		F0E740EB2A9FE72B00AD2A72 /* AltitudeStepEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeStepEntry.swift; sourceTree = "<group>"; };
 		F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepGraphView.swift; sourceTree = "<group>"; };
 		F0E740FA2AA7CBB300AD2A72 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,13 +211,13 @@
 		F0E2257E29D1F4710068D00E /* altitude */ = {
 			isa = PBXGroup;
 			children = (
-				F0E740F92AA7CBA200AD2A72 /* Extensions */,
+				F0E740FE2AA8E2DC00AD2A72 /* AltitudeGraphWidget */,
+				F0E740FC2AA8E1E400AD2A72 /* Util */,
 				F0E2257F29D1F4710068D00E /* altitude.swift */,
 				F0E2258129D1F4710068D00E /* altitude.intentdefinition */,
 				F0E2258229D1F4730068D00E /* Assets.xcassets */,
 				F0E2258429D1F4730068D00E /* Info.plist */,
 				F0E740E82A9FE63800AD2A72 /* AltitudeGraphProvider.swift */,
-				F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */,
 			);
 			path = altitude;
 			sourceTree = "<group>";
@@ -232,6 +236,23 @@
 				F0E740FA2AA7CBB300AD2A72 /* Util.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F0E740FC2AA8E1E400AD2A72 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F0E740F92AA7CBA200AD2A72 /* Extensions */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		F0E740FE2AA8E2DC00AD2A72 /* AltitudeGraphWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */,
+				F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */,
+			);
+			path = AltitudeGraphWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,10 +417,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F04C5AF12A9521090010F3AE /* AltitudeView.swift in Sources */,
+				F0E741022AA8E3C900AD2A72 /* Util.swift in Sources */,
 				F0E740EC2A9FE72B00AD2A72 /* AltitudeStepEntry.swift in Sources */,
 				F02398FA29BD727800A0CC25 /* ContentView.swift in Sources */,
 				F0E740F82AA285A500AD2A72 /* StepGraphView.swift in Sources */,
 				F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */,
+				F0E741012AA8E3B000AD2A72 /* MockData.swift in Sources */,
 				F02398F829BD727800A0CC25 /* mtnmapApp.swift in Sources */,
 				F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */,
 			);
@@ -430,6 +453,7 @@
 				F0E740ED2A9FE72B00AD2A72 /* AltitudeStepEntry.swift in Sources */,
 				F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */,
 				F0E740FB2AA7CBB300AD2A72 /* Util.swift in Sources */,
+				F0E741002AA8E2FE00AD2A72 /* MockData.swift in Sources */,
 				F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */,
 				F0E2258029D1F4710068D00E /* altitude.swift in Sources */,
 				F0E740E92A9FE63800AD2A72 /* AltitudeGraphProvider.swift in Sources */,

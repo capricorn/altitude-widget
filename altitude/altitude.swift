@@ -121,27 +121,8 @@ struct altitude: Widget {
 }
 
 struct altitude_Previews: PreviewProvider {
-    static var stepGraphEntry: AltitudeStepEntry {
-        let entryCount = 5
-        let dates = (0..<entryCount).map { _ in
-            Int.random(in: 5*60...30*60)
-        }
-        .cumsum()
-        .map { offset in
-            Date().addingTimeInterval(TimeInterval(offset))
-        }
-        
-        let values = binomialWalk(k: entryCount, p: 0.5).map { $0 * 100 }
-        
-        let altitudes = zip(dates, values).map { time, altitude in
-            AltitudeStepEntry.Altitude(value: altitude, time: time)
-        }
-        
-        return AltitudeStepEntry(altitudes: altitudes)
-    }
-    
     static var previews: some View {
-        StepGraphView(entry: stepGraphEntry)
+        StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))

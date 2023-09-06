@@ -65,14 +65,17 @@ struct StepGraphView: View {
                         for col in 0..<min(columns, values.count) {
                             // +- 4 padding
                             var columnY = (graphHeight-8)*(1.0-scaler(values[col])) + 4
-                            path.addLine(to: CGPoint(x: CGFloat(col)*columnWidth, y: columnY))
+                            path.move(to: CGPoint(x: (CGFloat(col)*columnWidth + columnWidth/2), y: graphHeight-8))
+                            path.addLine(to: CGPoint(x: (CGFloat(col)*columnWidth + columnWidth/2), y: columnY))
                             
+                            /*
                             let point = CGPoint(
                                 x: CGFloat(col+1)*(columnWidth),
                                 y: columnY
                             )
                             // Top line of square
                             path.addLine(to: point)
+                             */
                             // TODO: Select top/bottom if bounds exceeded
                             let columnText = Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced))
                             let columnTextSize = context.resolve(columnText).measure(in: size)
@@ -83,14 +86,16 @@ struct StepGraphView: View {
                                 columnY -= columnTextSize.height
                             }
                             
+                            /*
                             context.draw(
                                 // TODO: Value formatting
                                 Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced)),
                                 at: CGPoint(x: CGFloat(col)*(columnWidth) + columnTextPadding, y: columnY),
                                 anchor: .topLeading
                             )
+                             */
                         }
-                    }, with: .foreground
+                    }, with: .foreground, style: StrokeStyle(lineWidth: 4, lineCap: .round)
                 )
                 
                 drawTimeline(context: context, size: size)
@@ -106,7 +111,7 @@ struct StepGraphView: View {
 
 struct StepGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        StepGraphView(entry: AltitudeStepEntry(altitudes: []))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        // Use app target for previewing!
+        StepGraphView(entry: StepGraphView.stepGraphEntry)
     }
 }
