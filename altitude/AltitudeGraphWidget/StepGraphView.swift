@@ -71,12 +71,14 @@ struct StepGraphView: View {
                         path.move(to: .zero)
                         
                         for col in 0..<min(columns, values.count) {
-                            // +- 4 padding
-                            // The actual height of the scaled value
-                            var columnY = (graphRect.height)*(scaler(values[col]))
+                            let columnHeight = (graphRect.height)*(scaler(values[col]))
                             let columnX = (CGFloat(col)*columnWidth + columnWidth/2)
-                            path.move(to: CGPoint(x: columnX, y: graphRect.maxY))
-                            path.addLine(to: CGPoint(x: columnX, y: graphRect.maxY - columnY))
+                            
+                            let columnOriginPoint = CGPoint(x: columnX, y: graphRect.maxY)
+                            let columnTopPoint = CGPoint(x: columnX, y: graphRect.maxY - columnHeight)
+                            
+                            path.move(to: columnOriginPoint)
+                            path.addLine(to: columnTopPoint)
                             
                             // TODO: Select top/bottom if bounds exceeded
                             let columnText = Text("\(Int(values[col]))").font(.system(size: 8, design: .monospaced))
@@ -84,9 +86,11 @@ struct StepGraphView: View {
                             let columnTextPadding = (columnWidth - columnTextSize.width)/2
                             
                             // If the text will clip below the graph, render it above.
+                            /*
                             if (columnY + columnTextSize.height) > (graphRect.height-4) {
                                 columnY -= columnTextSize.height
                             }
+                             */
                             
                             /*
                             context.draw(
