@@ -60,15 +60,28 @@ struct StepGraphView: View {
             let columnWidth = size.width/CGFloat(columns)
             let timestampTextSize = context.resolve(text).measure(in: size)
             let timestampPadding = (columnWidth - timestampTextSize.width)/2
-            let labelPoint = CGPoint(x: CGFloat(i)*columnWidth, y: size.height-20)
+            let x1 = CGFloat(i+1)*columnWidth// + columnWidth/2
+            let y1 = size.height/2//-20
+            let labelPoint = CGPoint(x: x1, y: y1)
             
             // TODO: Calculate changed drawing rect once performed at 45 degrees..?
             // (For now, don't use the text size at all for operations)
             context.drawLayer { subCtx in
                 //subCtx.translateBy(x: 0, y: 0)
                 // Does the point need translated too?
-                subCtx.rotate(by: .degrees(10))
-                subCtx.draw(text, at: labelPoint.rotate(.degrees(-10)), anchor: .topLeading)
+                let rotation = 45.0
+                // Want to rotate opp direction to cancel out
+                let rotationRadians = Angle(degrees: -rotation).radians
+                subCtx.rotate(by: .degrees(rotation))
+                let hyp = labelPoint.distance()
+                
+                //let rotatedPoint = CGPoint(x: hyp*cos(rotationRadians), y: hyp*sin(rotationRadians))
+                let rotatedPoint = CGPoint(
+                    x: hyp*cos(rotationRadians)-hyp+x1,
+                    y: hyp*sin(rotationRadians)+y1
+                )
+                subCtx.draw(text, at: rotatedPoint, anchor: .topLeading)
+                //subCtx.draw(text, at: labelPoint.rotate(.degrees(-rotation)), anchor: .topLeading)
                 //subCtx.rotate(by: .degrees(-10))
                 //subCtx.transform = .init(rotationAngle: 3.14/4)
             }
