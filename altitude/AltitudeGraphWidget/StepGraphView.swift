@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct StepGraphView: View {
-    let columns = 5
+    static let columns = 10
     let entry: AltitudeStepEntry
     
     init(entry: AltitudeStepEntry) {
@@ -49,7 +49,7 @@ struct StepGraphView: View {
         formatter.dateFormat = "h:mm"
         
         //context.rotate(by: .degrees(5))
-        for i in 0..<min(columns, entry.altitudes.count) {
+        for i in 0..<min(StepGraphView.columns, entry.altitudes.count) {
             //let timestamp = Int(startDate.timeIntervalSince1970) + i*Int.random(in: 60...3600)
             let date = entry.altitudes[i].time
             let text = Text(formatter.string(from: date)).font(.system(size: 6, design: .monospaced))
@@ -57,7 +57,7 @@ struct StepGraphView: View {
             //context.rotate(by: .degrees(-90))
             //context.transform = .identity
             
-            let columnWidth = size.width/CGFloat(columns)
+            let columnWidth = size.width/CGFloat(StepGraphView.columns)
             let timestampTextSize = context.resolve(text).measure(in: size)
             let timestampPadding = (columnWidth - timestampTextSize.width/2)/2
             let x1 = (CGFloat(i)*columnWidth + columnWidth/2)// + timestampPadding
@@ -103,7 +103,7 @@ struct StepGraphView: View {
                     Path { path in
                         let graphRect = graphRect(context: context, size: size)
                         let values = entry.altitudes.map { CGFloat($0.value) }
-                        let columnWidth = graphRect.width/CGFloat(columns)
+                        let columnWidth = graphRect.width/CGFloat(StepGraphView.columns)
                         
                         let scaler = { (x: CGFloat) -> CGFloat in
                             let maxValue = values.max()!
@@ -116,7 +116,7 @@ struct StepGraphView: View {
                         
                         path.move(to: .zero)
                         
-                        for col in 0..<min(columns, values.count) {
+                        for col in 0..<min(StepGraphView.columns, values.count) {
                             let columnHeight = (graphRect.height)*(scaler(values[col]))
                             let columnX = (CGFloat(col)*columnWidth + columnWidth/2)
                             

@@ -9,7 +9,7 @@ import Foundation
 
 extension StepGraphView {
     static let stepGraphEntry: AltitudeStepEntry = {
-        let entryCount = 5
+        let entryCount = StepGraphView.columns
         let dates = (0..<entryCount).map { _ in
             Int.random(in: 5*60...30*60)
         }
