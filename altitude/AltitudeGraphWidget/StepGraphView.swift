@@ -43,23 +43,42 @@ struct StepGraphView: View {
         return CGRect(x: 0.0, y: graphMinY, width: size.width, height: graphHeight)
     }
     
-    private func drawTimeline(context: GraphicsContext, size: CGSize) {
+    private func drawTimeline(context: inout GraphicsContext, size: CGSize) {
         let startDate = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm"
         
+        //context.rotate(by: .degrees(5))
         for i in 0..<min(columns, entry.altitudes.count) {
             //let timestamp = Int(startDate.timeIntervalSince1970) + i*Int.random(in: 60...3600)
             let date = entry.altitudes[i].time
             let text = Text(formatter.string(from: date)).font(.system(size: 6, design: .monospaced))
             
+            //context.rotate(by: .degrees(-90))
+            //context.transform = .identity
+            
             let columnWidth = size.width/CGFloat(columns)
             let timestampTextSize = context.resolve(text).measure(in: size)
             let timestampPadding = (columnWidth - timestampTextSize.width)/2
-            let labelPoint = CGPoint(x: CGFloat(i)*columnWidth + timestampPadding, y: size.height - timestampTextSize.height)
+            let labelPoint = CGPoint(x: CGFloat(i)*columnWidth, y: size.height-20)
             
-            context.draw(text, at: labelPoint, anchor: .topLeading)
+            // TODO: Calculate changed drawing rect once performed at 45 degrees..?
+            // (For now, don't use the text size at all for operations)
+            context.drawLayer { subCtx in
+                //subCtx.translateBy(x: 0, y: 0)
+                // Does the point need translated too?
+                subCtx.rotate(by: .degrees(10))
+                subCtx.draw(text, at: labelPoint.rotate(.degrees(-10)), anchor: .topLeading)
+                //subCtx.rotate(by: .degrees(-10))
+                //subCtx.transform = .init(rotationAngle: 3.14/4)
+            }
+            //context.draw(text, at: labelPoint, anchor: .topLeading)
+            //context.transform = .identity
+            //context.rotate(by: .degrees(-5))
+            // TODO: Necessary?
+            //context.rotate(by: .degrees(-45))
         }
+        //context.transform = .identity
     }
     
     var body: some View {
@@ -107,7 +126,7 @@ struct StepGraphView: View {
                     }, with: .foreground, style: StrokeStyle(lineWidth: 4, lineCap: .round)
                 )
                 
-                drawTimeline(context: context, size: size)
+                drawTimeline(context: &context, size: size)
             }
             .border(Color.black)
         }

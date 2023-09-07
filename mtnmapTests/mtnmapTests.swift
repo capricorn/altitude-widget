@@ -18,7 +18,13 @@ final class mtnmapTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-
+    // TODO: Integer solutions? Rounding troubles
+    /*
+    func testPointRotation() throws {
+        let point = CGPoint(x: 1, y: 1)
+        let rotatedPoint = point.rotate(.degrees(45))
+        
+        XCTAssert(rotatedPoint.equalTo(CGPoint(x: 0, y: sqrt(1))), "Rotation: \(rotatedPoint)")
     }
+    */
 }

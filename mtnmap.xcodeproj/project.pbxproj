@@ -34,6 +34,7 @@
 		F0E741002AA8E2FE00AD2A72 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */; };
 		F0E741012AA8E3B000AD2A72 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */; };
 		F0E741022AA8E3C900AD2A72 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FA2AA7CBB300AD2A72 /* Util.swift */; };
+		F0E741032AAA389800AD2A72 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FA2AA7CBB300AD2A72 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -433,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F023990929BD727900A0CC25 /* mtnmapTests.swift in Sources */,
+				F0E741032AAA389800AD2A72 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
