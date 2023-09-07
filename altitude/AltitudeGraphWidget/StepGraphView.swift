@@ -59,9 +59,10 @@ struct StepGraphView: View {
             
             let columnWidth = size.width/CGFloat(columns)
             let timestampTextSize = context.resolve(text).measure(in: size)
-            let timestampPadding = (columnWidth - timestampTextSize.width)/2
-            let x1 = CGFloat(i+1)*columnWidth// + columnWidth/2
-            let y1 = size.height/2//-20
+            let timestampPadding = (columnWidth - timestampTextSize.width/2)/2
+            let x1 = (CGFloat(i)*columnWidth + columnWidth/2)// + timestampPadding
+            // If not vertically centered, translation problem
+            let y1 = 0.0//size.height//size.height-(timestampTextSize.width/2)///2//-20
             let labelPoint = CGPoint(x: x1, y: y1)
             
             // TODO: Calculate changed drawing rect once performed at 45 degrees..?
@@ -77,7 +78,7 @@ struct StepGraphView: View {
                 
                 //let rotatedPoint = CGPoint(x: hyp*cos(rotationRadians), y: hyp*sin(rotationRadians))
                 let rotatedPoint = CGPoint(
-                    x: hyp*cos(rotationRadians)-hyp+x1,
+                    x: hyp*(cos(rotationRadians)-1)+x1,
                     y: hyp*sin(rotationRadians)+y1
                 )
                 subCtx.draw(text, at: rotatedPoint, anchor: .topLeading)
