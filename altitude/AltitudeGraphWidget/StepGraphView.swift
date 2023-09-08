@@ -40,10 +40,11 @@ struct StepGraphView: View {
         let graphMinY = altitudeTextSize(context: context, size: size).height + 4
         let graphHeight = graphHeight(context: context, size: size)
         
-        return CGRect(x: 0.0, y: graphMinY, width: size.width, height: graphHeight)
+        return CGRect(x: 8.0, y: graphMinY, width: size.width-8.0, height: graphHeight)
     }
     
     private func drawTimeline(context: inout GraphicsContext, size: CGSize) {
+        let graphRect = graphRect(context: context, size: size)
         let startDate = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm"
@@ -53,10 +54,10 @@ struct StepGraphView: View {
             let date = entry.altitudes[i].time
             let text = Text(formatter.string(from: date)).font(.system(size: 6, design: .monospaced))
             
-            let columnWidth = size.width/CGFloat(StepGraphView.columns)
+            let columnWidth = graphRect.width/CGFloat(StepGraphView.columns)
             let timestampTextSize = context.resolve(text).measure(in: size)
             let timestampPadding = (columnWidth - timestampTextSize.width/2)/2
-            let x1 = (CGFloat(i)*columnWidth + columnWidth/2)// + timestampPadding
+            let x1 = graphRect.minX + (CGFloat(i)*columnWidth)// + timestampPadding
             // If not vertically centered, translation problem
             let y1 = size.height-(timestampTextSize.width*cos(3.14/4))-6
             
