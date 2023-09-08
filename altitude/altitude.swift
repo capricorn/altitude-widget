@@ -103,7 +103,7 @@ struct AltitudeGraph: Widget {
         }
         .configurationDisplayName("Altitude Graph")
         .description("A timeline of recent altitude readings.")
-        .supportedFamilies([.accessoryRectangular])
+        .supportedFamilies([.accessoryRectangular, .systemSmall])
     }
 }
 
