@@ -47,7 +47,7 @@ struct StepGraphView: View {
         let graphRect = graphRect(context: context, size: size)
         let startDate = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm"
+        formatter.dateFormat = "hh:mm"
         
         for i in 0..<min(StepGraphView.columns, entry.altitudes.count) {
             //let timestamp = Int(startDate.timeIntervalSince1970) + i*Int.random(in: 60...3600)
