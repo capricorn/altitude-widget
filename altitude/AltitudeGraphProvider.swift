@@ -36,73 +36,6 @@ class GPS {
             return location
         }
     }
-    
-    /*
-    @MainActor
-    var location: CLLocation {
-        get async {
-            let result = await withCheckedContinuation { continuation in
-                assert(Thread.isMainThread)
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                delegate = LocationContinuationDelegate()
-                
-                // has to be that the delegates are somehow lost..
-                
-                delegate.continuation = continuation
-                locationManager.delegate = delegate
-                
-                locationManager.startUpdatingLocation()
-            }
-            
-            locationManager.stopUpdatingLocation()
-            return result
-            
-            /*
-            let task = Task { @MainActor in
-                assert(Thread.isMainThread)
-                print("Location authorization status: \(locationManager.authorizationStatus)")
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                delegate = LocationContinuationDelegate()
-                // Suspect this await is the problem.. another task perhaps runs in the meantime (and so the delegate is lost..)
-                // Although presumably the last set delegate would work..?
-                let location = await withCheckedContinuation { continuation in
-                    assert(Thread.isMainThread)
-                    // TODO: Figure out reference
-                    /*
-                    delegate.continuation = continuation
-                    locationManager.delegate = delegate
-                     */
-                    locationManager.startUpdatingLocation()
-                    // Verify that the continuation works at all
-                    continuation.resume(with: .success(CLLocation(latitude: 10.0, longitude: 10.0)))
-                }
-                
-                locationManager.stopUpdatingLocation()
-                return location
-            }
-            
-            let location = try! await task.result.get()
-            return location
-             */
-            /*
-            await MainActor.run(resultType: CLLocation.self) { () -> CLLocation in
-                print("Location authorization status: \(locationManager.authorizationStatus)")
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                delegate = LocationContinuationDelegate()
-                let location = await withCheckedContinuation { continuation in
-                    // TODO: Figure out reference
-                    delegate.continuation = continuation
-                    locationManager.delegate = delegate
-                    locationManager.startUpdatingLocation()
-                }
-                
-                locationManager.stopUpdatingLocation()
-                return location
-            }
-            */
-        }
-    }
-    */
 }
 
 struct AltitudeGraphProvider: IntentTimelineProvider {
@@ -186,48 +119,5 @@ struct AltitudeGraphProvider: IntentTimelineProvider {
             completion(Timeline(entries: [entry], policy: .atEnd))
 
         }
-        /*
-        let manager = CLLocationManager()
-        let delegate = LocationContinuationDelegate()
-        
-        //delegate.continuation = ...
-        
-        manager.delegate = delegate
-        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        
-        // Problem with above approach: need to capture vars or they will instantly deallocate
-        manager.startUpdatingLocation()
-         */
-        /*
-        DispatchQueue.main.async {
-            // One option: the above completion to the
-        }
-         */
-        
-        
-        //completion(Timeline(entries: [AltitudeStepEntry(altitudes: [.init(value: 10, time: Date())])], policy: .atEnd))
-        
-        // Perform gps reading, use completion callback here
-        /*
-        Task { @MainActor in
-            let endDate = Date().addingTimeInterval(60)
-            //let locationDelegate = LocationContinuationDelegate()
-            let gps = GPS()
-            let manager = CLLocationManager()
-            gps.locationManager = manager
-            //assert(gps.locationManager.allowsBackgroundLocationUpdates)
-            assert(Thread.isMainThread)
-            let location = await gps.location //await locationManager.getLocation(delegate: locationDelegate)
-            let altitude = AltitudeStepEntry.Altitude(value: Int(location.altitude), time: Date())
-            
-            //let altitude = AltitudeStepEntry.Altitude(value: Int.random(in: 10...100), time: Date())
-            
-            entryStack.push(altitude)
-            
-            let entry = AltitudeStepEntry(altitudes: entryStack.entries, date: endDate)
-            
-            completion(Timeline(entries: [entry], policy: .atEnd))
-        }
-         */
     }
 }
