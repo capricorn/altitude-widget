@@ -30,7 +30,7 @@ struct StepGraphView: View {
         let timestampTextSize = timestampTextSize(context: context, size: size)
         let altitudeTextSize = altitudeTextSize(context: context, size: size)
         
-        let timestampRowHeight = timestampTextSize.height + 4
+        let timestampRowHeight = (timestampTextSize.width*cos(3.14/4)) + 4
         let altitudeTextHeight = altitudeTextSize.height + 4
         
         return size.height - (timestampRowHeight + altitudeTextHeight)
@@ -58,7 +58,7 @@ struct StepGraphView: View {
             let timestampPadding = (columnWidth - timestampTextSize.width/2)/2
             let x1 = (CGFloat(i)*columnWidth + columnWidth/2)// + timestampPadding
             // If not vertically centered, translation problem
-            let y1 = 0.0//size.height//size.height-(timestampTextSize.width/2)///2//-20
+            let y1 = size.height-(timestampTextSize.width*cos(3.14/4))-6
             
             context.drawLayer { subCtx in
                 subCtx.rotate(by: .degrees(45))
