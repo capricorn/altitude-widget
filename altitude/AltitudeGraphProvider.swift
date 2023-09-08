@@ -105,7 +105,10 @@ class GPS {
     */
 }
 
-struct AltitudeGraphProvider: TimelineProvider {
+struct AltitudeGraphProvider: IntentTimelineProvider {
+    typealias Intent = AltitudeIntent
+    typealias Entry = AltitudeStepEntry
+    
     private class EntryStack {
         let stackSize: Int
         var entries: [AltitudeStepEntry.Altitude] = []
@@ -122,8 +125,6 @@ struct AltitudeGraphProvider: TimelineProvider {
             self.entries.append(altitude)
         }
     }
-    
-    typealias Entry = AltitudeStepEntry
     
     // TODO: Does this work in practice?
     private let entryStack = EntryStack(stackSize: 5)
@@ -147,12 +148,12 @@ struct AltitudeGraphProvider: TimelineProvider {
         return AltitudeStepEntry(altitudes: altitudes)
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (AltitudeStepEntry) -> Void) {
+    func getSnapshot(for configuration: AltitudeIntent, in context: Context, completion: @escaping (AltitudeStepEntry) -> Void) {
         let entry = AltitudeStepEntry(altitudes: entryStack.entries)
         completion(entry)
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<AltitudeStepEntry>) -> Void) {
+    func getTimeline(for configuration: AltitudeIntent, in context: Context, completion: @escaping (Timeline<AltitudeStepEntry>) -> Void) {
         // TODO: Is this the correct way to avoid dupes across widgets..?
         // (Seems they share the same provider across all families..?)
         guard context.family == .accessoryRectangular else {

@@ -37,6 +37,7 @@ class Altimeter {
     }
 }
 
+/*
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> AltitudeEntry {
         AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent())
@@ -59,13 +60,15 @@ struct Provider: IntentTimelineProvider {
         }
     }
 }
+*/
 
 struct AltitudeEntry: TimelineEntry {
     let date: Date
     let altitude: Int
-    let configuration: ConfigurationIntent
+    let configuration: AltitudeIntent
 }
 
+/*
 struct altitudeEntryView : View {
     var entry: Provider.Entry
     
@@ -80,27 +83,23 @@ struct altitudeEntryView : View {
         }
     }
 }
+ */
 
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
-        altitude()
+        //altitude()
         AltitudeGraph()
     }
 }
-
-
 
 struct AltitudeGraph: Widget {
     let kind: String = "com.goatfish.AltitudeGraph"
     
     var body: some WidgetConfiguration {
-        // TODO: Is a custom ConfigurationIntent necessary?
-        // TODO: Implement separate Provider
-        StaticConfiguration(kind: kind, provider: AltitudeGraphProvider()) { timelineEntry in
-            // TODO: Provide entry to actual view
+        IntentConfiguration(kind: kind, intent: AltitudeIntent.self, provider: AltitudeGraphProvider()) { timelineEntry in
+            // TODO: Obtain config here and apply..?
             StepGraphView(entry: timelineEntry)
-            //StepGraphView(entry: AltitudeStepEntry(altitudes: [.init(value: 30, time: Date()), .init(value: 50, time: Date())]))
         }
         .configurationDisplayName("Altitude Graph")
         .description("A timeline of recent altitude readings.")
@@ -108,6 +107,7 @@ struct AltitudeGraph: Widget {
     }
 }
 
+/*
 struct altitude: Widget {
     let kind: String = "com.goatfish.altitude"
 
@@ -121,12 +121,15 @@ struct altitude: Widget {
             .accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
     }
 }
+ */
 
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        /*
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        */
     }
 }
