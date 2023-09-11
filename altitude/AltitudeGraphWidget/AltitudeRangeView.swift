@@ -30,7 +30,6 @@ struct AltitudeRangeView: View {
             let maxY = size.height - verticalPadding(size)
             
             let path = Path { path in
-                
                 let maxText = Text(viewModel.maxLabel).font(.system(size: 16).monospaced())
                 let maxTextSize = context.resolve(maxText).measure(in: size)
                 let topTextPoint = CGPoint(x: (minX + (maxX-minX)/2) - maxTextSize.width/2, y: minY-maxTextSize.height-8)
@@ -54,6 +53,20 @@ struct AltitudeRangeView: View {
                 
                 path.move(to: CGPoint(x: minX, y: maxY))
                 path.addLine(to: CGPoint(x: maxX, y: maxY))
+                
+                guard let current = viewModel.current,
+                      let max = viewModel.max,
+                      let min = viewModel.min
+                else {
+                    return
+                }
+                
+                // Calculate y-offset given point (between maxY/minY)
+                let scalar = (1/(Swift.max(max-min,1.0)))*(current-max) + 1.0
+                let currentY = scalar * (maxY-minY) + minY
+                let centerPoint = CGPoint(x: centerX, y: currentY)
+                path.move(to: centerPoint)
+                path.addArc(center: centerPoint, radius: 4.0, startAngle: .degrees(0), endAngle: .degrees(360), clockwise: true)
             }
             
             // TODO: Some sort of indicator to represent current point
@@ -76,8 +89,12 @@ struct AltitudeRangeView_Preview: PreviewProvider {
                     viewModel.max = 8238
                 }
                 .onTapGesture {
-                    viewModel.max = CGFloat(Int.random(in: 100...1000))
-                    viewModel.min = CGFloat(Int.random(in: 100...1000))
+                    let a = CGFloat(Int.random(in: 100...1000))
+                    let b = CGFloat(Int.random(in: 100...1000))
+                    
+                    viewModel.max = max(a,b)
+                    viewModel.min = min(a,b)
+                    viewModel.current = CGFloat(Int.random(in: Int(viewModel.min!)...Int(viewModel.max!)))
                 }
         }
     }
