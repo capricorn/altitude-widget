@@ -40,7 +40,22 @@ struct StepGraphView: View {
         let graphMinY = altitudeTextSize(context: context, size: size).height + 4
         let graphHeight = graphHeight(context: context, size: size)
         
-        return CGRect(x: 8.0, y: graphMinY, width: size.width-8.0, height: graphHeight)
+        let graphWidth = size.width*(2/3)
+        
+        return CGRect(x: 8.0, y: graphMinY, width: graphWidth, height: graphHeight)
+    }
+    
+    private func rangeDisplayRect(context: GraphicsContext, size: CGSize) -> CGRect {
+        let minX = size.width*(2/3)
+        let maxX = size.width
+        let minY = 0.0
+        let maxY = size.height - (timestampTextSize(context: context, size: size).width*cos(3.14/4))
+        
+        return CGRect(x: minX, y: minY, width: maxX-minX, height: maxY-minY)
+    }
+    
+    private func drawRangeDisplay(context: inout GraphicsContext, size: CGSize) {
+        // TODO
     }
     
     private func drawTimeline(context: inout GraphicsContext, size: CGSize) {
