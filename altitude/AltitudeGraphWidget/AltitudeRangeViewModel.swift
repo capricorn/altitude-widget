@@ -36,15 +36,15 @@ class AltitudeRangeViewModel: ObservableObject {
     }
     
     func horizontalPadding(_ size: CGSize) -> CGFloat {
-        return size.width / 4
+        return size.width * (3/8)//size.width / 2
     }
     
     func drawRangeDisplay(context: inout GraphicsContext, rect: CGRect) {
-                let size = rect.size
+        let size = rect.size
         
-        let centerX = size.width/2
-        let minX = horizontalPadding(size)
-        let maxX = size.width - horizontalPadding(size)
+        let minX = rect.minX + horizontalPadding(size)
+        let centerX = rect.minX + size.width/2
+        let maxX = minX + size.width - horizontalPadding(size)*2 //(size.width - horizontalPadding(size))
         let minY = verticalPadding(size)
         let maxY = size.height - verticalPadding(size)
         
@@ -89,6 +89,6 @@ class AltitudeRangeViewModel: ObservableObject {
         }
         
         // TODO: Some sort of indicator to represent current point
-        context.stroke(path, with: .color(.white), style: StrokeStyle(lineWidth: 4, lineCap: .round))
+        context.stroke(path, with: .color(.white), style: StrokeStyle(lineWidth: 1, lineCap: .round))
     }
 }

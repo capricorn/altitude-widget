@@ -9,6 +9,8 @@ import SwiftUI
 import WidgetKit
 
 struct StepGraphView: View {
+    @StateObject var rangeModel = AltitudeRangeViewModel()
+    
     static let columns = 10
     let entry: AltitudeStepEntry
     
@@ -46,7 +48,7 @@ struct StepGraphView: View {
     }
     
     private func rangeDisplayRect(context: GraphicsContext, size: CGSize) -> CGRect {
-        let minX = size.width*(2/3)
+        let minX = size.width*(3/4)//size.width*(2/3) // -- use last fourth for range display
         let maxX = size.width
         let minY = 0.0
         let maxY = size.height - (timestampTextSize(context: context, size: size).width*cos(3.14/4))
@@ -134,6 +136,8 @@ struct StepGraphView: View {
                 )
                 
                 drawTimeline(context: &context, size: size)
+                let rangeRect = rangeDisplayRect(context: context, size: size)
+                rangeModel.drawRangeDisplay(context: &context, rect: rangeRect)
             }
             .border(Color.black)
         }
