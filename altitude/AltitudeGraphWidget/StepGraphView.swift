@@ -30,16 +30,13 @@ struct StepGraphView: View {
     
     private func graphHeight(context: GraphicsContext, size: CGSize) -> CGFloat {
         let timestampTextSize = timestampTextSize(context: context, size: size)
-        let altitudeTextSize = altitudeTextSize(context: context, size: size)
-        
         let timestampRowHeight = (timestampTextSize.width*cos(3.14/4)) + 4
-        let altitudeTextHeight = altitudeTextSize.height + 4
         
-        return size.height - (timestampRowHeight + altitudeTextHeight)
+        return size.height - (timestampRowHeight + 8)
     }
     
     private func graphRect(context: GraphicsContext, size: CGSize) -> CGRect {
-        let graphMinY = altitudeTextSize(context: context, size: size).height + 4
+        let graphMinY = 8.0
         let graphHeight = graphHeight(context: context, size: size)
         
         let graphWidth = size.width*(2/3)
