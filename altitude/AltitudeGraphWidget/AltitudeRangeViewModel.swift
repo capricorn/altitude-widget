@@ -32,20 +32,20 @@ class AltitudeRangeViewModel: ObservableObject {
     }
     
     func verticalPadding(_ size: CGSize) -> CGFloat {
-        return size.height / 4
+        return size.height * (1/8) //size.height / 4
     }
     
     func horizontalPadding(_ size: CGSize) -> CGFloat {
-        return size.width * (3/8)//size.width / 2
+        return size.width * (1/4)//(3/8)//size.width / 2
     }
     
-    func drawRangeDisplay(context: inout GraphicsContext, rect: CGRect) {
+    func drawRangeDisplay(context: inout GraphicsContext, rect: CGRect, anchor: CGPoint = .zero) {
         let size = rect.size
         
-        let minX = rect.minX + horizontalPadding(size)
-        let centerX = rect.minX + size.width/2
+        let minX = rect.minX + horizontalPadding(size) + anchor.x
+        let centerX = rect.minX + size.width/2 + anchor.x
         let maxX = minX + size.width - horizontalPadding(size)*2 //(size.width - horizontalPadding(size))
-        let minY = verticalPadding(size)
+        let minY = verticalPadding(size) + anchor.y
         let maxY = size.height - verticalPadding(size)
         
         let path = Path { path in

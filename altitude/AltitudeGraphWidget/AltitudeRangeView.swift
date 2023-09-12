@@ -30,7 +30,8 @@ struct AltitudeRangeView_Preview: PreviewProvider {
         
         var body: some View {
             AltitudeRangeView(viewModel: viewModel)
-                .frame(width: 200, height: 300)
+                .frame(width: 200, height: 300) // 2:3 ratio
+                .border(Color.blue)
                 .onAppear {
                     viewModel.max = 8238
                 }
