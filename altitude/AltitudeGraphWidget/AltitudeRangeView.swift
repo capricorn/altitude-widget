@@ -16,9 +16,13 @@ struct AltitudeRangeView: View {
     var body: some View {
         Canvas { context, size in
             let frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
-            viewModel.drawRangeDisplay(context: &context, rect: frame)
+            viewModel.drawRangeDisplay(
+                context: &context,
+                rect: frame,
+                anchor: .zero
+            )
         }
-        .border(Color.red)
+        //.border(Color.red)
         .background(.black)
         .foregroundColor(.white)
     }
@@ -31,7 +35,7 @@ struct AltitudeRangeView_Preview: PreviewProvider {
         var body: some View {
             AltitudeRangeView(viewModel: viewModel)
                 .frame(width: 200, height: 300) // 2:3 ratio
-                .border(Color.blue)
+                //.border(Color.blue)
                 .onAppear {
                     viewModel.max = 8238
                 }

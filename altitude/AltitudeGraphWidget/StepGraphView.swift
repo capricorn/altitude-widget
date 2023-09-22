@@ -134,7 +134,11 @@ struct StepGraphView: View {
                 
                 drawTimeline(context: &context, size: size)
                 let rangeRect = rangeDisplayRect(context: context, size: size)
-                rangeModel.drawRangeDisplay(context: &context, rect: rangeRect)
+                rangeModel.drawRangeDisplay(
+                    context: &context,
+                    rect: rangeRect,
+                    anchor: .zero//CGPoint(x: 0, y: size.height*(1/4))
+                )
             }
             .border(Color.black)
         }
