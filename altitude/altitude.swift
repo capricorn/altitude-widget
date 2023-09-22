@@ -78,12 +78,18 @@ class Altimeter {
 }
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> AltitudeEntry {
-        AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent())
+    class PreviousEntryContainer {
+        var entry: CompactAltitudeEntry?
+    }
+    
+    let prevEntryContainer = PreviousEntryContainer()
+    
+    func placeholder(in context: Context) -> AltitudeEntryContainer {
+        AltitudeEntryContainer(date: Date(), configuration: AltitudeIntent(), currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800))
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (AltitudeEntry) -> ()) {
-        let entry = AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent())
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (AltitudeEntryContainer) -> ()) {
+        let entry = AltitudeEntryContainer(date: Date(), configuration: AltitudeIntent(), currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800))
         completion(entry)
     }
 
@@ -92,11 +98,28 @@ struct Provider: IntentTimelineProvider {
             let location = await GPS().location
             let currentDate = Date()
             let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
-            let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: AltitudeIntent())
-            let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
+            
+            let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
+            let container = AltitudeEntryContainer(date: currentDate, configuration: AltitudeIntent(), currentEntry: entry, prevEntry: prevEntryContainer.entry)
+            let timeline = Timeline(entries: [container], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
+            
+            prevEntryContainer.entry = entry
+            
             completion(timeline)
         }
     }
+}
+
+struct CompactAltitudeEntry {
+    let date: Date
+    let altitude: Int
+}
+
+struct AltitudeEntryContainer: TimelineEntry {
+    let date: Date
+    let configuration: AltitudeIntent
+    let currentEntry: CompactAltitudeEntry
+    var prevEntry: CompactAltitudeEntry? = nil
 }
 
 struct AltitudeEntry: TimelineEntry {
@@ -106,18 +129,19 @@ struct AltitudeEntry: TimelineEntry {
 }
 
 struct altitudeEntryView : View {
-    var entry: Provider.Entry
-    var prevEntry: Provider.Entry?
+    //var entry: Provider.Entry
+    //var prevEntry: Provider.Entry?
+    var container: AltitudeEntryContainer
     
-    var altitude: AltitudeEntry {
-        entry as AltitudeEntry
+    private var altitude: CompactAltitudeEntry {
+        container.currentEntry
     }
     
-    var prevAltitude: AltitudeEntry? {
-        prevEntry as AltitudeEntry?
+    private var prevAltitude: CompactAltitudeEntry? {
+        container.prevEntry
     }
     
-    var altitudeDeltaLabel: String? {
+    private var altitudeDeltaLabel: String? {
         guard let prevAltitude else {
             return nil
         }
@@ -175,7 +199,7 @@ struct altitude: Widget {
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            altitudeEntryView(entry: entry)
+            altitudeEntryView(container: entry)
         }
         .configurationDisplayName("Recent Altitude")
         .description("A recent altitude reading indicator.")
@@ -190,22 +214,44 @@ struct altitude_Previews: PreviewProvider {
         
         // Minute-only preview
         altitudeEntryView(
-            entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
-            prevEntry: AltitudeEntry(date: Date() - 60*40, altitude: 1200, configuration: AltitudeIntent())
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
+                prevEntry: CompactAltitudeEntry(date: Date() - 60*40, altitude: 600)
+            )
         )
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         
-        // Hour timestamp preview
+        // Hour-only preview
         altitudeEntryView(
-            entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
-            prevEntry: AltitudeEntry(date: Date() - 60*60*12, altitude: 1200, configuration: AltitudeIntent())
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
+                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*12, altitude: 1200)
+            )
         )
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         
-        // Day timestamp preview
+        // Days-only preview
         altitudeEntryView(
-            entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
-            prevEntry: AltitudeEntry(date: Date() - 60*60*40, altitude: 600, configuration: AltitudeIntent())
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
+                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*36, altitude: 1200)
+            )
+        )
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        
+        // Prev entry absent
+        altitudeEntryView(
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800)
+            )
         )
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
