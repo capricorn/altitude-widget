@@ -51,8 +51,8 @@ struct Provider: IntentTimelineProvider {
         Task { @MainActor in
             let location = await GPS().location
             let currentDate = Date()
-            let altitudeFeet = Int(location.altitude.measurement(UnitLength.feet).value)
-            let measurement = Measurement(value: location.altitude, unit: UnitLength.feet)
+            let measurement = Measurement(value: location.altitude, unit: UnitLength.meters)
+            let altitudeFeet = Int(measurement.converted(to: .feet).value)
             let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: AltitudeIntent())
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
             completion(timeline)
@@ -122,6 +122,6 @@ struct altitude_Previews: PreviewProvider {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
