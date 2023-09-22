@@ -111,8 +111,7 @@ struct altitude: Widget {
         }
         .configurationDisplayName("Recent Altitude")
         .description("A recent altitude reading indicator.")
-        .supportedFamilies([
-            .accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
+        .supportedFamilies([.accessoryRectangular])
     }
 }
 
