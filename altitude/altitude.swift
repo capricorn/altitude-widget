@@ -51,8 +51,7 @@ struct Provider: IntentTimelineProvider {
         Task { @MainActor in
             let location = await GPS().location
             let currentDate = Date()
-            let measurement = Measurement(value: location.altitude, unit: UnitLength.meters)
-            let altitudeFeet = Int(measurement.converted(to: .feet).value)
+            let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
             let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: AltitudeIntent())
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
             completion(timeline)

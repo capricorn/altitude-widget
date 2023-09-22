@@ -38,6 +38,13 @@ class GPS {
     }
 }
 
+extension CLLocation {
+    /// Obtain the altitude as an abstract measurement.
+    var mAltitude: Measurement<UnitLength> {
+        return Measurement(value: self.altitude, unit: .feet)
+    }
+}
+
 struct AltitudeGraphProvider: IntentTimelineProvider {
     typealias Intent = AltitudeIntent
     typealias Entry = AltitudeStepEntry
