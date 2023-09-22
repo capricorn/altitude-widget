@@ -120,6 +120,6 @@ struct altitude_Previews: PreviewProvider {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
 }
