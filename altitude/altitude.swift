@@ -36,11 +36,11 @@ private struct CompactWidgetTime: FormatStyle {
     func format(_ value: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         
-        if value < 24*60*60 {
-            /*
-            formatter.unitsStyle = .abbreviated
-            formatter.allowedUnits = [ .hour, .minute ]
-             */
+        if value < 60*60 {
+            formatter.unitsStyle = .short
+            formatter.allowedUnits = [ .minute ]
+            return formatter.string(from: value)!
+        } else if value < 24*60*60 {
             formatter.unitsStyle = .full
             formatter.allowedUnits = [ .hour ]
             return formatter.string(from: value)!
@@ -187,11 +187,22 @@ struct altitude_Previews: PreviewProvider {
     static var previews: some View {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        
+        // Minute-only preview
+        altitudeEntryView(
+            entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
+            prevEntry: AltitudeEntry(date: Date() - 60*40, altitude: 1200, configuration: AltitudeIntent())
+        )
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        
+        // Hour timestamp preview
         altitudeEntryView(
             entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
             prevEntry: AltitudeEntry(date: Date() - 60*60*12, altitude: 1200, configuration: AltitudeIntent())
         )
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        
+        // Day timestamp preview
         altitudeEntryView(
             entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
             prevEntry: AltitudeEntry(date: Date() - 60*60*40, altitude: 600, configuration: AltitudeIntent())
