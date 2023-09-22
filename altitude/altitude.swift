@@ -16,6 +16,46 @@ extension Double {
     }
 }
 
+private extension Int {
+    var signLabel: String {
+        if self > 0 {
+            return "+"
+        }
+        
+        // Negative case is already included when a number is converted to a string.
+        return ""
+    }
+}
+
+private struct CompactWidgetTime: FormatStyle {
+    typealias FormatInput = TimeInterval
+    typealias FormatOutput = String
+    
+    static let style = Self()
+    
+    func format(_ value: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        
+        if value < 24*60*60 {
+            /*
+            formatter.unitsStyle = .abbreviated
+            formatter.allowedUnits = [ .hour, .minute ]
+             */
+            formatter.unitsStyle = .full
+            formatter.allowedUnits = [ .hour ]
+            return formatter.string(from: value)!
+        } else {
+            formatter.unitsStyle = .short
+            formatter.allowedUnits = [ .day ]
+            return formatter.string(from: value)!
+        }
+    }
+}
+
+private extension FormatStyle where Self == CompactWidgetTime {
+    static var compactWidgetTime: CompactWidgetTime { self.style }
+}
+
 class Altimeter {
     private let queue = OperationQueue()
     private let altimeter = CMAltimeter()
@@ -67,15 +107,43 @@ struct AltitudeEntry: TimelineEntry {
 
 struct altitudeEntryView : View {
     var entry: Provider.Entry
+    var prevEntry: Provider.Entry?
     
     var altitude: AltitudeEntry {
         entry as AltitudeEntry
     }
+    
+    var prevAltitude: AltitudeEntry? {
+        prevEntry as AltitudeEntry?
+    }
+    
+    var altitudeDeltaLabel: String? {
+        guard let prevAltitude else {
+            return nil
+        }
+        
+        let delta = altitude.altitude - prevAltitude.altitude
+        let sign = delta.signLabel
+        let prevTime = altitude.date.timeIntervalSince1970 - prevAltitude.date.timeIntervalSince1970
+        
+        // TODO: Use settings measurement
+        return "\(sign)\(delta) ft since \(prevTime.formatted(.compactWidgetTime)) ago"
+    }
+    
 
     var body: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "mountain.2.circle")
-            Text("\(altitude.altitude) ft")
+        VStack(alignment: .leading) {
+            HStack(spacing: 4) {
+                Image(systemName: "mountain.2.circle")
+                Text("\(altitude.altitude) ft")
+            }
+            
+            if let altitudeDeltaLabel {
+                Text(altitudeDeltaLabel)
+                    .font(.caption)
+                    .fontWeight(.light)
+                    .truncationMode(.tail)
+            }
         }
     }
 }
@@ -119,7 +187,15 @@ struct altitude_Previews: PreviewProvider {
     static var previews: some View {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        altitudeEntryView(
+            entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
+            prevEntry: AltitudeEntry(date: Date() - 60*60*12, altitude: 1200, configuration: AltitudeIntent())
+        )
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        altitudeEntryView(
+            entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()),
+            prevEntry: AltitudeEntry(date: Date() - 60*60*40, altitude: 600, configuration: AltitudeIntent())
+        )
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
 }
