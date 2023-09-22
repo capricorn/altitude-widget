@@ -37,14 +37,13 @@ class Altimeter {
     }
 }
 
-/*
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> AltitudeEntry {
-        AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent())
+        AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (AltitudeEntry) -> ()) {
-        let entry = AltitudeEntry(date: Date(), altitude: 800, configuration: configuration)
+        let entry = AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent())
         completion(entry)
     }
 
@@ -54,13 +53,12 @@ struct Provider: IntentTimelineProvider {
             let currentDate = Date()
             let altitudeFeet = Int(location.altitude.measurement(UnitLength.feet).value)
             let measurement = Measurement(value: location.altitude, unit: UnitLength.feet)
-            let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: configuration)
+            let entry = AltitudeEntry(date: currentDate, altitude: altitudeFeet, configuration: AltitudeIntent())
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
             completion(timeline)
         }
     }
 }
-*/
 
 struct AltitudeEntry: TimelineEntry {
     let date: Date
@@ -68,7 +66,6 @@ struct AltitudeEntry: TimelineEntry {
     let configuration: AltitudeIntent
 }
 
-/*
 struct altitudeEntryView : View {
     var entry: Provider.Entry
     
@@ -83,12 +80,11 @@ struct altitudeEntryView : View {
         }
     }
 }
- */
 
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
-        //altitude()
+        altitude()
         AltitudeGraph()
     }
 }
@@ -107,7 +103,6 @@ struct AltitudeGraph: Widget {
     }
 }
 
-/*
 struct altitude: Widget {
     let kind: String = "com.goatfish.altitude"
 
@@ -121,15 +116,12 @@ struct altitude: Widget {
             .accessoryRectangular, .accessoryInline, .systemSmall, .systemMedium])
     }
 }
- */
 
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        /*
-        altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: ConfigurationIntent()))
+        altitudeEntryView(entry: AltitudeEntry(date: Date(), altitude: 800, configuration: AltitudeIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        */
     }
 }
