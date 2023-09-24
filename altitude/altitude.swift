@@ -186,9 +186,11 @@ struct altitudeEntryView : View {
         let delta = altitude.altitude - prevAltitude.altitude
         let sign = delta.signLabel
         let prevTime = altitude.date.timeIntervalSince1970 - prevAltitude.date.timeIntervalSince1970
+        // If delta is zero, no sign is present; ergo, no padding.
+        let signPad = (delta == 0) ? "" : " "
         
         // TODO: Use settings measurement
-        return "\(sign) \(abs(delta)) ft in \(prevTime.formatted(.compactWidgetTime))"
+        return "\(sign)\(signPad)\(abs(delta)) ft in \(prevTime.formatted(.compactWidgetTime))"
     }
     
 
@@ -294,6 +296,17 @@ struct altitude_Previews: PreviewProvider {
                 date: Date(),
                 configuration: AltitudeIntent(),
                 currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800)
+            )
+        )
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        
+        // No change in altitude between readings
+        altitudeEntryView(
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
+                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*36, altitude: 800)
             )
         )
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
