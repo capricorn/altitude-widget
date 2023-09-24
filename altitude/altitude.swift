@@ -52,6 +52,41 @@ private struct CompactWidgetTime: FormatStyle {
     }
 }
 
+private extension TimeInterval {
+    var days: Int {
+        Int(floor(self / (24*60*60)))
+    }
+}
+
+private struct CompactWidgetDateFormatStyle: FormatStyle {
+    typealias FormatInput = Date
+    typealias FormatOutput = String
+    
+    static let style = Self()
+    
+    func format(_ value: Date) -> String {
+        let elapsedTime = Date.now.timeIntervalSince1970 - value.timeIntervalSince1970
+        let formatter = DateFormatter()
+        
+        if elapsedTime.days < 1 {
+            // Present the time of the previous reading
+            // TODO: Handle 24 hr time setting
+            formatter.amSymbol = "am"
+            formatter.pmSymbol = "pm"
+            formatter.dateFormat = "h:mm a"
+        } else {
+            // TODO: Use locale for this? Maybe it already does..?
+            formatter.dateFormat = "M/dd"
+        }
+        
+        return formatter.string(from: value)
+    }
+}
+
+private extension FormatStyle where Self == CompactWidgetDateFormatStyle {
+    static var compactWidgetDate: CompactWidgetDateFormatStyle { self.style }
+}
+
 private extension FormatStyle where Self == CompactWidgetTime {
     static var compactWidgetTime: CompactWidgetTime { self.style }
 }
