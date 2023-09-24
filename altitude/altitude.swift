@@ -197,13 +197,18 @@ struct altitudeEntryView : View {
                 Text("\(altitude.altitude) ft")
             }
             
-            if let altitudeDeltaLabel {
-                Text(altitudeDeltaLabel)
+            Group {
+                if let altitudeDeltaLabel {
+                    Text(altitudeDeltaLabel)
+                }
+                
+                // TODO: Use 'on' for entries occurring >24 hr ago
+                (Text("at ") + Text(altitude.date.formatted(.compactWidgetDate)))
                     .foregroundColor(Color.gray)
-                    .font(.caption)
-                    .fontWeight(.light)
-                    .truncationMode(.tail)
             }
+            .font(.caption)
+            .fontWeight(.light)
+            .truncationMode(.tail)
         }
     }
 }
