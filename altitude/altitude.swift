@@ -164,6 +164,7 @@ struct altitudeEntryView : View {
             
             if let altitudeDeltaLabel {
                 Text(altitudeDeltaLabel)
+                    .foregroundColor(Color.gray)
                     .font(.caption)
                     .fontWeight(.light)
                     .truncationMode(.tail)
