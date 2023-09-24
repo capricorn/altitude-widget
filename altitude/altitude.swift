@@ -186,7 +186,7 @@ struct altitudeEntryView : View {
         let prevTime = altitude.date.timeIntervalSince1970 - prevAltitude.date.timeIntervalSince1970
         
         // TODO: Use settings measurement
-        return "\(sign)\(delta) ft since \(prevTime.formatted(.compactWidgetTime)) ago"
+        return "\(sign)\(delta) ft in \(prevTime.formatted(.compactWidgetTime))"
     }
     
 
