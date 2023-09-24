@@ -19,7 +19,9 @@ extension Double {
 private extension Int {
     var signLabel: String {
         if self > 0 {
-            return "+"
+            return "↗"
+        } else if self < 0 {
+            return "↘"
         }
         
         // Negative case is already included when a number is converted to a string.
@@ -186,7 +188,7 @@ struct altitudeEntryView : View {
         let prevTime = altitude.date.timeIntervalSince1970 - prevAltitude.date.timeIntervalSince1970
         
         // TODO: Use settings measurement
-        return "\(sign)\(delta) ft in \(prevTime.formatted(.compactWidgetTime))"
+        return "\(sign) \(abs(delta)) ft in \(prevTime.formatted(.compactWidgetTime))"
     }
     
 
