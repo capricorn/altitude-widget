@@ -130,7 +130,7 @@ struct Provider: IntentTimelineProvider {
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
         Task { @MainActor in
             let location = await GPS().location
             let currentDate = Date()
@@ -220,7 +220,7 @@ struct altitudeEntryView : View {
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
-        altitude()
+        AltitudeLockWidget()
         AltitudeGraph()
     }
 }
