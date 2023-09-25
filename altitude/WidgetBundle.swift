@@ -16,18 +16,6 @@ extension Double {
     }
 }
 
-struct CompactAltitudeEntry {
-    let date: Date
-    let altitude: Int
-}
-
-struct AltitudeEntryContainer: TimelineEntry {
-    let date: Date
-    let configuration: AltitudeIntent
-    let currentEntry: CompactAltitudeEntry
-    var prevEntry: CompactAltitudeEntry? = nil
-}
-
 struct AltitudeEntry: TimelineEntry {
     let date: Date
     let altitude: Int
