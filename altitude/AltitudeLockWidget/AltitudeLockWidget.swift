@@ -12,7 +12,7 @@ struct AltitudeLockWidget: Widget {
     let kind: String = "com.goatfish.altitude"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: AltitudeLockWidgetProvider()) { entry in
             altitudeEntryView(container: entry)
         }
         .configurationDisplayName("Recent Altitude")
