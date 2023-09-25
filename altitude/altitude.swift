@@ -235,7 +235,7 @@ struct AltitudeGraph: Widget {
         }
         .configurationDisplayName("Altitude Graph")
         .description("A timeline of recent altitude readings.")
-        .supportedFamilies([.accessoryRectangular, .systemSmall])
+        .supportedFamilies([.systemSmall])
     }
 }
 
@@ -255,7 +255,7 @@ struct altitude: Widget {
 struct altitude_Previews: PreviewProvider {
     static var previews: some View {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
         
         // Minute-only preview
         altitudeEntryView(
