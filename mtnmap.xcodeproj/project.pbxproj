@@ -247,7 +247,6 @@
 				F0E2258129D1F4710068D00E /* altitude.intentdefinition */,
 				F0E2258229D1F4730068D00E /* Assets.xcassets */,
 				F0E2258429D1F4730068D00E /* Info.plist */,
-				F0E740E82A9FE63800AD2A72 /* AltitudeGraphProvider.swift */,
 			);
 			path = altitude;
 			sourceTree = "<group>";
@@ -279,6 +278,7 @@
 		F0E740FE2AA8E2DC00AD2A72 /* AltitudeGraphWidget */ = {
 			isa = PBXGroup;
 			children = (
+				F0E740E82A9FE63800AD2A72 /* AltitudeGraphProvider.swift */,
 				F0E740EE2AA0FAEC00AD2A72 /* StepGraphView.swift */,
 				F0E740FF2AA8E2FE00AD2A72 /* MockData.swift */,
 				F0DF2DBB2AAF7DEB00D66ADD /* AltitudeRangeView.swift */,
