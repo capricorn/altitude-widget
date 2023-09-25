@@ -224,37 +224,3 @@ struct AltitudeWidgets: WidgetBundle {
         AltitudeGraph()
     }
 }
-
-struct AltitudeGraph: Widget {
-    let kind: String = "com.goatfish.AltitudeGraph"
-    
-    var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: AltitudeIntent.self, provider: AltitudeGraphProvider()) { timelineEntry in
-            // TODO: Obtain config here and apply..?
-            StepGraphView(entry: timelineEntry)
-        }
-        .configurationDisplayName("Altitude Graph")
-        .description("A timeline of recent altitude readings.")
-        .supportedFamilies([.systemSmall])
-    }
-}
-
-struct altitude: Widget {
-    let kind: String = "com.goatfish.altitude"
-
-    var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            altitudeEntryView(container: entry)
-        }
-        .configurationDisplayName("Recent Altitude")
-        .description("A recent altitude reading indicator.")
-        .supportedFamilies([.accessoryRectangular])
-    }
-}
-
-struct altitude_Previews: PreviewProvider {
-    static var previews: some View {
-        StepGraphView(entry: StepGraphView.stepGraphEntry)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
