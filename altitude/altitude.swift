@@ -256,59 +256,5 @@ struct altitude_Previews: PreviewProvider {
     static var previews: some View {
         StepGraphView(entry: StepGraphView.stepGraphEntry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-        
-        // Minute-only preview
-        altitudeEntryView(
-            container: AltitudeEntryContainer(
-                date: Date(),
-                configuration: AltitudeIntent(),
-                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
-                prevEntry: CompactAltitudeEntry(date: Date() - 60*40, altitude: 600)
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        
-        // Hour-only preview
-        altitudeEntryView(
-            container: AltitudeEntryContainer(
-                date: Date(),
-                configuration: AltitudeIntent(),
-                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
-                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*12, altitude: 1200)
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        
-        // Days-only preview
-        altitudeEntryView(
-            container: AltitudeEntryContainer(
-                date: Date(),
-                configuration: AltitudeIntent(),
-                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
-                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*36, altitude: 1200)
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        
-        // Prev entry absent
-        altitudeEntryView(
-            container: AltitudeEntryContainer(
-                date: Date(),
-                configuration: AltitudeIntent(),
-                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800)
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        
-        // No change in altitude between readings
-        altitudeEntryView(
-            container: AltitudeEntryContainer(
-                date: Date(),
-                configuration: AltitudeIntent(),
-                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
-                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*36, altitude: 800)
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
 }
