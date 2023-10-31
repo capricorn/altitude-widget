@@ -10,12 +10,6 @@ import SwiftUI
 import Intents
 import CoreMotion
 
-extension Double {
-    func measurement<UnitType: Unit>(_ type: UnitType) -> Measurement<UnitType> {
-        Measurement(value: self, unit: type.self)
-    }
-}
-
 struct AltitudeEntry: TimelineEntry {
     let date: Date
     let altitude: Int

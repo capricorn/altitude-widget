@@ -55,3 +55,9 @@ extension CGPoint {
         return sqrt(pow(self.x, 2) + pow(self.y, 2))
     }
 }
+
+extension Double {
+    func measurement<UnitType: Unit>(_ type: UnitType) -> Measurement<UnitType> {
+        Measurement(value: self, unit: type.self)
+    }
+}
