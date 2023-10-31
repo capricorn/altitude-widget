@@ -20,6 +20,15 @@ extension UserDefaults {
                 }
             }
             
+            var compactLabel: String {
+                switch self {
+                case .feet:
+                    "ft"
+                case .meters:
+                    "m"
+                }
+            }
+            
             var id: Self {
                 self
             }

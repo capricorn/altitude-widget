@@ -29,8 +29,16 @@ private extension FormatStyle where Self == AltitudeLockWidget.CompactWidgetTime
 }
 
 struct altitudeEntryView : View {
-    //var entry: Provider.Entry
-    //var prevEntry: Provider.Entry?
+    @AppStorage(UserDefaults.Settings.AltitudeUnit.defaultKey) 
+    private var defaultUnit: UserDefaults.Settings.AltitudeUnit?
+    
+    @AppStorage(UserDefaults.Settings.TimeNotation.defaultKey) 
+    private var defaultTime: UserDefaults.Settings.TimeNotation?
+    
+    private var unitLabel: String {
+        (defaultUnit ?? .feet).compactLabel
+    }
+    
     var container: AltitudeEntryContainer
     
     private var altitude: CompactAltitudeEntry {
@@ -53,15 +61,14 @@ struct altitudeEntryView : View {
         let signPad = (delta == 0) ? "" : " "
         
         // TODO: Use settings measurement
-        return "\(sign)\(signPad)\(abs(delta)) ft in \(prevTime.formatted(.compactWidgetTime))"
+        return "\(sign)\(signPad)\(abs(delta)) \(unitLabel) in \(prevTime.formatted(.compactWidgetTime))"
     }
     
-
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 4) {
                 Image(systemName: "mountain.2.circle")
-                Text("\(altitude.altitude) ft")
+                Text("\(altitude.altitude) \(unitLabel)")
             }
             
             Group {
