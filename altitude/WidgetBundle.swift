@@ -26,6 +26,5 @@ struct AltitudeEntry: TimelineEntry {
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
         AltitudeLockWidget()
-        AltitudeGraph()
     }
 }
