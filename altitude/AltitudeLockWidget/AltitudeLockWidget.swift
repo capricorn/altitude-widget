@@ -32,6 +32,15 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
         return defaults
     }()
     
+    static let hour24UserDefaults: UserDefaults = {
+        let defaults = UserDefaults(suiteName: "altitude-lock-24hr")!
+        
+        // TODO: UserDefaults extension to make this less painful
+        defaults.set(UserDefaults.Settings.TimeNotation.hour24.rawValue, forKey: UserDefaults.Settings.TimeNotation.defaultKey)
+        
+        return defaults
+    }()
+    
     static var previews: some View {
         altitudeEntryView(
             container: AltitudeEntryContainer(
@@ -57,6 +66,7 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
                 prevEntry: CompactAltitudeEntry(date: Date() - 60*60*12, altitude: 1200)
             )
         )
+        .defaultAppStorage(hour24UserDefaults)
         .containerBackground(for: .widget) {
             AccessoryWidgetBackground()
         }
