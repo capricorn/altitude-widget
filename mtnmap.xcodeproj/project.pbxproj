@@ -104,6 +104,8 @@
 		F023991429BD727900A0CC25 /* mtnmapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtnmapUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F03413D42AF19CB3001FC36F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F03413D62AF1AB06001FC36F /* SettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorage.swift; sourceTree = "<group>"; };
+		F03413DA2AF1FA31001FC36F /* altitudeExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = altitudeExtension.entitlements; sourceTree = "<group>"; };
+		F03413DB2AF1FB00001FC36F /* mtnmap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mtnmap.entitlements; sourceTree = "<group>"; };
 		F04C5AF02A9521090010F3AE /* AltitudeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeView.swift; sourceTree = "<group>"; };
 		F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		F04C5AF62A996C8A0010F3AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		F02398EB29BD727800A0CC25 = {
 			isa = PBXGroup;
 			children = (
+				F03413DA2AF1FA31001FC36F /* altitudeExtension.entitlements */,
 				F02398F629BD727800A0CC25 /* mtnmap */,
 				F023990729BD727900A0CC25 /* mtnmapTests */,
 				F023991129BD727900A0CC25 /* mtnmapUITests */,
@@ -194,6 +197,7 @@
 		F02398F629BD727800A0CC25 /* mtnmap */ = {
 			isa = PBXGroup;
 			children = (
+				F03413DB2AF1FB00001FC36F /* mtnmap.entitlements */,
 				F0E740EA2A9FE71200AD2A72 /* Model */,
 				F04C5AF62A996C8A0010F3AE /* Info.plist */,
 				F02398F729BD727800A0CC25 /* mtnmapApp.swift */,
@@ -682,6 +686,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = mtnmap/mtnmap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mtnmap/Preview Content\"";
@@ -717,6 +722,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = mtnmap/mtnmap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mtnmap/Preview Content\"";
@@ -827,6 +833,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = altitudeExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q49KLF9VPG;
@@ -854,6 +861,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = altitudeExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q49KLF9VPG;

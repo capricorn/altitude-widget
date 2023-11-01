@@ -14,6 +14,7 @@ struct AltitudeLockWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: AltitudeLockWidgetProvider()) { entry in
             altitudeEntryView(container: entry)
+                .defaultAppStorage(.init(suiteName: UserDefaults.Settings.appGroupId)!)
         }
         .configurationDisplayName("Recent Altitude")
         .description("A recent altitude reading indicator.")

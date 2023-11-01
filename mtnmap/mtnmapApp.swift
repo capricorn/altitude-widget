@@ -12,6 +12,7 @@ struct mtnmapApp: App {
     var body: some Scene {
         WindowGroup {
             SettingsView()
+                .defaultAppStorage(.init(suiteName: UserDefaults.Settings.appGroupId)!)
         }
     }
 }

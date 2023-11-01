@@ -9,6 +9,7 @@ import Foundation
 
 extension UserDefaults {
     enum Settings {
+        static let appGroupId = "group.com.goatfish.altitudegroup"
         enum AltitudeUnit: String, CaseIterable, Identifiable, RawRepresentable {
             case feet
             case meters
