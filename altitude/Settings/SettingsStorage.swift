@@ -9,7 +9,7 @@ import Foundation
 
 extension UserDefaults {
     enum Settings {
-        enum AltitudeUnit: String, CaseIterable, Identifiable {
+        enum AltitudeUnit: String, CaseIterable, Identifiable, RawRepresentable {
             case feet
             case meters
             
@@ -36,7 +36,7 @@ extension UserDefaults {
             static let defaultKey = "altitude_unit"
         }
         
-        enum TimeNotation: String, CaseIterable, Identifiable {
+        enum TimeNotation: String, CaseIterable, Identifiable, RawRepresentable {
             case hour12
             case hour24
             

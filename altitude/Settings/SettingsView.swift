@@ -11,8 +11,8 @@ struct SettingsView: View {
     typealias AltitudeUnit = UserDefaults.Settings.AltitudeUnit
     typealias TimeNotation = UserDefaults.Settings.TimeNotation
 
-    @AppStorage(AltitudeUnit.defaultKey) private var unitSelection: AltitudeUnit?
-    @AppStorage(TimeNotation.defaultKey) private var timeSelection: TimeNotation?
+    @AppStorage(AltitudeUnit.defaultKey) private var unitSelection: AltitudeUnit = .feet
+    @AppStorage(TimeNotation.defaultKey) private var timeSelection: TimeNotation = .hour12
     
     var body: some View {
         List {
