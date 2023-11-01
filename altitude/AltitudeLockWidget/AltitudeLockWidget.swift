@@ -23,6 +23,15 @@ struct AltitudeLockWidget: Widget {
 
 @available(iOSApplicationExtension 17.0, *)
 struct AltitudeLockWidget_Previews: PreviewProvider {
+    static let metricUserDefaults: UserDefaults = {
+        let defaults = UserDefaults(suiteName: "altitude-lock-metric")!
+        
+        // TODO: UserDefaults extension to make this less painful
+        defaults.set(UserDefaults.Settings.AltitudeUnit.meters.rawValue, forKey: UserDefaults.Settings.AltitudeUnit.defaultKey)
+        
+        return defaults
+    }()
+    
     static var previews: some View {
         altitudeEntryView(
             container: AltitudeEntryContainer(
@@ -32,6 +41,7 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
                 prevEntry: CompactAltitudeEntry(date: Date() - 60*40, altitude: 600)
             )
         )
+        .defaultAppStorage(metricUserDefaults)
         .containerBackground(for: .widget) {
             AccessoryWidgetBackground()
         }

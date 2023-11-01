@@ -30,13 +30,13 @@ private extension FormatStyle where Self == AltitudeLockWidget.CompactWidgetTime
 
 struct altitudeEntryView : View {
     @AppStorage(UserDefaults.Settings.AltitudeUnit.defaultKey) 
-    private var defaultUnit: UserDefaults.Settings.AltitudeUnit?
+    private var defaultUnit: UserDefaults.Settings.AltitudeUnit = .feet
     
     @AppStorage(UserDefaults.Settings.TimeNotation.defaultKey) 
-    private var defaultTime: UserDefaults.Settings.TimeNotation?
+    private var defaultTime: UserDefaults.Settings.TimeNotation = .hour12
     
     private var unitLabel: String {
-        (defaultUnit ?? .feet).compactLabel
+        defaultUnit.compactLabel
     }
     
     var container: AltitudeEntryContainer
