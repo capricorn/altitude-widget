@@ -35,6 +35,8 @@ struct AltitudeLockWidgetProvider: IntentTimelineProvider {
             
             prevEntryContainer.entry = entry
             
+            UserDefaults.Settings.defaults.set(entry, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
+            
             completion(timeline)
         }
     }

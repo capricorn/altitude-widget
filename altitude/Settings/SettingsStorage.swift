@@ -10,6 +10,10 @@ import Foundation
 extension UserDefaults {
     enum Settings {
         static let appGroupId = "group.com.goatfish.altitudegroup"
+        static let lastAltitudeReadingKey = "last_altitude_reading"
+        
+        static let defaults = UserDefaults(suiteName: appGroupId)!
+        
         enum AltitudeUnit: String, CaseIterable, Identifiable, RawRepresentable {
             case feet
             case meters

@@ -7,7 +7,7 @@
 
 import WidgetKit
 
-struct CompactAltitudeEntry {
+struct CompactAltitudeEntry: Codable {
     let date: Date
     let altitude: Int
 }
