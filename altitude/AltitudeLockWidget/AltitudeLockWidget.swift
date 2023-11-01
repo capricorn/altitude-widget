@@ -21,6 +21,7 @@ struct AltitudeLockWidget: Widget {
     }
 }
 
+@available(iOSApplicationExtension 17.0, *)
 struct AltitudeLockWidget_Previews: PreviewProvider {
     static var previews: some View {
         altitudeEntryView(
@@ -31,6 +32,9 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
                 prevEntry: CompactAltitudeEntry(date: Date() - 60*40, altitude: 600)
             )
         )
+        .containerBackground(for: .widget) {
+            AccessoryWidgetBackground()
+        }
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         .previewDisplayName("Minute only")
         
