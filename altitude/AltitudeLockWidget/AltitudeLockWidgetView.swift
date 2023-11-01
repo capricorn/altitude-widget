@@ -61,14 +61,14 @@ struct altitudeEntryView : View {
         let signPad = (delta == 0) ? "" : " "
         
         // TODO: Use settings measurement
-        return "\(sign)\(signPad)\(abs(delta)) \(unitLabel) in \(prevTime.formatted(.compactWidgetTime))"
+        return "\(sign)\(signPad)\(abs(delta))\(unitLabel) in \(prevTime.formatted(.compactWidgetTime))"
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 4) {
                 Image(systemName: "mountain.2.circle")
-                Text("\(altitude.altitude) \(unitLabel)")
+                Text("\(altitude.altitude)\(unitLabel)")
             }
             
             Group {
