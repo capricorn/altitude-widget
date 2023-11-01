@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SettingsView: View {
     typealias AltitudeUnit = UserDefaults.Settings.AltitudeUnit
@@ -31,7 +32,10 @@ struct SettingsView: View {
                 }
             }
         }
-        Text("Test: \((timeSelection ?? .hour12).label)")
+        .onChange(of: unitSelection) { _ in
+            // TODO: Reference from a single place
+            WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.altitude")
+        }
     }
 }
 
