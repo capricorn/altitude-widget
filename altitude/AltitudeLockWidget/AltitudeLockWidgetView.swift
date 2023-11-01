@@ -35,6 +35,9 @@ struct altitudeEntryView : View {
     @AppStorage(UserDefaults.Settings.TimeNotation.defaultKey) 
     private var defaultTime: UserDefaults.Settings.TimeNotation = .hour12
     
+    @AppStorage<CompactAltitudeEntry?>(UserDefaults.Settings.lastAltitudeReadingKey)
+    private var prevAltitude: CompactAltitudeEntry?
+    
     private var unitLabel: String {
         defaultUnit.compactLabel
     }
@@ -43,10 +46,6 @@ struct altitudeEntryView : View {
     
     private var altitude: CompactAltitudeEntry {
         container.currentEntry
-    }
-    
-    private var prevAltitude: CompactAltitudeEntry? {
-        container.prevEntry
     }
     
     private var altitudeDeltaLabel: String? {
