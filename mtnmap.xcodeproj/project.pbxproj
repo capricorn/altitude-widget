@@ -19,6 +19,8 @@
 		F03413D82AF1AB6C001FC36F /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03413D62AF1AB06001FC36F /* SettingsStorage.swift */; };
 		F04C5AF12A9521090010F3AE /* AltitudeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF02A9521090010F3AE /* AltitudeView.swift */; };
 		F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
+		F0669EAF2AF2FA2500A8303F /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DD32AC22FDA00D66ADD /* TimelineEntry.swift */; };
+		F0669EB22AF2FACC00A8303F /* TimelineEntryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0669EB02AF2FAB300A8303F /* TimelineEntryContainer.swift */; };
 		F0DF2DBA2AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DB92AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition */; };
 		F0DF2DBC2AAF7DEB00D66ADD /* AltitudeRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DBB2AAF7DEB00D66ADD /* AltitudeRangeView.swift */; };
 		F0DF2DBD2AAF7FB000D66ADD /* AltitudeRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DBB2AAF7DEB00D66ADD /* AltitudeRangeView.swift */; };
@@ -109,6 +111,7 @@
 		F04C5AF02A9521090010F3AE /* AltitudeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeView.swift; sourceTree = "<group>"; };
 		F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		F04C5AF62A996C8A0010F3AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F0669EB02AF2FAB300A8303F /* TimelineEntryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineEntryContainer.swift; sourceTree = "<group>"; };
 		F0DF2D992AABB96800D66ADD /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		F0DF2DA42AABB96800D66ADD /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		F0DF2DB92AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AltitudeWidgetIntent.intentdefinition; sourceTree = "<group>"; };
@@ -252,6 +255,7 @@
 				F0DF2DCD2AC22CA500D66ADD /* AltitudeLockWidgetView.swift */,
 				F0DF2DCF2AC22DB500D66ADD /* FormatStyle.swift */,
 				F0DF2DD32AC22FDA00D66ADD /* TimelineEntry.swift */,
+				F0669EB02AF2FAB300A8303F /* TimelineEntryContainer.swift */,
 			);
 			path = AltitudeLockWidget;
 			sourceTree = "<group>";
@@ -503,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0669EAF2AF2FA2500A8303F /* TimelineEntry.swift in Sources */,
 				F023990929BD727900A0CC25 /* mtnmapTests.swift in Sources */,
 				F0E741032AAA389800AD2A72 /* Util.swift in Sources */,
 			);
@@ -530,6 +535,7 @@
 				F0DF2DC12AAF842500D66ADD /* AltitudeRangeViewModel.swift in Sources */,
 				F0DF2DD42AC22FDA00D66ADD /* TimelineEntry.swift in Sources */,
 				F0DF2DC82AC227B200D66ADD /* AltitudeGraphWidget.swift in Sources */,
+				F0669EB22AF2FACC00A8303F /* TimelineEntryContainer.swift in Sources */,
 				F0E740E72A9E94BC00AD2A72 /* AltitudeView.swift in Sources */,
 				F0E740FB2AA7CBB300AD2A72 /* Util.swift in Sources */,
 				F0DF2DCA2AC2298D00D66ADD /* AltitudeLockWidgetProvider.swift in Sources */,

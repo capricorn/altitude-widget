@@ -29,6 +29,8 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
         
         // TODO: UserDefaults extension to make this less painful
         defaults.set(UserDefaults.Settings.AltitudeUnit.meters.rawValue, forKey: UserDefaults.Settings.AltitudeUnit.defaultKey)
+        let lastAltitude = CompactAltitudeEntry(date: Date(), altitude: 4000)
+        defaults.set(lastAltitude.rawValue, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
         
         return defaults
     }()

@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import mtnmap
+@testable import altitudeExtension
 
 final class mtnmapTests: XCTestCase {
 
@@ -18,6 +19,15 @@ final class mtnmapTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testAltitudeCodable() throws {
+        let fixedDate = Date(timeIntervalSince1970: 1698960233)
+        let entry = CompactAltitudeEntry(date: fixedDate, altitude: 1000)
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        let json = try encoder.encode(entry)
+        
+        XCTAssert(json.string == #"{"altitude":1000,"date":"2023-11-02T21:23:53Z"}"#, json.string ?? "n/a")
+    }
     // TODO: Integer solutions? Rounding troubles
     /*
     func testPointRotation() throws {

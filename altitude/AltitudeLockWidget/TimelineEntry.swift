@@ -13,8 +13,13 @@ struct CompactAltitudeEntry: Codable, RawRepresentable {
     let date: Date
     let altitude: Int
     
+    enum CodingKeys: String, CodingKey {
+        case date
+        case altitude
+    }
+    
     var rawValue: RawValue {
-        try! JSONEncoder().encode(self).description
+        try! JSONEncoder().encode(self).string!
     }
     
     init?(rawValue: RawValue) {
@@ -28,11 +33,11 @@ struct CompactAltitudeEntry: Codable, RawRepresentable {
         self.date = date
         self.altitude = altitude
     }
-}
-
-struct AltitudeEntryContainer: TimelineEntry {
-    let date: Date
-    let configuration: AltitudeIntent
-    let currentEntry: CompactAltitudeEntry
-    var prevEntry: CompactAltitudeEntry? = nil
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(self.date.formatted(.iso8601), forKey: .date)
+        try container.encode(self.altitude, forKey: .altitude)
+    }
 }

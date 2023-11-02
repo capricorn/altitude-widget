@@ -61,3 +61,9 @@ extension Double {
         Measurement(value: self, unit: type.self)
     }
 }
+
+extension Data {
+    var string: String? {
+        String(data: self, encoding: .utf8)
+    }
+}
