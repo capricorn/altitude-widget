@@ -56,6 +56,7 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
     
     @EnvironmentObject var gpsStatus: T
     
+    // TODO: Make optional instead
     var locationAvailable: Bool {
         guard let status = gpsStatus.status else {
             return false
@@ -93,6 +94,13 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
         .onChange(of: unitSelection) { _ in
             // TODO: Reference from a single place
             WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.altitude")
+        }
+        .onAppear {
+            if gpsStatus.status != nil, locationAvailable == false {
+                // TODO: Request permissions
+                // TODO: Will this also account for widget permissions?
+                CLLocationManager().requestWhenInUseAuthorization()
+            }
         }
     }
 }
