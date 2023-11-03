@@ -91,7 +91,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
-            value = "com.goatfish.AltitudeGraph"
+            value = "com.goatfish.altitude"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -101,8 +101,8 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "medium"
-            isEnabled = "NO">
+            value = "accessoryRectangular"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
