@@ -34,8 +34,9 @@ struct AltitudeLockWidgetProvider: IntentTimelineProvider {
             let timeline = Timeline(entries: [container], policy: .after(Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!))
             
             prevEntryContainer.entry = entry
+            let rawEntry = try! JSONEncoder().encode(entry).string!
             
-            UserDefaults.Settings.defaults.set(entry, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
+            UserDefaults.Settings.defaults.set(rawEntry, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
             
             completion(timeline)
         }

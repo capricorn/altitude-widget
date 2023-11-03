@@ -40,4 +40,13 @@ struct CompactAltitudeEntry: Codable, RawRepresentable {
         try container.encode(self.date.formatted(.iso8601), forKey: .date)
         try container.encode(self.altitude, forKey: .altitude)
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let iso8601Date = try container.decode(String.self, forKey: .date)
+        self.date = ISO8601DateFormatter().date(from: iso8601Date)!
+        
+        self.altitude = try container.decode(Int.self, forKey: .altitude)
+    }
 }
