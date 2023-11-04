@@ -21,6 +21,12 @@ class LocationServiceStatusDeniedMock: LocationServiceStatusProtocol {
     }
 }
 
+class LocationServiceStatusOkayMock: LocationServiceStatusProtocol {
+    var status: CLAuthorizationStatus? {
+        .authorizedAlways
+    }
+}
+
 class LocationServiceStatus: LocationServiceStatusProtocol {
     private let manager: CLLocationManager
     private let delegate: LocationDelegate!
@@ -65,8 +71,8 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
         return (status == .authorizedAlways || status == .authorizedWhenInUse)
     }
     
-    var body: some View {
-        List {
+    var settingsListView: some View {
+         List {
             // TODO: Possibly drop?
             Section("Settings") {
                 Picker("Units", selection: $unitSelection) {
@@ -90,16 +96,31 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
                     Spacer()
                 }
             }
-        }
-        .onChange(of: unitSelection) { _ in
-            // TODO: Reference from a single place
-            WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.altitude")
-        }
-        .onAppear {
-            if gpsStatus.status != nil, locationAvailable == false {
-                // TODO: Request permissions
-                // TODO: Will this also account for widget permissions?
-                CLLocationManager().requestWhenInUseAuthorization()
+        }       
+    }
+    
+    var body: some View {
+        ZStack {
+            settingsListView
+                .onChange(of: unitSelection) { _ in
+                    // TODO: Reference from a single place
+                    WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.altitude")
+                }
+                .onAppear {
+                    if gpsStatus.status != nil, locationAvailable == false {
+                        // TODO: Request permissions
+                        // TODO: Will this also account for widget permissions?
+                        CLLocationManager().requestWhenInUseAuthorization()
+                    }
+                }
+            VStack {
+                Spacer()
+                Image(systemName: "mountain.2")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.horizontal, 16)
+                    .foregroundColor(.gray)
+                    .opacity(0.10)
             }
         }
     }
@@ -108,5 +129,11 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
 #Preview {
     SettingsView<LocationServiceStatusDeniedMock>()
         .environmentObject(LocationServiceStatusDeniedMock())
+        .defaultAppStorage(.init(suiteName: "settings-preview-defaults")!)
+}
+
+#Preview {
+    SettingsView<LocationServiceStatusOkayMock>()
+        .environmentObject(LocationServiceStatusOkayMock())
         .defaultAppStorage(.init(suiteName: "settings-preview-defaults")!)
 }
