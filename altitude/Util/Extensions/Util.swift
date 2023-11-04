@@ -67,3 +67,9 @@ extension Data {
         String(data: self, encoding: .utf8)
     }
 }
+
+extension TimeInterval {
+    var minutes: TimeInterval {
+        self/60
+    }
+}

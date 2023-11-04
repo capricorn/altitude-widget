@@ -8,6 +8,14 @@
 import Foundation
 
 extension UserDefaults {
+    var lastAltitude: CompactAltitudeEntry? {
+        if let rawDefault = Settings.defaults.string(forKey: Settings.lastAltitudeReadingKey)?.data(using: .utf8) {
+            return try? JSONDecoder().decode(CompactAltitudeEntry.self, from: rawDefault)
+        }
+        
+        return nil
+    }
+    
     enum Settings {
         static let appGroupId = "group.com.goatfish.altitudegroup"
         static let lastAltitudeReadingKey = "last_altitude_reading"
