@@ -17,10 +17,18 @@
 		F03413D52AF19CB3001FC36F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03413D42AF19CB3001FC36F /* SettingsView.swift */; };
 		F03413D72AF1AB06001FC36F /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03413D62AF1AB06001FC36F /* SettingsStorage.swift */; };
 		F03413D82AF1AB6C001FC36F /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03413D62AF1AB06001FC36F /* SettingsStorage.swift */; };
+		F0471CF32AF720B60024F6B8 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DCB2AC22BBE00D66ADD /* GPS.swift */; };
+		F0471CF42AF721240024F6B8 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
+		F0471CF62AF722220024F6B8 /* AltitudeLockWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DC92AC2298D00D66ADD /* AltitudeLockWidgetProvider.swift */; };
 		F04C5AF12A9521090010F3AE /* AltitudeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF02A9521090010F3AE /* AltitudeView.swift */; };
 		F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 		F0669EAF2AF2FA2500A8303F /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DD32AC22FDA00D66ADD /* TimelineEntry.swift */; };
 		F0669EB22AF2FACC00A8303F /* TimelineEntryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0669EB02AF2FAB300A8303F /* TimelineEntryContainer.swift */; };
+		F09009032AF72411000B71CB /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
+		F09009052AF72430000B71CB /* TimelineEntryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0669EB02AF2FAB300A8303F /* TimelineEntryContainer.swift */; };
+		F09009062AF72441000B71CB /* Altimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DD12AC22F1400D66ADD /* Altimeter.swift */; };
+		F09009072AF72474000B71CB /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03413D62AF1AB06001FC36F /* SettingsStorage.swift */; };
+		F09009082AF724FB000B71CB /* AltitudeWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DB92AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition */; };
 		F09182052AF5FCD000B6FF36 /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DD32AC22FDA00D66ADD /* TimelineEntry.swift */; };
 		F0DF2DBA2AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DB92AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition */; };
 		F0DF2DBC2AAF7DEB00D66ADD /* AltitudeRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DBB2AAF7DEB00D66ADD /* AltitudeRangeView.swift */; };
@@ -509,9 +517,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F09009052AF72430000B71CB /* TimelineEntryContainer.swift in Sources */,
+				F0471CF62AF722220024F6B8 /* AltitudeLockWidgetProvider.swift in Sources */,
 				F0669EAF2AF2FA2500A8303F /* TimelineEntry.swift in Sources */,
 				F023990929BD727900A0CC25 /* mtnmapTests.swift in Sources */,
+				F0471CF32AF720B60024F6B8 /* GPS.swift in Sources */,
+				F09009062AF72441000B71CB /* Altimeter.swift in Sources */,
+				F09009072AF72474000B71CB /* SettingsStorage.swift in Sources */,
 				F0E741032AAA389800AD2A72 /* Util.swift in Sources */,
+				F0471CF42AF721240024F6B8 /* LocationDelegate.swift in Sources */,
+				F09009082AF724FB000B71CB /* AltitudeWidgetIntent.intentdefinition in Sources */,
+				F09009032AF72411000B71CB /* altitude.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

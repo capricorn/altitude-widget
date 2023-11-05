@@ -18,7 +18,7 @@ struct AltitudeLockWidget: Widget {
         }
         .configurationDisplayName("Recent Altitude")
         .description("A recent altitude reading indicator.")
-        .supportedFamilies([.accessoryRectangular, .systemSmall])
+        .supportedFamilies([.accessoryRectangular])
     }
 }
 

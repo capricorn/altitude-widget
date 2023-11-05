@@ -69,7 +69,23 @@ extension Data {
 }
 
 extension TimeInterval {
-    var minutes: TimeInterval {
+    var min: TimeInterval {
         self/60
+    }
+}
+
+extension Int {
+    var min: Measurement<UnitDuration> {
+        Measurement(value: Double(self), unit: .minutes)
+    }
+}
+
+extension Date {
+    static func - (endDate: Date, startDate: Date) -> TimeInterval {
+        endDate.timeIntervalSince(startDate)
+    }
+    
+    static func + (_ date: Date, _ interval: Measurement<UnitDuration>) -> Date {
+        date.addingTimeInterval(interval.converted(to: .seconds).value)
     }
 }

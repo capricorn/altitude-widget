@@ -6,6 +6,8 @@
 //
 
 import XCTest
+import CoreLocation
+import WidgetKit
 @testable import mtnmap
 @testable import altitudeExtension
 
@@ -28,6 +30,76 @@ final class mtnmapTests: XCTestCase {
         
         XCTAssert(json.string == #"{"altitude":1000,"date":"2023-11-02T21:23:53Z"}"#, json.string ?? "n/a")
     }
+    
+    func testWidgetProviderCache() throws {
+        class MockGPS: GPS {
+            private var returnImmediately = false
+            
+            override func locationFuture(_ callback: @escaping (CLLocation) -> Void) {
+                let location: CLLocation = CLLocation(
+                    coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                    altitude: 500.0,
+                    horizontalAccuracy: 0.0,
+                    verticalAccuracy: 0.0,
+                    timestamp: Date()
+                )
+                
+                if returnImmediately {
+                    let location = CLLocation(
+                        coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                        altitude: 1000.0,
+                        horizontalAccuracy: 0.0,
+                        verticalAccuracy: 0.0,
+                        timestamp: Date()
+                    )
+                    callback(location)
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+                        callback(location)
+                    }
+                    
+                    returnImmediately = true
+                }
+            }
+        }
+        
+        let mockGPS = MockGPS()
+        // TODO: Allow injection of cache for tests
+        let provider = AltitudeLockWidgetProvider<MockGPS>(gps: mockGPS)
+        let expectation1 = XCTestExpectation(description: "Timeline refresh 1 request completed.")
+        let expectation2 = XCTestExpectation(description: "Timeline refresh 2 request completed.")
+        let expectation3 = XCTestExpectation(description: "Timeline refresh 3 request completed.")
+        
+        // TODO: Verify cache values
+        // TODO: Attempt to verify cache timestamps
+        // TODO: **Verify cache hit within 5 minutes vs outside of that**
+        
+        print("Updating timeline: \(Date())")
+        provider.updateTimeline { container in
+            print("Fulfilled e1: \(Date())")
+            expectation1.fulfill()
+            XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "\(provider.cache.currentAltitude?.altitude)")
+            XCTAssert(provider.cache.lastAltitude == nil)
+        }
+        
+        // Below verifies that the cache is hit even with multiple timeline calls
+        provider.updateTimeline { container in
+            print("Fulfilled e2: \(Date())")
+            expectation2.fulfill()
+            XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "\(provider.cache.currentAltitude?.altitude)")
+            XCTAssert(provider.cache.lastAltitude == nil)
+        }
+        
+        provider.updateTimeline { container in
+            print("Fulfilled e3: \(Date())")
+            expectation3.fulfill()
+            XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "\(provider.cache.currentAltitude?.altitude)")
+            XCTAssert(provider.cache.lastAltitude == nil)
+        }
+        
+        wait(for: [expectation1, expectation2, expectation3], timeout: 5)
+    }
+    
     // TODO: Integer solutions? Rounding troubles
     /*
     func testPointRotation() throws {
