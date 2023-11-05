@@ -7,6 +7,8 @@
 
 import WidgetKit
 
+private let queue = DispatchQueue(label: "altitude-widget")
+
 struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     class Cache {
         var lastRefresh: Date? = nil
@@ -15,7 +17,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     }
     
     let cache = Cache()
-    private let queue = DispatchQueue(label: "altitude-widget")
+    //private let queue = DispatchQueue(label: "altitude-widget")
     private let gps: T
     private let group = DispatchGroup()
     
