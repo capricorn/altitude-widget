@@ -29,7 +29,9 @@ private extension FormatStyle where Self == AltitudeLockWidget.CompactWidgetTime
 }
 
 struct altitudeEntryView : View {
-    @AppStorage(UserDefaults.Settings.AltitudeUnit.defaultKey) 
+    @Environment(\.widgetFamily) var widgetFamily
+    
+    @AppStorage(UserDefaults.Settings.AltitudeUnit.defaultKey)
     private var defaultUnit: UserDefaults.Settings.AltitudeUnit = .feet
     
     @AppStorage(UserDefaults.Settings.TimeNotation.defaultKey) 
@@ -76,24 +78,28 @@ struct altitudeEntryView : View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(spacing: 4) {
-                Image(systemName: "mountain.2.circle")
-                Text("\(altitude.altitude)\(accuracyLabel)\(unitLabel)")
-            }
-            
-            Group {
-                if let altitudeDeltaLabel {
-                    Text(altitudeDeltaLabel)
+        if widgetFamily == .accessoryInline {
+            Text("\(altitude.altitude)\(accuracyLabel)\(unitLabel)")
+        } else {
+            VStack(alignment: .leading) {
+                HStack(spacing: 4) {
+                    Image(systemName: "mountain.2.circle")
+                    Text("\(altitude.altitude)\(accuracyLabel)\(unitLabel)")
                 }
                 
-                // TODO: Use 'on' for entries occurring >24 hr ago
-                (Text("at ") + Text(altitude.date.formatted(.compactWidgetDate)))
-                    .foregroundColor(Color.gray)
+                Group {
+                    if let altitudeDeltaLabel {
+                        Text(altitudeDeltaLabel)
+                    }
+                    
+                    // TODO: Use 'on' for entries occurring >24 hr ago
+                    (Text("at ") + Text(altitude.date.formatted(.compactWidgetDate)))
+                        .foregroundColor(Color.gray)
+                }
+                .font(.caption)
+                .fontWeight(.light)
+                .truncationMode(.tail)
             }
-            .font(.caption)
-            .fontWeight(.light)
-            .truncationMode(.tail)
         }
     }
 }

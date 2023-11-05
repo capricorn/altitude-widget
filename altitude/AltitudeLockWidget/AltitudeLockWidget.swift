@@ -18,7 +18,7 @@ struct AltitudeLockWidget: Widget {
         }
         .configurationDisplayName("Recent Altitude")
         .description("A recent altitude reading indicator.")
-        .supportedFamilies([.accessoryRectangular])
+        .supportedFamilies([.accessoryRectangular, .accessoryInline])
     }
 }
 
@@ -143,5 +143,20 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
         }
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         .previewDisplayName("Display accuracy")
+        
+        altitudeEntryView(
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 8132),
+                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*36, altitude: 800)
+            )
+        )
+        .defaultAppStorage(displayAccuracyDefaults)
+        .containerBackground(for: .widget) {
+            AccessoryWidgetBackground()
+        }
+        .previewContext(WidgetPreviewContext(family: .accessoryInline))
+        .previewDisplayName("Display inline")
     }
 }
