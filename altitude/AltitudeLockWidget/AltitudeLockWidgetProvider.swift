@@ -32,16 +32,17 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
         completion(entry)
     }
     
-    func updateTimeline(completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
+    func updateTimeline(currentDate: Date = Date(), defaults: UserDefaults = UserDefaults.Settings.defaults,  completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
         queue.async {
-            group.wait()
-            group.enter()
+            //group.enter()
             
-            let currentDate = Date()
+            var currentDate = currentDate
             
-            if let currentAltitude = cache.currentAltitude, (currentDate - currentAltitude.date).min < 5 {
+            // TODO: Replace w/ equivalent user defaults calls
+            
+            if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < 5 {
                 let entry = currentAltitude
-                let prevEntry = cache.lastAltitude
+                let prevEntry = defaults.lastAltitude
                 
                 let container = AltitudeEntryContainer(
                     date: currentDate,
@@ -56,19 +57,20 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                 )
                 
                 completion(timeline)
-                group.leave()
+                //group.leave()
                 return
             } else {
+                group.enter()
                 gps.locationFuture { location in
-                    if let recentAltitude = cache.currentAltitude {
-                        cache.lastAltitude = recentAltitude
+                    if let recentAltitude = defaults.currentAltitude {
+                        defaults.lastAltitude = recentAltitude
                     }
                     
                     let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
                     let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
-                    let prevEntry = cache.lastAltitude
+                    let prevEntry = defaults.lastAltitude
                     
-                    cache.currentAltitude = entry
+                    defaults.currentAltitude = entry
                     
                     let container = AltitudeEntryContainer(
                         date: currentDate,
@@ -85,6 +87,8 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                     completion(timeline)
                     group.leave()
                 }
+                
+                group.wait()
             }
         }
     }

@@ -8,17 +8,39 @@
 import Foundation
 
 extension UserDefaults {
+    
+    // TODO: Add currentAltitude to user defaults
+    
     var lastAltitude: CompactAltitudeEntry? {
-        if let rawDefault = Settings.defaults.string(forKey: Settings.lastAltitudeReadingKey)?.data(using: .utf8) {
-            return try? JSONDecoder().decode(CompactAltitudeEntry.self, from: rawDefault)
+        get {
+            if let rawDefault = Settings.defaults.string(forKey: Settings.lastAltitudeReadingKey)?.data(using: .utf8) {
+                return try? JSONDecoder().decode(CompactAltitudeEntry.self, from: rawDefault)
+            }
+            
+            return nil
         }
-        
-        return nil
+        set {
+            Settings.defaults.set(newValue?.rawValue, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
+        }
+    }
+    
+    var currentAltitude: CompactAltitudeEntry? {
+        get {
+            if let rawDefault = Settings.defaults.string(forKey: Settings.currentAltitudeReadingKey)?.data(using: .utf8) {
+                return try? JSONDecoder().decode(CompactAltitudeEntry.self, from: rawDefault)
+            }
+            
+            return nil
+        }
+        set {
+            Settings.defaults.set(newValue?.rawValue, forKey: UserDefaults.Settings.currentAltitudeReadingKey)
+        }
     }
     
     enum Settings {
         static let appGroupId = "group.com.goatfish.altitudegroup"
         static let lastAltitudeReadingKey = "last_altitude_reading"
+        static let currentAltitudeReadingKey = "current_altitude_reading"
         
         static let defaults = UserDefaults(suiteName: appGroupId)!
         
