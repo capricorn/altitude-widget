@@ -35,6 +35,8 @@ struct altitudeEntryView : View {
     @AppStorage(UserDefaults.Settings.TimeNotation.defaultKey) 
     private var defaultTime: UserDefaults.Settings.TimeNotation = .hour12
     
+    @AppStorage(UserDefaults.Settings.displayAccuracyKey)
+    private var displayAccuracy: Bool = false
     /*
     @AppStorage<CompactAltitudeEntry?>(UserDefaults.Settings.lastAltitudeReadingKey)
     private var prevAltitude: CompactAltitudeEntry?
@@ -68,11 +70,16 @@ struct altitudeEntryView : View {
         return "\(sign)\(signPad)\(abs(delta))\(unitLabel) in \(prevTime.formatted(.compactWidgetTime))"
     }
     
+    var accuracyLabel: String {
+        // TODO: Reference actual recorded accuracy.
+        (displayAccuracy) ? "±0" : ""
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 4) {
                 Image(systemName: "mountain.2.circle")
-                Text("\(altitude.altitude)\(unitLabel)")
+                Text("\(altitude.altitude)\(accuracyLabel)\(unitLabel)")
             }
             
             Group {

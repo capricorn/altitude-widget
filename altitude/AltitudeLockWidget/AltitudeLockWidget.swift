@@ -44,6 +44,15 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
         return defaults
     }()
     
+    static let displayAccuracyDefaults: UserDefaults = {
+        let defaults = UserDefaults(suiteName: "altitude-accuracy")!
+        
+        //defaults.displayAccuracy = true
+        defaults.set(true, forKey: UserDefaults.Settings.displayAccuracyKey)
+        
+        return defaults
+    }()
+    
     static var previews: some View {
         altitudeEntryView(
             container: AltitudeEntryContainer(
@@ -119,5 +128,20 @@ struct AltitudeLockWidget_Previews: PreviewProvider {
         }
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         .previewDisplayName("No alt delta")
+        
+        altitudeEntryView(
+            container: AltitudeEntryContainer(
+                date: Date(),
+                configuration: AltitudeIntent(),
+                currentEntry: CompactAltitudeEntry(date: Date(), altitude: 800),
+                prevEntry: CompactAltitudeEntry(date: Date() - 60*60*36, altitude: 800)
+            )
+        )
+        .defaultAppStorage(displayAccuracyDefaults)
+        .containerBackground(for: .widget) {
+            AccessoryWidgetBackground()
+        }
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        .previewDisplayName("Display accuracy")
     }
 }

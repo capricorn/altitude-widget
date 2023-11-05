@@ -59,6 +59,7 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
 
     @AppStorage(AltitudeUnit.defaultKey) private var unitSelection: AltitudeUnit = .feet
     @AppStorage(TimeNotation.defaultKey) private var timeSelection: TimeNotation = .hour12
+    @AppStorage(UserDefaults.Settings.displayAccuracyKey) private var displayAccuracy = false
     
     @EnvironmentObject var gpsStatus: T
     
@@ -85,6 +86,10 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
                     ForEach(TimeNotation.allCases) {
                         Text($0.label).tag($0)
                     }
+                }
+                
+                Toggle(isOn: $displayAccuracy) {
+                    Text("Display Accuracy")
                 }
             }
             

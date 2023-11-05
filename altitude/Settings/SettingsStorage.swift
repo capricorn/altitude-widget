@@ -37,10 +37,20 @@ extension UserDefaults {
         }
     }
     
+    var displayAccuracy: Bool {
+        get {
+            Settings.defaults.bool(forKey: Settings.displayAccuracyKey)
+        }
+        set {
+            Settings.defaults.set(newValue, forKey: Settings.displayAccuracyKey)
+        }
+    }
+    
     enum Settings {
         static let appGroupId = "group.com.goatfish.altitudegroup"
         static let lastAltitudeReadingKey = "last_altitude_reading"
         static let currentAltitudeReadingKey = "current_altitude_reading"
+        static let displayAccuracyKey = "display_accuracy"
         
         static let defaults = UserDefaults(suiteName: appGroupId)!
         
