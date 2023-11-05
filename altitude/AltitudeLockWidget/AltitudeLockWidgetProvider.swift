@@ -45,7 +45,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
             //let entry: CompactAltitudeEntry
             //let prevEntry: CompactAltitudeEntry?
             
-            if let currentAltitude = cache.currentAltitude {
+            if let currentAltitude = cache.currentAltitude, (currentDate - currentAltitude.date).min < 5 {
                 let entry = currentAltitude
                 let prevEntry = cache.lastAltitude
                 
