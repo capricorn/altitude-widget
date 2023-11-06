@@ -8,8 +8,14 @@
 import Foundation
 
 extension UserDefaults {
-    
-    // TODO: Add currentAltitude to user defaults
+    var currentAccuracy: Double? {
+        get {
+            return Settings.defaults.double(forKey: Settings.currentAltitudeAccuracyKey)
+        }
+        set {
+            Settings.defaults.set(newValue, forKey: UserDefaults.Settings.currentAltitudeAccuracyKey)
+        }
+    }
     
     var lastAltitude: CompactAltitudeEntry? {
         get {
@@ -51,6 +57,7 @@ extension UserDefaults {
         static let lastAltitudeReadingKey = "last_altitude_reading"
         static let currentAltitudeReadingKey = "current_altitude_reading"
         static let displayAccuracyKey = "display_accuracy"
+        static let currentAltitudeAccuracyKey = "current_altitude_std_dev"
         
         static let defaults = UserDefaults(suiteName: appGroupId)!
         

@@ -39,10 +39,10 @@ struct altitudeEntryView : View {
     
     @AppStorage(UserDefaults.Settings.displayAccuracyKey)
     private var displayAccuracy: Bool = false
-    /*
-    @AppStorage<CompactAltitudeEntry?>(UserDefaults.Settings.lastAltitudeReadingKey)
-    private var prevAltitude: CompactAltitudeEntry?
-     */
+    
+    @AppStorage(UserDefaults.Settings.displayAccuracyKey)
+    private var currentAccuracy: Double?
+    
     private var prevAltitude: CompactAltitudeEntry? {
         container.prevEntry
     }
@@ -73,8 +73,11 @@ struct altitudeEntryView : View {
     }
     
     var accuracyLabel: String {
-        // TODO: Reference actual recorded accuracy.
-        (displayAccuracy) ? "±0" : ""
+        if let currentAccuracy, displayAccuracy {
+            return "±\(Int(currentAccuracy))"
+        }
+        
+        return ""
     }
     
     var body: some View {
