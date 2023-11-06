@@ -74,7 +74,8 @@ struct altitudeEntryView : View {
     
     var accuracyLabel: String {
         if let currentAccuracy, displayAccuracy {
-            return "±\(Int(currentAccuracy))"
+            // 2 std dev (~95%)
+            return "±\(Int(currentAccuracy*2.0))"
         }
         
         return ""
