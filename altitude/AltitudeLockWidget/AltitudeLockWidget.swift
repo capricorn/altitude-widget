@@ -9,6 +9,9 @@ import WidgetKit
 import SwiftUI
 
 struct AltitudeLockWidget: Widget {
+    static let queue = DispatchQueue(label: "altitude-widget")
+    static let group = DispatchGroup()
+    
     let kind: String = "com.goatfish.altitude"
 
     var body: some WidgetConfiguration {

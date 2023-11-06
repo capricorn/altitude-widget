@@ -7,8 +7,6 @@
 
 import WidgetKit
 
-private let queue = DispatchQueue(label: "altitude-widget")
-
 struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     class Cache {
         var lastRefresh: Date? = nil
@@ -17,9 +15,10 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     }
     
     let cache = Cache()
-    //private let queue = DispatchQueue(label: "altitude-widget")
     private let gps: T
-    private let group = DispatchGroup()
+    
+    let queue = AltitudeLockWidget.queue
+    let group = AltitudeLockWidget.group
     
     init(gps: T = GPS()) {
         self.gps = gps
@@ -35,14 +34,14 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     }
     
     func updateTimeline(currentDate: Date = Date(), defaults: UserDefaults = UserDefaults.Settings.defaults,  completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
-        queue.async {
+        queue.async(group: group) {
             //group.enter()
             
             var currentDate = currentDate
             
             // TODO: Replace w/ equivalent user defaults calls
             
-            if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < 5 {
+            if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < 1 {
                 let entry = currentAltitude
                 let prevEntry = defaults.lastAltitude
                 
