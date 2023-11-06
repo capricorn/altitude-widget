@@ -53,18 +53,21 @@ struct altitudeEntryView : View {
     
     var container: AltitudeEntryContainer
     
-    private var altitude: CompactAltitudeEntry? {
+    private var altitude: CompactAltitudeEntry {
         container.currentEntry
     }
     
     private var altitudeDeltaLabel: String? {
-        guard let prevAltitude, let altitude else {
+        guard let prevReading = prevAltitude,
+              let prevAltitude = prevAltitude?.altitude,
+              let currentAltitude = altitude.altitude
+        else {
             return nil
         }
         
-        let delta = altitude.altitude - prevAltitude.altitude
+        let delta = currentAltitude - prevAltitude
         let sign = delta.signLabel
-        let prevTime = altitude.date.timeIntervalSince1970 - prevAltitude.date.timeIntervalSince1970
+        let prevTime = altitude.date.timeIntervalSince1970 - prevReading.date.timeIntervalSince1970
         // If delta is zero, no sign is present; ergo, no padding.
         let signPad = (delta == 0) ? "" : " "
         
@@ -82,26 +85,22 @@ struct altitudeEntryView : View {
     }
     
     private var inlineAltitudeLabel: String {
-        guard let altitude else {
+        guard let altitude = altitude.altitude else {
             return "--"
         }
         
-        return "\(altitude.altitude)\(accuracyLabel)\(unitLabel)"
+        return "\(altitude)\(accuracyLabel)\(unitLabel)"
     }
     
     private var rectangularAltitudeLabel: String {
-        guard let altitude else {
+        guard let altitude = altitude.altitude else {
             return "Location unknown."
         }
         
-        return "\(altitude.altitude)\(accuracyLabel)\(unitLabel)"
+        return "\(altitude)\(accuracyLabel)\(unitLabel)"
     }
     
     private var lastRefreshLabel: String? {
-        guard let altitude else {
-            return nil
-        }
-        
         return "at \(altitude.date.formatted(.compactWidgetDate))"
     }
     

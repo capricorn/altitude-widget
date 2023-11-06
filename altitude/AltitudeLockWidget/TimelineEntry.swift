@@ -11,7 +11,7 @@ struct CompactAltitudeEntry: Codable, RawRepresentable {
     typealias RawValue = String
     
     let date: Date
-    let altitude: Int
+    let altitude: Int?
     
     enum CodingKeys: String, CodingKey {
         case date
@@ -29,7 +29,7 @@ struct CompactAltitudeEntry: Codable, RawRepresentable {
         self.altitude = entry.altitude
     }
     
-    init(date: Date, altitude: Int) {
+    init(date: Date, altitude: Int?) {
         self.date = date
         self.altitude = altitude
     }

@@ -62,7 +62,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                 // Problem: need to wait synchronously on this.
                 DispatchQueue.global().async(group: group) {
                     gps.locationFuture { (result: Result<CLLocation, GPS.AuthorizationError>) in
-                        var entry: CompactAltitudeEntry? = nil
+                        var entry: CompactAltitudeEntry
                         var prevEntry: CompactAltitudeEntry? = nil
                         
                         // TODO: switch on result, handle failure.
@@ -73,15 +73,18 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                             }
                             
                             let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
-                            let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
-                            let prevEntry = defaults.lastAltitude
+                            entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
+                            prevEntry = defaults.lastAltitude
                             
                             defaults.currentAltitude = entry
                             defaults.currentAccuracy = location.verticalAccuracy
                         case .failure(_):
-                            defaults.currentAltitude = nil
-                            defaults.lastAltitude = nil
+                            defaults.lastAltitude = defaults.currentAltitude
                             defaults.currentAccuracy = nil
+                            defaults.currentAltitude = CompactAltitudeEntry(date: currentDate, altitude: nil)
+                            
+                            entry = defaults.currentAltitude!
+                            prevEntry = defaults.lastAltitude
                         }
                                                 
                         let container = AltitudeEntryContainer(
