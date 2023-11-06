@@ -36,15 +36,11 @@ class LocationFutureDelegate: NSObject, CLLocationManagerDelegate {
     var callback: (CLLocation) -> Void = { _ in }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let queue = DispatchQueue(label: "altitude-widget")
-        // TODO: Does this matter?
-        queue.async {
-            if let lastLocation = locations.last {
-                //self.continuation.resume(returning: lastLocation)
-                manager.stopUpdatingLocation()
-                self.callback(lastLocation)
-                //self.promise(.success(lastLocation))
-            }
+        if let lastLocation = locations.last {
+            //self.continuation.resume(returning: lastLocation)
+            manager.stopUpdatingLocation()
+            self.callback(lastLocation)
+            //self.promise(.success(lastLocation))
         }
     }
     

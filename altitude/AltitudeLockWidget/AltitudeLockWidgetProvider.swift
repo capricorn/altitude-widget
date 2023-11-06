@@ -34,7 +34,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     }
     
     func updateTimeline(currentDate: Date = Date(), defaults: UserDefaults = UserDefaults.Settings.defaults,  completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
-        queue.async(group: group) {
+        queue.async {
             var currentDate = currentDate
             
             // TODO: Replace w/ equivalent user defaults calls
@@ -58,34 +58,37 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                 completion(timeline)
                 return
             } else {
-                group.enter()
                 // Problem: need to wait synchronously on this.
-                gps.locationFuture { location in
-                    if let recentAltitude = defaults.currentAltitude {
-                        defaults.lastAltitude = recentAltitude
+                DispatchQueue.global().async(group: group) {
+                    gps.locationFuture { location in
+                        if let recentAltitude = defaults.currentAltitude {
+                            defaults.lastAltitude = recentAltitude
+                        }
+                        
+                        let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
+                        let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
+                        let prevEntry = defaults.lastAltitude
+                        
+                        defaults.currentAltitude = entry
+                        
+                        let container = AltitudeEntryContainer(
+                            date: currentDate,
+                            configuration: AltitudeIntent(),
+                            currentEntry: entry,
+                            prevEntry: prevEntry
+                        )
+                        
+                        let timeline = Timeline(
+                            entries: [container],
+                            policy: .after(currentDate + 15.min)
+                        )
+                        
+                        completion(timeline)
+                        group.leave()
                     }
-                    
-                    let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
-                    let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
-                    let prevEntry = defaults.lastAltitude
-                    
-                    defaults.currentAltitude = entry
-                    
-                    let container = AltitudeEntryContainer(
-                        date: currentDate,
-                        configuration: AltitudeIntent(),
-                        currentEntry: entry,
-                        prevEntry: prevEntry
-                    )
-                    
-                    let timeline = Timeline(
-                        entries: [container],
-                        policy: .after(currentDate + 15.min)
-                    )
-                    
-                    completion(timeline)
-                    group.leave()
                 }
+                
+                group.wait()
                 return
             }
         }
