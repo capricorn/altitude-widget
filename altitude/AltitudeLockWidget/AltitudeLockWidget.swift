@@ -11,6 +11,7 @@ import SwiftUI
 struct AltitudeLockWidget: Widget {
     static let queue = DispatchQueue(label: "altitude-widget")
     static let group = DispatchGroup()
+    static let cacheExpirationMin = 5.0
     
     let kind: String = "com.goatfish.altitude"
 

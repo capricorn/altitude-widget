@@ -39,7 +39,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
             
             // TODO: Replace w/ equivalent user defaults calls
             
-            if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < 1 {
+            if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < AltitudeLockWidget.cacheExpirationMin {
                 let entry = currentAltitude
                 let prevEntry = defaults.lastAltitude
                 
