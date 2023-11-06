@@ -32,20 +32,18 @@ class LocationDelegate: NSObject, CLLocationManagerDelegate {
 }
 
 class LocationFutureDelegate: NSObject, CLLocationManagerDelegate {
-    //var promise: Future<CLLocation, Never>.Promise!
-    var callback: (CLLocation) -> Void = { _ in }
+    var callback: ((Result<CLLocation, GPS.AuthorizationError>) -> Void)?
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lastLocation = locations.last {
-            //self.continuation.resume(returning: lastLocation)
             manager.stopUpdatingLocation()
-            self.callback(lastLocation)
-            //self.promise(.success(lastLocation))
+            self.callback?(.success(lastLocation))
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager failed: \(error.localizedDescription)")
+        self.callback?(.failure(GPS.AuthorizationError()))
     }
 }
 

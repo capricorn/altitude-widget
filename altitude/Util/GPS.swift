@@ -18,28 +18,18 @@ class GPS {
     
     var callbackDelegate: LocationFutureDelegate!
     
+    struct AuthorizationError: Error {}
+    
     init() {}
     
-    func locationFuture(_ callback: @escaping (CLLocation)->Void) {
-        //let loc = Future() { promise in
-        //let manager = CLLocationManager()
-        //let continuationDelegate = LocationFutureDelegate()
+    func locationFuture(_ callback: @escaping (Result<CLLocation, AuthorizationError>)->Void) {
         callbackDelegate = LocationFutureDelegate()
         
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        
         locationManager.delegate = callbackDelegate
-        
-        //continuationDelegate.promise = promise
         callbackDelegate.callback = callback
-        locationManager.startUpdatingLocation()
-            
-            //manager.stopUpdatingLocation()
-        //}
         
-        // TODO: 'Just' for a one-shot publisher?
-        //return loc
-        //return Just(loc)
+        locationManager.startUpdatingLocation()
     }
     
     var location: CLLocation {

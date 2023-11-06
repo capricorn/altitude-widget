@@ -11,6 +11,6 @@ import WidgetKit
 struct AltitudeEntryContainer: TimelineEntry {
     let date: Date
     let configuration: AltitudeIntent
-    let currentEntry: CompactAltitudeEntry
+    let currentEntry: CompactAltitudeEntry?
     var prevEntry: CompactAltitudeEntry? = nil
 }

@@ -53,12 +53,12 @@ struct altitudeEntryView : View {
     
     var container: AltitudeEntryContainer
     
-    private var altitude: CompactAltitudeEntry {
+    private var altitude: CompactAltitudeEntry? {
         container.currentEntry
     }
     
     private var altitudeDeltaLabel: String? {
-        guard let prevAltitude else {
+        guard let prevAltitude, let altitude else {
             return nil
         }
         
@@ -81,14 +81,38 @@ struct altitudeEntryView : View {
         return ""
     }
     
+    private var inlineAltitudeLabel: String {
+        guard let altitude else {
+            return "--"
+        }
+        
+        return "\(altitude.altitude)\(accuracyLabel)\(unitLabel)"
+    }
+    
+    private var rectangularAltitudeLabel: String {
+        guard let altitude else {
+            return "Location unknown."
+        }
+        
+        return "\(altitude.altitude)\(accuracyLabel)\(unitLabel)"
+    }
+    
+    private var lastRefreshLabel: String? {
+        guard let altitude else {
+            return nil
+        }
+        
+        return "at \(altitude.date.formatted(.compactWidgetDate))"
+    }
+    
     var body: some View {
         if widgetFamily == .accessoryInline {
-            Text("\(altitude.altitude)\(accuracyLabel)\(unitLabel)")
+            Text(inlineAltitudeLabel)
         } else {
             VStack(alignment: .leading) {
                 HStack(spacing: 4) {
                     Image(systemName: "mountain.2.circle")
-                    Text("\(altitude.altitude)\(accuracyLabel)\(unitLabel)")
+                    Text(rectangularAltitudeLabel)
                 }
                 
                 Group {
@@ -97,8 +121,10 @@ struct altitudeEntryView : View {
                     }
                     
                     // TODO: Use 'on' for entries occurring >24 hr ago
-                    (Text("at ") + Text(altitude.date.formatted(.compactWidgetDate)))
-                        .foregroundColor(Color.gray)
+                    if let lastRefreshLabel {
+                        Text(lastRefreshLabel)
+                            .foregroundColor(Color.gray)
+                    }
                 }
                 .font(.caption)
                 .fontWeight(.light)

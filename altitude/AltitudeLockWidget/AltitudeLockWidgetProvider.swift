@@ -6,6 +6,7 @@
 //
 
 import WidgetKit
+import CoreLocation
 
 struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     class Cache {
@@ -60,18 +61,29 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
             } else {
                 // Problem: need to wait synchronously on this.
                 DispatchQueue.global().async(group: group) {
-                    gps.locationFuture { location in
-                        if let recentAltitude = defaults.currentAltitude {
-                            defaults.lastAltitude = recentAltitude
+                    gps.locationFuture { (result: Result<CLLocation, GPS.AuthorizationError>) in
+                        var entry: CompactAltitudeEntry? = nil
+                        var prevEntry: CompactAltitudeEntry? = nil
+                        
+                        // TODO: switch on result, handle failure.
+                        switch result {
+                        case .success(let location):
+                            if let recentAltitude = defaults.currentAltitude {
+                                defaults.lastAltitude = recentAltitude
+                            }
+                            
+                            let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
+                            let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
+                            let prevEntry = defaults.lastAltitude
+                            
+                            defaults.currentAltitude = entry
+                            defaults.currentAccuracy = location.verticalAccuracy
+                        case .failure(_):
+                            defaults.currentAltitude = nil
+                            defaults.lastAltitude = nil
+                            defaults.currentAccuracy = nil
                         }
-                        
-                        let altitudeFeet = Int(location.mAltitude.converted(to: .feet).value)
-                        let entry = CompactAltitudeEntry(date: currentDate, altitude: altitudeFeet)
-                        let prevEntry = defaults.lastAltitude
-                        
-                        defaults.currentAltitude = entry
-                        defaults.currentAccuracy = location.verticalAccuracy
-                        
+                                                
                         let container = AltitudeEntryContainer(
                             date: currentDate,
                             configuration: AltitudeIntent(),

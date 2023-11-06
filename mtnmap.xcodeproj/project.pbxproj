@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0132DAC2AF99E99001A590C /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DCB2AC22BBE00D66ADD /* GPS.swift */; };
 		F02398F829BD727800A0CC25 /* mtnmapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02398F729BD727800A0CC25 /* mtnmapApp.swift */; };
 		F02398FA29BD727800A0CC25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02398F929BD727800A0CC25 /* ContentView.swift */; };
 		F02398FC29BD727900A0CC25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02398FB29BD727900A0CC25 /* Assets.xcassets */; };
@@ -510,6 +511,7 @@
 				F09182052AF5FCD000B6FF36 /* TimelineEntry.swift in Sources */,
 				F0DF2DBD2AAF7FB000D66ADD /* AltitudeRangeView.swift in Sources */,
 				F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */,
+				F0132DAC2AF99E99001A590C /* GPS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
