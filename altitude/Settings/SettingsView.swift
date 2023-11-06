@@ -58,7 +58,6 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
     typealias TimeNotation = UserDefaults.Settings.TimeNotation
 
     @AppStorage(AltitudeUnit.defaultKey) private var unitSelection: AltitudeUnit = .feet
-    @AppStorage(TimeNotation.defaultKey) private var timeSelection: TimeNotation = .hour12
     @AppStorage(UserDefaults.Settings.displayAccuracyKey) private var displayAccuracy = false
     
     @EnvironmentObject var gpsStatus: T
@@ -78,12 +77,6 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
             Section("Settings") {
                 Picker("Units", selection: $unitSelection) {
                     ForEach(AltitudeUnit.allCases) {
-                        Text($0.label).tag($0)
-                    }
-                }
-                
-                Picker("Clock", selection: $timeSelection) {
-                    ForEach(TimeNotation.allCases) {
                         Text($0.label).tag($0)
                     }
                 }
