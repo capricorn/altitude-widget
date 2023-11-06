@@ -101,7 +101,9 @@ struct SettingsView<T: LocationServiceStatusProtocol>: View {
         ZStack {
             settingsListView
                 .onChange(of: unitSelection) { _ in
-                    // TODO: Reference from a single place
+                    WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.altitude")
+                }
+                .onChange(of: displayAccuracy) { _ in
                     WidgetCenter.shared.reloadTimelines(ofKind: "com.goatfish.altitude")
                 }
                 .onAppear {
