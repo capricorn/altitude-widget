@@ -70,6 +70,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                         let prevEntry = defaults.lastAltitude
                         
                         defaults.currentAltitude = entry
+                        defaults.currentAccuracy = location.verticalAccuracy
                         
                         let container = AltitudeEntryContainer(
                             date: currentDate,
