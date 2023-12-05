@@ -27,6 +27,7 @@ struct AltitudeLockWidget: Widget {
 }
 
 @available(iOSApplicationExtension 17.0, *)
+@available(iOS 17, *)
 struct AltitudeLockWidget_Previews: PreviewProvider {
     static let metricUserDefaults: UserDefaults = {
         let defaults = UserDefaults(suiteName: "altitude-lock-metric")!

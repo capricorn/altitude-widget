@@ -21,6 +21,10 @@
 		F0471CF32AF720B60024F6B8 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DCB2AC22BBE00D66ADD /* GPS.swift */; };
 		F0471CF42AF721240024F6B8 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 		F0471CF62AF722220024F6B8 /* AltitudeLockWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DC92AC2298D00D66ADD /* AltitudeLockWidgetProvider.swift */; };
+		F04A82162B1FA2C900E98AC8 /* AltitudeLockWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DC32AC222AB00D66ADD /* AltitudeLockWidget.swift */; };
+		F04A82172B1FA2DD00E98AC8 /* AltitudeLockWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DCD2AC22CA500D66ADD /* AltitudeLockWidgetView.swift */; };
+		F04A82182B1FA30000E98AC8 /* FormatStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DCF2AC22DB500D66ADD /* FormatStyle.swift */; };
+		F04A82192B1FA39E00E98AC8 /* AltitudeStepEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740EB2A9FE72B00AD2A72 /* AltitudeStepEntry.swift */; };
 		F04C5AF12A9521090010F3AE /* AltitudeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF02A9521090010F3AE /* AltitudeView.swift */; };
 		F04C5AF52A99466A0010F3AE /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 		F0669EAF2AF2FA2500A8303F /* TimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DF2DD32AC22FDA00D66ADD /* TimelineEntry.swift */; };
@@ -523,13 +527,17 @@
 				F0471CF62AF722220024F6B8 /* AltitudeLockWidgetProvider.swift in Sources */,
 				F0669EAF2AF2FA2500A8303F /* TimelineEntry.swift in Sources */,
 				F023990929BD727900A0CC25 /* mtnmapTests.swift in Sources */,
+				F04A82162B1FA2C900E98AC8 /* AltitudeLockWidget.swift in Sources */,
 				F0471CF32AF720B60024F6B8 /* GPS.swift in Sources */,
 				F09009062AF72441000B71CB /* Altimeter.swift in Sources */,
 				F09009072AF72474000B71CB /* SettingsStorage.swift in Sources */,
 				F0E741032AAA389800AD2A72 /* Util.swift in Sources */,
 				F0471CF42AF721240024F6B8 /* LocationDelegate.swift in Sources */,
+				F04A82182B1FA30000E98AC8 /* FormatStyle.swift in Sources */,
 				F09009082AF724FB000B71CB /* AltitudeWidgetIntent.intentdefinition in Sources */,
 				F09009032AF72411000B71CB /* altitude.intentdefinition in Sources */,
+				F04A82172B1FA2DD00E98AC8 /* AltitudeLockWidgetView.swift in Sources */,
+				F04A82192B1FA39E00E98AC8 /* AltitudeStepEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

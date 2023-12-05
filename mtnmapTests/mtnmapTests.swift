@@ -35,7 +35,7 @@ final class mtnmapTests: XCTestCase {
         class MockGPS: GPS {
             private var returnImmediately = false
             
-            override func locationFuture(_ callback: @escaping (CLLocation) -> Void) {
+            override func locationFuture(_ callback: @escaping (Result<CLLocation, AuthorizationError>) -> Void) {
                 let location: CLLocation = CLLocation(
                     coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
                     altitude: 500.0,
@@ -52,10 +52,10 @@ final class mtnmapTests: XCTestCase {
                         verticalAccuracy: 0.0,
                         timestamp: Date()
                     )
-                    callback(location)
+                    callback(.success(location))
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-                        callback(location)
+                        callback(.success(location))
                     }
                     
                     returnImmediately = true
@@ -98,6 +98,65 @@ final class mtnmapTests: XCTestCase {
         }
         
         wait(for: [expectation1, expectation2, expectation3], timeout: 5)
+    }
+    
+    func testWidgetProviderStaleCache() throws {
+        class MockGPS: GPS {
+            override func locationFuture(_ callback: @escaping (Result<CLLocation, AuthorizationError>) -> Void) {
+                let location: CLLocation = CLLocation(
+                    coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                    altitude: 500.0,
+                    horizontalAccuracy: 0.0,
+                    verticalAccuracy: 0.0,
+                    timestamp: Date()
+                )
+                
+                callback(.success(location))
+            }
+        }
+        
+        let gps = MockGPS()
+        let provider = AltitudeLockWidgetProvider<MockGPS>(gps: gps)
+        let expectation = XCTestExpectation()
+        
+        // First: set the cache
+        Task {
+            provider.updateTimeline { _ in
+                print("First update")
+                XCTAssert(provider.cache.currentAltitude != nil)
+                XCTAssert(provider.cache.lastAltitude == nil)
+            }
+        }
+        
+        Task {
+            provider.updateTimeline { _ in
+                print("Second update")
+                XCTAssert(provider.cache.currentAltitude != nil)
+                XCTAssert(provider.cache.lastAltitude == nil)
+            }
+        }
+        
+        Task {
+            // Rule: if current cache is set and an update occurs 5 minutes later, set it
+            provider.updateTimeline(currentDate: Date.now + 10.min) { _ in
+                print("Update -- cache expired")
+                expectation.fulfill()
+            }
+        }
+        
+        Task {
+            // Update after cache expiration -- should be ignored (ie hits cache)
+            provider.updateTimeline(currentDate: Date.now + 11.min) { _ in
+                print("Final update")
+                // TODO: Expectation
+            }
+        }
+        
+        wait(for: [expectation], timeout: 3)
+        
+        // TODO: Check dates as well?
+        XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "cache: \(provider.cache.currentAltitude?.altitude)")
+        XCTAssert(provider.cache.lastAltitude?.altitude == 1640)
     }
     
     // TODO: Integer solutions? Rounding troubles
