@@ -1,0 +1,1 @@
+![Widget screenshot](demo.png)
