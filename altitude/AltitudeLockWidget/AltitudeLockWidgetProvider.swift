@@ -36,10 +36,6 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     
     func updateTimeline(currentDate: Date = Date(), defaults: UserDefaults = UserDefaults.Settings.defaults,  completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
         queue.async {
-            var currentDate = currentDate
-            
-            // TODO: Replace w/ equivalent user defaults calls
-            
             if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < AltitudeLockWidget.cacheExpirationMin {
                 let entry = currentAltitude
                 let prevEntry = defaults.lastAltitude
@@ -59,9 +55,8 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                 completion(timeline)
                 return
             } else {
-                // Problem: need to wait synchronously on this.
                 DispatchQueue.global().async(group: group) {
-                    gps.locationFuture { (result: Result<CLLocation, GPS.AuthorizationError>) in
+                    gps.location { (result: Result<CLLocation, GPS.AuthorizationError>) in
                         var entry: CompactAltitudeEntry
                         var prevEntry: CompactAltitudeEntry? = nil
                         

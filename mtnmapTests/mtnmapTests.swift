@@ -35,7 +35,7 @@ final class mtnmapTests: XCTestCase {
         class MockGPS: GPS {
             private var returnImmediately = false
             
-            override func locationFuture(_ callback: @escaping (Result<CLLocation, AuthorizationError>) -> Void) {
+            override func location(_ callback: @escaping (Result<CLLocation, AuthorizationError>) -> Void) {
                 let location: CLLocation = CLLocation(
                     coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
                     altitude: 500.0,
@@ -102,7 +102,7 @@ final class mtnmapTests: XCTestCase {
     
     func testWidgetProviderStaleCache() throws {
         class MockGPS: GPS {
-            override func locationFuture(_ callback: @escaping (Result<CLLocation, AuthorizationError>) -> Void) {
+            override func location(_ callback: @escaping (Result<CLLocation, AuthorizationError>) -> Void) {
                 let location: CLLocation = CLLocation(
                     coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
                     altitude: 500.0,
@@ -158,14 +158,4 @@ final class mtnmapTests: XCTestCase {
         XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "cache: \(provider.cache.currentAltitude?.altitude)")
         XCTAssert(provider.cache.lastAltitude?.altitude == 1640)
     }
-    
-    // TODO: Integer solutions? Rounding troubles
-    /*
-    func testPointRotation() throws {
-        let point = CGPoint(x: 1, y: 1)
-        let rotatedPoint = point.rotate(.degrees(45))
-        
-        XCTAssert(rotatedPoint.equalTo(CGPoint(x: 0, y: sqrt(1))), "Rotation: \(rotatedPoint)")
-    }
-    */
 }

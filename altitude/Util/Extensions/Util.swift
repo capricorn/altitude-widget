@@ -37,25 +37,6 @@ func binomialWalk(k: Int = 1, p: Double = 0.5) -> [Int] {
     .cumsum()
 }
 
-extension CGPoint {
-    func rotate(_ angle: Angle) -> CGPoint {
-        // TODO: breaks after 90 deg? (two solutions given sqrt)
-        let R = self.distance()
-        // Compute existing angle of point
-        let T = atan(self.y/self.x) + angle.radians
-        // Assume angle is 0
-        
-        let xp = pow(pow(R,2.0)/(1 + pow(tan(T),2.0)), 1/2)
-        let yp = pow((pow(R,2.0) - pow(xp, 2.0)), 1/2)
-        
-        return CGPoint(x: xp, y: yp)
-    }
-    
-    func distance() -> CGFloat {
-        return sqrt(pow(self.x, 2) + pow(self.y, 2))
-    }
-}
-
 extension Double {
     func measurement<UnitType: Unit>(_ type: UnitType) -> Measurement<UnitType> {
         Measurement(value: self, unit: type.self)

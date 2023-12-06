@@ -11,9 +11,7 @@ import SwiftUI
 struct mtnmapApp: App {
     var body: some Scene {
         WindowGroup {
-            SettingsView<LocationServiceStatus>()
-                .environmentObject(LocationServiceStatus())
-                .defaultAppStorage(.init(suiteName: UserDefaults.Settings.appGroupId)!)
+            ContentView()
         }
     }
 }

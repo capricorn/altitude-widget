@@ -10,12 +10,6 @@ import SwiftUI
 import Intents
 import CoreMotion
 
-struct AltitudeEntry: TimelineEntry {
-    let date: Date
-    let altitude: Int
-    let configuration: AltitudeIntent
-}
-
 @main
 struct AltitudeWidgets: WidgetBundle {
     var body: some Widget {
