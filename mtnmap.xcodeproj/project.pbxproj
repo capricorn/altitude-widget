@@ -108,6 +108,7 @@
 		F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		F04C5AF62A996C8A0010F3AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F0669EB02AF2FAB300A8303F /* TimelineEntryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineEntryContainer.swift; sourceTree = "<group>"; };
+		F0CFD9DA2B20F6AA00271C0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F0DF2D992AABB96800D66ADD /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		F0DF2DA42AABB96800D66ADD /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		F0DF2DB92AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AltitudeWidgetIntent.intentdefinition; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 		F02398EB29BD727800A0CC25 = {
 			isa = PBXGroup;
 			children = (
+				F0CFD9DA2B20F6AA00271C0E /* README.md */,
 				F03413DA2AF1FA31001FC36F /* altitudeExtension.entitlements */,
 				F02398F629BD727800A0CC25 /* mtnmap */,
 				F023990729BD727900A0CC25 /* mtnmapTests */,
