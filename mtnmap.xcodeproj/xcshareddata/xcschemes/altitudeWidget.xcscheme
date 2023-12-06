@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F0E2257729D1F4710068D00E"
-               BuildableName = "altitudeExtension.appex"
-               BlueprintName = "altitudeExtension"
+               BuildableName = "altitudeWidget.appex"
+               BlueprintName = "altitudeWidget"
                ReferencedContainer = "container:mtnmap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -74,8 +74,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0E2257729D1F4710068D00E"
-            BuildableName = "altitudeExtension.appex"
-            BlueprintName = "altitudeExtension"
+            BuildableName = "altitudeWidget.appex"
+            BlueprintName = "altitudeWidget"
             ReferencedContainer = "container:mtnmap.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>

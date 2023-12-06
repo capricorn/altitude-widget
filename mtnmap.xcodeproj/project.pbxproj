@@ -45,7 +45,7 @@
 		F0E2258329D1F4730068D00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0E2258229D1F4730068D00E /* Assets.xcassets */; };
 		F0E2258529D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
 		F0E2258629D1F4730068D00E /* altitude.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F0E2258129D1F4710068D00E /* altitude.intentdefinition */; };
-		F0E2258929D1F4730068D00E /* altitudeExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F0E2257829D1F4710068D00E /* altitudeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F0E2258929D1F4730068D00E /* altitudeWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F0E2257829D1F4710068D00E /* altitudeWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F0E740F12AA249C400AD2A72 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04C5AF42A99466A0010F3AE /* LocationDelegate.swift */; };
 		F0E740FB2AA7CBB300AD2A72 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FA2AA7CBB300AD2A72 /* Util.swift */; };
 		F0E741022AA8E3C900AD2A72 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E740FA2AA7CBB300AD2A72 /* Util.swift */; };
@@ -83,7 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				F0E2258929D1F4730068D00E /* altitudeExtension.appex in Embed Foundation Extensions */,
+				F0E2258929D1F4730068D00E /* altitudeWidget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +118,7 @@
 		F0DF2DCD2AC22CA500D66ADD /* AltitudeLockWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeLockWidgetView.swift; sourceTree = "<group>"; };
 		F0DF2DCF2AC22DB500D66ADD /* FormatStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatStyle.swift; sourceTree = "<group>"; };
 		F0DF2DD32AC22FDA00D66ADD /* TimelineEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineEntry.swift; sourceTree = "<group>"; };
-		F0E2257829D1F4710068D00E /* altitudeExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = altitudeExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0E2257829D1F4710068D00E /* altitudeWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = altitudeWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E2257A29D1F4710068D00E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F0E2257C29D1F4710068D00E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		F0E2257F29D1F4710068D00E /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 				F02398F629BD727800A0CC25 /* mtnmap */,
 				F023990729BD727900A0CC25 /* mtnmapTests */,
 				F023991129BD727900A0CC25 /* mtnmapUITests */,
-				F0E2257E29D1F4710068D00E /* altitude */,
+				F0E2257E29D1F4710068D00E /* AltitudeWidget */,
 				F0E2257929D1F4710068D00E /* Frameworks */,
 				F02398F529BD727800A0CC25 /* Products */,
 			);
@@ -182,7 +182,7 @@
 				F02398F429BD727800A0CC25 /* mtnmap.app */,
 				F023990429BD727900A0CC25 /* mtnmapTests.xctest */,
 				F023990E29BD727900A0CC25 /* mtnmapUITests.xctest */,
-				F0E2257829D1F4710068D00E /* altitudeExtension.appex */,
+				F0E2257829D1F4710068D00E /* altitudeWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,6 +190,7 @@
 		F02398F629BD727800A0CC25 /* mtnmap */ = {
 			isa = PBXGroup;
 			children = (
+				F03413D32AF19CA4001FC36F /* Settings */,
 				F03413DB2AF1FB00001FC36F /* mtnmap.entitlements */,
 				F04C5AF62A996C8A0010F3AE /* Info.plist */,
 				F02398F729BD727800A0CC25 /* mtnmapApp.swift */,
@@ -267,11 +268,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F0E2257E29D1F4710068D00E /* altitude */ = {
+		F0E2257E29D1F4710068D00E /* AltitudeWidget */ = {
 			isa = PBXGroup;
 			children = (
 				F0E2257F29D1F4710068D00E /* WidgetBundle.swift */,
-				F03413D32AF19CA4001FC36F /* Settings */,
 				F0DF2DC22AC221DA00D66ADD /* AltitudeLockWidget */,
 				F0E740FC2AA8E1E400AD2A72 /* Util */,
 				F0DF2DB92AABB9D800D66ADD /* AltitudeWidgetIntent.intentdefinition */,
@@ -279,7 +279,7 @@
 				F0E2258229D1F4730068D00E /* Assets.xcassets */,
 				F0E2258429D1F4730068D00E /* Info.plist */,
 			);
-			path = altitude;
+			path = AltitudeWidget;
 			sourceTree = "<group>";
 		};
 		F0E740F92AA7CBA200AD2A72 /* Extensions */ = {
@@ -357,9 +357,9 @@
 			productReference = F023990E29BD727900A0CC25 /* mtnmapUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		F0E2257729D1F4710068D00E /* altitudeExtension */ = {
+		F0E2257729D1F4710068D00E /* altitudeWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F0E2258D29D1F4730068D00E /* Build configuration list for PBXNativeTarget "altitudeExtension" */;
+			buildConfigurationList = F0E2258D29D1F4730068D00E /* Build configuration list for PBXNativeTarget "altitudeWidget" */;
 			buildPhases = (
 				F0E2257429D1F4710068D00E /* Sources */,
 				F0E2257529D1F4710068D00E /* Frameworks */,
@@ -369,9 +369,9 @@
 			);
 			dependencies = (
 			);
-			name = altitudeExtension;
+			name = altitudeWidget;
 			productName = altitudeExtension;
-			productReference = F0E2257829D1F4710068D00E /* altitudeExtension.appex */;
+			productReference = F0E2257829D1F4710068D00E /* altitudeWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -416,7 +416,7 @@
 				F02398F329BD727800A0CC25 /* mtnmap */,
 				F023990329BD727900A0CC25 /* mtnmapTests */,
 				F023990D29BD727900A0CC25 /* mtnmapUITests */,
-				F0E2257729D1F4710068D00E /* altitudeExtension */,
+				F0E2257729D1F4710068D00E /* altitudeWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -536,7 +536,7 @@
 		};
 		F0E2258829D1F4730068D00E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F0E2257729D1F4710068D00E /* altitudeExtension */;
+			target = F0E2257729D1F4710068D00E /* altitudeWidget */;
 			targetProxy = F0E2258729D1F4730068D00E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -814,8 +814,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q49KLF9VPG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = altitude/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = altitude;
+				INFOPLIST_FILE = AltitudeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AltitudeWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -842,8 +842,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q49KLF9VPG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = altitude/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = altitude;
+				INFOPLIST_FILE = AltitudeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AltitudeWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -899,7 +899,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F0E2258D29D1F4730068D00E /* Build configuration list for PBXNativeTarget "altitudeExtension" */ = {
+		F0E2258D29D1F4730068D00E /* Build configuration list for PBXNativeTarget "altitudeWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F0E2258B29D1F4730068D00E /* Debug */,

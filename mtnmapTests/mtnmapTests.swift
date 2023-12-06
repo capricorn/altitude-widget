@@ -9,7 +9,7 @@ import XCTest
 import CoreLocation
 import WidgetKit
 @testable import mtnmap
-@testable import altitudeExtension
+@testable import altitudeWidget
 
 final class mtnmapTests: XCTestCase {
 
