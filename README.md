@@ -1,3 +1,5 @@
+WIP
+
 ## Accessory rectangular
 
 ![Accessory rectangular widget screenshot](widget-accessory-rectangular.png)
