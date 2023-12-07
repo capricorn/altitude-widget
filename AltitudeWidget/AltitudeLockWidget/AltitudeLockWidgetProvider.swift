@@ -36,6 +36,7 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
     
     func updateTimeline(currentDate: Date = Date(), defaults: UserDefaults = UserDefaults.Settings.defaults,  completion: @escaping (Timeline<AltitudeEntryContainer>) -> ()) {
         queue.async {
+            print("Running timeline update task")
             if let currentAltitude = defaults.currentAltitude, (currentDate - currentAltitude.date).min < AltitudeLockWidget.cacheExpirationMin {
                 let entry = currentAltitude
                 let prevEntry = defaults.lastAltitude
@@ -55,7 +56,8 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                 completion(timeline)
                 return
             } else {
-                DispatchQueue.global().async(group: group) {
+                group.enter()
+                DispatchQueue.global().async {
                     gps.location { (result: Result<CLLocation, GPS.AuthorizationError>) in
                         var entry: CompactAltitudeEntry
                         var prevEntry: CompactAltitudeEntry? = nil
@@ -94,11 +96,13 @@ struct AltitudeLockWidgetProvider<T: GPS>: IntentTimelineProvider {
                             policy: .after(currentDate + 15.min)
                         )
                         
+                        defaults.synchronize()
                         completion(timeline)
                         group.leave()
                     }
                 }
                 
+                print("Waiting for timeline update to complete")
                 group.wait()
                 return
             }
