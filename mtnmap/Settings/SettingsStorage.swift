@@ -10,45 +10,45 @@ import Foundation
 extension UserDefaults {
     var currentAccuracy: Double? {
         get {
-            return Settings.defaults.double(forKey: Settings.currentAltitudeAccuracyKey)
+            return self.double(forKey: Settings.currentAltitudeAccuracyKey)
         }
         set {
-            Settings.defaults.set(newValue, forKey: UserDefaults.Settings.currentAltitudeAccuracyKey)
+            self.set(newValue, forKey: UserDefaults.Settings.currentAltitudeAccuracyKey)
         }
     }
     
     var lastAltitude: CompactAltitudeEntry? {
         get {
-            if let rawDefault = Settings.defaults.string(forKey: Settings.lastAltitudeReadingKey)?.data(using: .utf8) {
+            if let rawDefault = self.string(forKey: Settings.lastAltitudeReadingKey)?.data(using: .utf8) {
                 return try? JSONDecoder().decode(CompactAltitudeEntry.self, from: rawDefault)
             }
             
             return nil
         }
         set {
-            Settings.defaults.set(newValue?.rawValue, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
+            self.set(newValue?.rawValue, forKey: UserDefaults.Settings.lastAltitudeReadingKey)
         }
     }
     
     var currentAltitude: CompactAltitudeEntry? {
         get {
-            if let rawDefault = Settings.defaults.string(forKey: Settings.currentAltitudeReadingKey)?.data(using: .utf8) {
+            if let rawDefault = self.string(forKey: Settings.currentAltitudeReadingKey)?.data(using: .utf8) {
                 return try? JSONDecoder().decode(CompactAltitudeEntry.self, from: rawDefault)
             }
             
             return nil
         }
         set {
-            Settings.defaults.set(newValue?.rawValue, forKey: UserDefaults.Settings.currentAltitudeReadingKey)
+            self.set(newValue?.rawValue, forKey: UserDefaults.Settings.currentAltitudeReadingKey)
         }
     }
     
     var displayAccuracy: Bool {
         get {
-            Settings.defaults.bool(forKey: Settings.displayAccuracyKey)
+            self.bool(forKey: Settings.displayAccuracyKey)
         }
         set {
-            Settings.defaults.set(newValue, forKey: Settings.displayAccuracyKey)
+            self.set(newValue, forKey: Settings.displayAccuracyKey)
         }
     }
     

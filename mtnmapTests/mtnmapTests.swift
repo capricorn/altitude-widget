@@ -12,13 +12,15 @@ import WidgetKit
 @testable import altitudeWidget
 
 final class mtnmapTests: XCTestCase {
+    private var defaults: UserDefaults!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        defaults = UserDefaults(suiteName: self.name)
+        defaults.removePersistentDomain(forName: self.name)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        defaults = nil
     }
 
     func testAltitudeCodable() throws {
@@ -31,7 +33,17 @@ final class mtnmapTests: XCTestCase {
         XCTAssert(json.string == #"{"altitude":1000,"date":"2023-11-02T21:23:53Z"}"#, json.string ?? "n/a")
     }
     
-    func testWidgetProviderCache() throws {
+    /**
+     Verify the cache state updates in the following manner:
+     Given the cache variables (prev, curr)
+     (prev: nil, curr: nil) -> (prev: nil, curr: foo)
+     (prev: nil, curr: foo) -> (prev: foo, curr: bar)
+     (prev: foo, curr: bar) -> (prev: bar, curr: baz)
+     */
+    func testWidgetProviderCacheUpdate() throws {
+        XCTAssert(self.defaults.currentAltitude == nil)
+        XCTAssert(self.defaults.lastAltitude == nil)
+        
         class MockGPS: GPS {
             private var returnImmediately = false
             
@@ -75,7 +87,7 @@ final class mtnmapTests: XCTestCase {
         // TODO: **Verify cache hit within 5 minutes vs outside of that**
         
         print("Updating timeline: \(Date())")
-        provider.updateTimeline { container in
+        provider.updateTimeline(defaults: self.defaults) { container in
             print("Fulfilled e1: \(Date())")
             expectation1.fulfill()
             XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "\(provider.cache.currentAltitude?.altitude)")
@@ -83,14 +95,14 @@ final class mtnmapTests: XCTestCase {
         }
         
         // Below verifies that the cache is hit even with multiple timeline calls
-        provider.updateTimeline { container in
+        provider.updateTimeline(defaults: self.defaults) { container in
             print("Fulfilled e2: \(Date())")
             expectation2.fulfill()
             XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "\(provider.cache.currentAltitude?.altitude)")
             XCTAssert(provider.cache.lastAltitude == nil)
         }
         
-        provider.updateTimeline { container in
+        provider.updateTimeline(defaults: self.defaults) { container in
             print("Fulfilled e3: \(Date())")
             expectation3.fulfill()
             XCTAssert(provider.cache.currentAltitude?.altitude == 1640, "\(provider.cache.currentAltitude?.altitude)")
